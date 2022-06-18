@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+
+	<body>
+		<header th:fragment="fheader">
+			<a th:href="@{/ciudadano/inicio}">Inicio</a>
+			<a th:href="@{/ciudadano/crear-cv}">Crear Cv</a>
+			<a th:href="@{/ciudadano/ver-cv}">Ver Cv</a>
+			<a th:href="@{/ciudadano/cursos}">Cursos Disponibles</a>
+			<a th:href="@{/ciudadano/ofertas}">Ver Ofertas</a>
+			<a th:href="@{/ciudadano/salir}">Salir</a>
+		</header>
+	</body>
+</html>
