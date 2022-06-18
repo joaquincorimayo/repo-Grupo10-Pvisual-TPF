@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+
+	<body>
+		<header th:fragment="fheader">
+			<a th:href="@{/empleador/inicio}">Inicio</a>
+			<a th:href="@{/empleador/crear-oferta}">Crear Oferta</a>
+			<a th:href="@{/empleador/ver-ofertas-creadas}">Ver Ofertas</a>
+			<a th:href="@{/empleador/salir}">Salir</a>
+		</header>
+	</body>
+</html>

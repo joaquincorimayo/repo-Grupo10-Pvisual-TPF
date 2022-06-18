@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+	<head>
+		<meta charset="utf-8">
+		<title>Login</title>
+	</head>
+
+	<body>
+		<header th:replace="layouts/index_header::fheader"></header>
+			<form th:action="@{/iniciar-sesion/tipo-usuario}" method="POST">
+				<div>
+					<label>Seleciona como queres Iniciar Sesion!</label> 
+						<select name="userTypeLogin">
+							<option value="ciudadano">Ciudadano</option>
+							<option value="empleador">Empleador</option>
+						</select>
+				</div>
+				<div>
+					<button type="submit">Iniciar login</button>
+					<a th:href="@{/inicio}">Cancelar</a>
+				</div>
+			</form>
+		<footer th:replace="layouts/index_footer::ffooter"></footer>
+	</body>
+</html>
