@@ -87,8 +87,8 @@ public class Ciudadano implements Serializable {
 	@Column(name = "CIU_CURRICULUM")
 	private Curriculum curriculum;
 
-	@Column(name = "CIU_CURSOS")
-	private List<Curso> cursos = new ArrayList<Curso>();
+//	@Column(name = "CIU_CURSOS")
+//	private List<Curso> cursos = new ArrayList<Curso>();
 
 	@Column(name = "CIU_ESTADO")
 	private boolean estado;
@@ -119,7 +119,7 @@ public class Ciudadano implements Serializable {
 		this.provincia = provincia;
 		this.telefono = telefono;
 		this.curriculum = curriculum;
-		this.cursos = cursos;
+//		this.cursos = cursos;
 		this.estado = estado;
 	}
 
@@ -211,13 +211,13 @@ public class Ciudadano implements Serializable {
 		this.curriculum = curriculum;
 	}
 
-	public List<Curso> getCursos() {
-		return cursos;
-	}
-
-	public void setCursos(List<Curso> cursos) {
-		this.cursos = cursos;
-	}
+//	public List<Curso> getCursos() {
+//		return cursos;
+//	}
+//
+//	public void setCursos(List<Curso> cursos) {
+//		this.cursos = cursos;
+//	}
 
 	public boolean isEstado() {
 		return estado;
@@ -227,12 +227,18 @@ public class Ciudadano implements Serializable {
 		this.estado = estado;
 	}
 
+//	@Override
+//	public String toString() {
+//		return "Ciudadano [id=" + id + ", dni=" + dni + ", password=" + password + ", numeroTramite=" + numeroTramite
+//				+ ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email + ", estadoCivil=" + estadoCivil
+//				+ ", provincia=" + provincia + ", telefono=" + telefono + ", curriculum=" + curriculum + ", cursos="
+//				+ cursos + ", estado=" + estado + "]";
+//	}
 	@Override
 	public String toString() {
 		return "Ciudadano [id=" + id + ", dni=" + dni + ", password=" + password + ", numeroTramite=" + numeroTramite
 				+ ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email + ", estadoCivil=" + estadoCivil
-				+ ", provincia=" + provincia + ", telefono=" + telefono + ", curriculum=" + curriculum + ", cursos="
-				+ cursos + ", estado=" + estado + "]";
+				+ ", provincia=" + provincia + ", telefono=" + telefono + ", curriculum=" + curriculum + ", estado=" + estado + "]";
 	}
 
 }
