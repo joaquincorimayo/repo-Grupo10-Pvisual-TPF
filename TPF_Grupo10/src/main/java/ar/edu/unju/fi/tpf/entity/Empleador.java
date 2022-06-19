@@ -5,6 +5,15 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
@@ -16,26 +25,45 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
+@Table(name="EMPLEADOR")
 public class Empleador implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "EMP_ID")
 	private Long id;
+	
+	@Column(name = "EMP_CUIT")
 	private String cuit;
+	@Column(name = "EMP_PASSWORD")
 	private String password;
+	@Column(name = "EMP_R_SOCIAL")
 	private String razonSocial;
+	@Column(name = "EMP_N_COMERCIAL")
 	private String nombreComercial;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(name = "EMP_INICIO_ACTIVIDAD")
 	private LocalDate fechaInicioActividad;
+	@Column(name = "CIU_EMAIL")
 	private String email;
+	@Column(name = "CIU_TEL")
 	private String telefono;
+	@Column(name = "CIU_DOMICILIO")
 	private String domicilio;
+	@Column(name = "CIU_PROVINCIA")
 	private String provincia;
+	@Column(name = "CIU_PAG_WEB")
 	private String paginaWeb;
+	@Column(name = "CIU_DESCRIPCION")
 	private String descripcion;
+	@Column(name = "CIU_ESTADO")
 	private boolean estado;
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Oferta> ofertas = new ArrayList<Oferta>();
 
 	public Empleador() {
