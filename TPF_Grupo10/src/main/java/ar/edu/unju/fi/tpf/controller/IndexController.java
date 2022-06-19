@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import ar.edu.unju.fi.tpf.entity.Ciudadano;
 import ar.edu.unju.fi.tpf.entity.Empleador;
 
 /**
@@ -13,7 +14,7 @@ import ar.edu.unju.fi.tpf.entity.Empleador;
  * ser presentada en la vista consultada
  * 
  * @author JoaquinCorimayo.
- *
+ * @author LuisQuispe
  */
 
 @Controller
@@ -32,6 +33,8 @@ public class IndexController {
 	@PostMapping("/nuevo-registro/tipo-registro")
 	public String getTipoFormularioPage(@ModelAttribute("userType") String tipoRegistro, Model model) {
 		if (tipoRegistro.equals("ciudadano")) {
+			Ciudadano ciudadano= new Ciudadano();
+			model.addAttribute("ciudadano", ciudadano);
 			return "ciudadano_formulario";
 		} else {
 			Empleador empleador = new Empleador();
