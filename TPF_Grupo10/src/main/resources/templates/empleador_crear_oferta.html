@@ -2,10 +2,95 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
 	<head>
 		<meta charset="utf-8">
-		<title></title>
+		<title>Formulario nueva oferta</title>
 	</head>
 
 	<body>
-	
+		<h1>Iniciando nueva oferta laboral</h1>
+<!-- 		<header th:replace="layouts/empleador_header::fheader"></header> -->
+			<h1>Completar el registro</h1>
+			<form th:action="@{/oferta/guardar}" method="POST" th:object="${oferta}" autocomplete="off">
+				
+				<div>
+					<label for="fid">TEMPORAL ID: </label> 
+					<input th:field=*{id} type="number" id="fid">
+<!-- 					<div th:if="${#fields.hasErrors('puestoRequerido')}" th:errors="*{puestoRequerido}"></div> -->
+				</div>
+				
+				<div>
+					<label for="fcantidadV">Ingresar candidad de vacantes disponibles: </label> 
+					<input th:field=*{cantidadVacantes} type="text" id="fcantidadV" placeholder="00000">
+<!-- 					<div th:if="${#fields.hasErrors('cantidadVacantes')}" th:errors="*{cantidadVacantes}"></div> -->
+				</div>
+				
+<!-- 				BUSCAR EJEMPLOS -->
+<!-- 				<div> -->
+<!-- 					<label for="fpass">Ingresar disponibilidad horaria: </label>  -->
+<!-- 					<input th:field=*{password} type="text" id="fpass" placeholder="*********"> -->
+<!-- <!-- 					<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div> -->
+<!-- 				</div> -->
+				
+				<div>
+					<label for="fpreq">Ingresar puesto requerido: </label> 
+					<input th:field=*{puestoRequerido} type="text" id="fpreq">
+<!-- 					<div th:if="${#fields.hasErrors('puestoRequerido')}" th:errors="*{puestoRequerido}"></div> -->
+				</div>
+				
+				<div>
+					<label for="ftareas">Ingresar principales tareas: </label> 
+					<input th:field=*{principalesTareas} type="text" id="ftareas" placeholder="">
+<!-- 					<div th:if="${#fields.hasErrors('principalesTareas')}" th:errors="*{principalesTareas}"></div> -->
+				</div>
+				
+				<div>
+					<label for="fres">Ingresar un resumen breve: </label> 
+					<input th:field=*{resumen} type="text" id="fres">
+<!-- 					<div th:if="${#fields.hasErrors('resumen')}" th:errors="*{resumen}"></div> -->
+				</div>
+				
+				<div>
+					<label for="fcont">Ingresar contacto: </label> 
+					<input th:field=*{datosContacto} type="text" id="fcont" placeholder="">
+<!-- 					<div th:if="${#fields.hasErrors('datosContacto')}" th:errors="*{datosContacto}"></div> -->
+				</div>
+				
+				<div>
+					<label for="fjor">Ingresar jornada: </label> 
+					<input th:field=*{jornada} type="text" id="fjor" placeholder="">
+<!-- 					<div th:if="${#fields.hasErrors('jornada')}" th:errors="*{jornada}"></div> -->
+				</div>
+				
+				<div>
+					<label for="freq">Ingresar requisitos: </label> 
+					<input th:field=*{requisitos} type="text" id="freq" placeholder="">
+<!-- 					<div th:if="${#fields.hasErrors('requisitos')}" th:errors="*{requisitos}"></div> -->
+				</div>
+				
+				<div>
+					<label for="fben">Ingresar beneficios: </label> 
+					<input th:field=*{beneficios} type="text" id="fben" placeholder="">
+<!-- 					<div th:if="${#fields.hasErrors('beneficios')}" th:errors="*{beneficios}"></div> -->
+				</div>
+				
+				<div>
+					<label for="fdisp">Ingresar disponibilidad: </label> 
+					<input th:field=*{disponibilidad} type="text" id="fdisp" placeholder="">
+<!-- 			    <div th:if="${#fields.hasErrors('disponibilidad')}" th:errors="*{disponibilidad}"></div>  -->
+				</div>
+				
+				<div>
+					<label for="fsal">Ingresar salario: </label> 
+					<input th:field=*{salario} type="text" id="fsal" placeholder="">
+<!-- 					<div th:if="${#fields.hasErrors('salario')}" th:errors="*{salario}"></div> -->
+				</div>
+				
+				<div>
+					<button type="submit">Crear oferta</button>
+					<button th:href="@{/empleador/inicio}">Cancelar</button>
+				</div>
+				
+			</form>
+		
+		<footer th:replace="layouts/empleador_footer::ffooter"></footer>
 	</body>
 </html>

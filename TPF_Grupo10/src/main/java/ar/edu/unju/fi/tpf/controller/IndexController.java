@@ -6,8 +6,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import ar.edu.unju.fi.tpf.entity.Empleador;
+
 /**
- * Clase que se encargada de tomar las peticiones y controlar que respuesta debe
+ * Clase que se encarga de tomar las peticiones y controlar que respuesta debe
  * ser presentada en la vista consultada
  * 
  * @author JoaquinCorimayo.
@@ -28,10 +30,12 @@ public class IndexController {
 	}
 
 	@PostMapping("/nuevo-registro/tipo-registro")
-	public String getTipoFormularioPage(@ModelAttribute("userType") String tipoRegistro) {
+	public String getTipoFormularioPage(@ModelAttribute("userType") String tipoRegistro, Model model) {
 		if (tipoRegistro.equals("ciudadano")) {
 			return "ciudadano_formulario";
 		} else {
+			Empleador empleador = new Empleador();
+			model.addAttribute("empleador", empleador);
 			return "empleador_formulario";
 		}
 	}

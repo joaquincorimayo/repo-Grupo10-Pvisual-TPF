@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 /**
@@ -26,6 +27,7 @@ public class Empleador implements Serializable {
 	private String password;
 	private String razonSocial;
 	private String nombreComercial;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate fechaInicioActividad;
 	private String email;
 	private String telefono;
@@ -33,6 +35,7 @@ public class Empleador implements Serializable {
 	private String provincia;
 	private String paginaWeb;
 	private String descripcion;
+	private boolean estado;
 	private List<Oferta> ofertas = new ArrayList<Oferta>();
 
 	public Empleador() {
@@ -41,7 +44,7 @@ public class Empleador implements Serializable {
 
 	public Empleador(Long id, String cuit, String password, String razonSocial, String nombreComercial,
 			LocalDate fechaInicioActividad, String email, String telefono, String domicilio, String provincia,
-			String paginaWeb, String descripcion, List<Oferta> ofertas) {
+			String paginaWeb, String descripcion, boolean estado, List<Oferta> ofertas) {
 		super();
 		this.id = id;
 		this.cuit = cuit;
@@ -55,6 +58,7 @@ public class Empleador implements Serializable {
 		this.provincia = provincia;
 		this.paginaWeb = paginaWeb;
 		this.descripcion = descripcion;
+		this.estado = estado;
 		this.ofertas = ofertas;
 	}
 
@@ -154,6 +158,14 @@ public class Empleador implements Serializable {
 		this.descripcion = descripcion;
 	}
 
+	public boolean isEstado() {
+		return estado;
+	}
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
+	}
+
 	public List<Oferta> getOfertas() {
 		return ofertas;
 	}
@@ -166,12 +178,6 @@ public class Empleador implements Serializable {
 		return serialVersionUID;
 	}
 
-	@Override
-	public String toString() {
-		return "Empleador [id=" + id + ", cuit=" + cuit + ", password=" + password + ", razonSocial=" + razonSocial
-				+ ", nombreComercial=" + nombreComercial + ", fechaInicioActividad=" + fechaInicioActividad + ", email="
-				+ email + ", telefono=" + telefono + ", domicilio=" + domicilio + ", provincia=" + provincia
-				+ ", paginaWeb=" + paginaWeb + ", descripcion=" + descripcion + ", ofertas=" + ofertas + "]";
-	}
+	
 
 }

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+
+	<body>
+		<header th:replace="layouts/empleador_header::fheader"></header>
+		
+		<h1>Edicion de oferta</h1>
+	
+		<!-- Formulario de edicion -->
+		<form th:action="@{/oferta/modificar}" method="POST" th:object="${oferta}">
+	
+			<!-- Propiedades que no debe ser modificada, solamente se visualiza.-->
+			<div>
+				<input type="hidden" th:field="*{id}"> 
+				<label for="iof">Numero de oferta: </label>
+				<div>
+					<input type="number" id="iof" th:value="*{id}" disabled="disabled">
+				</div>
+			</div>
+			
+			<!-- Propiedades que se podran modificar, incluye validacion. -->
+			<div>
+				<label for="icv">cantidadVacantes</label>
+				<div>
+					<input type="text" id="icv" th:field="*{cantidadVacantes}">
+<!-- 					<div th:if="${#fields.hasErrors('cantidadVacantes')}" th:errors="*{cantidadVacantes}"></div> -->
+				</div>
+			</div>
+			<!-- Fin propiedades que pueden ser modificadas.-->
+			
+			<div>
+				<button type="submit">Confirmar</button>
+				<button th:href="@{/empleador/inicio}">Cancelar</button>
+			</div>
+		</form>
+	
+		<footer th:replace="layouts/empleador_footer::ffooter"></footer>
+	</body>
+</html>
