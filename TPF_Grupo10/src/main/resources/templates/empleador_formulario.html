@@ -7,6 +7,81 @@
 
 	<body>
 		<header th:replace="layouts/index_header::fheader"></header>
+			<h1>Completar el registro</h1>
+			<form th:action="@{/empleador/guardar}" method="POST" th:object="${empleador}" autocomplete="off">
+				<div>
+					<label for="fcuit">Ingresar ciut: </label> 
+					<input th:field=*{cuit} type="text" id="fcuit" placeholder="00-00000000-0">
+<!-- 					<div th:if="${#fields.hasErrors('cuit')}" th:errors="*{cuit}"></div> -->
+				</div>
+				
+				<div>
+					<label for="fpass">Ingresar password: </label> 
+					<input th:field=*{password} type="password" id="fpass" placeholder="*********">
+<!-- 					<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div> -->
+				</div>
+				
+				<div>
+					<label for="frsocial">Ingresar razón social: </label> 
+					<input th:field=*{razonSocial} type="text" id="frsocial" placeholder="razon social">
+<!-- 					<div th:if="${#fields.hasErrors('razonSocial')}" th:errors="*{razonSocial}"></div> -->
+				</div>
+				
+				<div>
+					<label for="fncomercial">Ingresar nombre comercial: </label> 
+					<input th:field=*{nombreComercial} type="text" id="fncomercial" placeholder="nombre comercial">
+<!-- 					<div th:if="${#fields.hasErrors('nombreComercial')}" th:errors="*{nombreComercial}"></div> -->
+				</div>
+				
+				<div>
+					<label for="ffinicio">Ingresar fecha inicio actividad: </label> 
+					<input th:field=*{fechaInicioActividad} type="date" id="ffinicio">
+<!-- 					<div th:if="${#fields.hasErrors('fechaInicioActividad')}" th:errors="*{fechaInicioActividad}"></div> -->
+				</div>
+				
+				<div>
+					<label for="femail">Ingresar email: </label> 
+					<input th:field=*{email} type="email" id="femail" placeholder="correo_electronico@gmail.com">
+<!-- 					<div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div> -->
+				</div>
+				
+				<div>
+					<label for="ftel">Ingresar telefono: </label> 
+					<input th:field=*{telefono} type="tel" id="ftel" placeholder="**********">
+<!-- 					<div th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></div> -->
+				</div>
+				
+				<div>
+					<label for="fdom">Ingresar domicilio: </label> 
+					<input th:field=*{domicilio} type="text" id="fdom" placeholder="domicilio">
+<!-- 					<div th:if="${#fields.hasErrors('domicilio')}" th:errors="*{domicilio}"></div> -->
+				</div>
+				
+				<div>
+					<label for="fprov">Ingresar provincia: </label> 
+					<input th:field=*{provincia} type="text" id="fprov" placeholder="provincia">
+<!-- 					<div th:if="${#fields.hasErrors('provincia')}" th:errors="*{provincia}"></div> -->
+				</div>
+				
+				<div>
+					<label for="fpage">Ingresar pagina web: </label> 
+					<input th:field=*{paginaWeb} type="text" id="fpage" placeholder="www.paginaweb.com">
+<!-- 					<div th:if="${#fields.hasErrors('paginaWeb')}" th:errors="*{paginaWeb}"></div> -->
+				</div>
+				
+				<div>
+					<label for="fdes">Ingresar descripcion: </label> 
+					<input th:field=*{descripcion} type="text" id="fdes" placeholder="Ingrese una descripcion breve">
+<!-- 					<div th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></div> -->
+				</div>
+				
+				<div>
+					<button type="submit">Registrase</button>
+					<button th:href="@{/inicio}">Cancelar</button>
+				</div>
+				
+			</form>
+		
 		<footer th:replace="layouts/index_footer::ffooter"></footer>
 	</body>
 </html>

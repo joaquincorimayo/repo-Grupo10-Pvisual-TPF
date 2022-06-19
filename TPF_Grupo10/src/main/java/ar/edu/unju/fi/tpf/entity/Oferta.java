@@ -22,8 +22,8 @@ public class Oferta implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
-	private int cantidadVacantes;
-	private int disponibilidadHoraria;
+	private String cantidadVacantes;
+	private String disponibilidadHoraria;
 	private String puestoRequerido;
 	private String principalesTareas;
 	private String resumen;
@@ -31,31 +31,34 @@ public class Oferta implements Serializable {
 	private String jornada;
 	private String requisitos;
 	private String beneficios;
-	private boolean disponibilidad;
-	private double salario;
+	private String disponibilidad;
+	private String salario;
+	private boolean estado;
 	private List<Ciudadano> candidatos = new ArrayList<Ciudadano>();
 	private Empleador empleador;
 
 	public Oferta() {
-		// TODO Auto-generated constructor stub
+
 	}
 
-	public Oferta(Long id, int cantidadVacantes, String puestoRequerido, String resumen, int disponibilidadHoraria,
-			String principalesTareas, String datosContacto, String jornada, String requisitos, double salario,
-			String beneficios, boolean disponibilidad, List<Ciudadano> candidatos, Empleador empleador) {
+	public Oferta(Long id, String cantidadVacantes, String disponibilidadHoraria, String puestoRequerido,
+			String principalesTareas, String resumen, String datosContacto, String jornada, String requisitos,
+			String beneficios, String disponibilidad, String salario, boolean estado, List<Ciudadano> candidatos,
+			Empleador empleador) {
 		super();
 		this.id = id;
 		this.cantidadVacantes = cantidadVacantes;
-		this.puestoRequerido = puestoRequerido;
-		this.resumen = resumen;
 		this.disponibilidadHoraria = disponibilidadHoraria;
+		this.puestoRequerido = puestoRequerido;
 		this.principalesTareas = principalesTareas;
+		this.resumen = resumen;
 		this.datosContacto = datosContacto;
 		this.jornada = jornada;
 		this.requisitos = requisitos;
-		this.salario = salario;
 		this.beneficios = beneficios;
 		this.disponibilidad = disponibilidad;
+		this.salario = salario;
+		this.estado = estado;
 		this.candidatos = candidatos;
 		this.empleador = empleador;
 	}
@@ -68,12 +71,20 @@ public class Oferta implements Serializable {
 		this.id = id;
 	}
 
-	public int getCantidadVacantes() {
+	public String getCantidadVacantes() {
 		return cantidadVacantes;
 	}
 
-	public void setCantidadVacantes(int cantidadVacantes) {
+	public void setCantidadVacantes(String cantidadVacantes) {
 		this.cantidadVacantes = cantidadVacantes;
+	}
+
+	public String getDisponibilidadHoraria() {
+		return disponibilidadHoraria;
+	}
+
+	public void setDisponibilidadHoraria(String disponibilidadHoraria) {
+		this.disponibilidadHoraria = disponibilidadHoraria;
 	}
 
 	public String getPuestoRequerido() {
@@ -84,28 +95,20 @@ public class Oferta implements Serializable {
 		this.puestoRequerido = puestoRequerido;
 	}
 
-	public String getResumen() {
-		return resumen;
-	}
-
-	public void setResumen(String resumen) {
-		this.resumen = resumen;
-	}
-
-	public int getDisponibilidadHoraria() {
-		return disponibilidadHoraria;
-	}
-
-	public void setDisponibilidadHoraria(int disponibilidadHoraria) {
-		this.disponibilidadHoraria = disponibilidadHoraria;
-	}
-
 	public String getPrincipalesTareas() {
 		return principalesTareas;
 	}
 
 	public void setPrincipalesTareas(String principalesTareas) {
 		this.principalesTareas = principalesTareas;
+	}
+
+	public String getResumen() {
+		return resumen;
+	}
+
+	public void setResumen(String resumen) {
+		this.resumen = resumen;
 	}
 
 	public String getDatosContacto() {
@@ -132,14 +135,6 @@ public class Oferta implements Serializable {
 		this.requisitos = requisitos;
 	}
 
-	public double getSalario() {
-		return salario;
-	}
-
-	public void setSalario(double salario) {
-		this.salario = salario;
-	}
-
 	public String getBeneficios() {
 		return beneficios;
 	}
@@ -148,12 +143,28 @@ public class Oferta implements Serializable {
 		this.beneficios = beneficios;
 	}
 
-	public boolean isDisponibilidad() {
+	public String getDisponibilidad() {
 		return disponibilidad;
 	}
 
-	public void setDisponibilidad(boolean disponibilidad) {
+	public void setDisponibilidad(String disponibilidad) {
 		this.disponibilidad = disponibilidad;
+	}
+
+	public String getSalario() {
+		return salario;
+	}
+
+	public void setSalario(String salario) {
+		this.salario = salario;
+	}
+
+	public boolean isEstado() {
+		return estado;
+	}
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
 	}
 
 	public List<Ciudadano> getCandidatos() {
@@ -172,17 +183,13 @@ public class Oferta implements Serializable {
 		this.empleador = empleador;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
 	@Override
 	public String toString() {
-		return "Oferta [id=" + id + ", cantidadVacantes=" + cantidadVacantes + ", puestoRequerido=" + puestoRequerido
-				+ ", resumen=" + resumen + ", disponibilidadHoraria=" + disponibilidadHoraria + ", principalesTareas="
-				+ principalesTareas + ", datosContacto=" + datosContacto + ", jornada=" + jornada + ", requisitos="
-				+ requisitos + ", salario=" + salario + ", beneficios=" + beneficios + ", disponibilidad="
-				+ disponibilidad + ", candidatos=" + candidatos + ", empleador=" + empleador + "]";
+		return "Oferta [id=" + id + ", cantidadVacantes=" + cantidadVacantes + ", disponibilidadHoraria="
+				+ disponibilidadHoraria + ", puestoRequerido=" + puestoRequerido + ", principalesTareas="
+				+ principalesTareas + ", resumen=" + resumen + ", datosContacto=" + datosContacto + ", jornada="
+				+ jornada + ", requisitos=" + requisitos + ", beneficios=" + beneficios + ", disponibilidad="
+				+ disponibilidad + ", salario=" + salario + ", estado=" + estado + ", candidatos=" + candidatos
+				+ ", empleador=" + empleador + "]";
 	}
-
 }

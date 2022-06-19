@@ -1,5 +1,9 @@
 package ar.edu.unju.fi.tpf.service;
 
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
 import ar.edu.unju.fi.tpf.entity.Empleador;
 
 /**
@@ -8,11 +12,17 @@ import ar.edu.unju.fi.tpf.entity.Empleador;
  * @author JoaquinCorimayo
  */
 
+@Service
 public interface IEmpleadorService {
-	public Empleador crearCiudadano();
-	public void leerEmpleador();
-	public void actualizarEmpleador();
-	public void borrarEmpleador();
-	public void insertarEmpleador();
-	public void obtenerEmpleador();	
+	public Empleador crearEmpleador();
+
+	public void guardarEmpleador(Empleador empleador);
+
+	public void borrarEmpleador(Long id);
+
+	public void actualizarEmpleador(Empleador empleador);
+
+	public List<Empleador> listarEmpleadores();
+
+	public Empleador buscarEmpleador(Long id);
 }

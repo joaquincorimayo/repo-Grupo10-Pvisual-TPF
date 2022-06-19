@@ -1,18 +1,27 @@
 package ar.edu.unju.fi.tpf.service;
 
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
 import ar.edu.unju.fi.tpf.entity.Oferta;
 
 /**
- * Declaracion de servicios para Oferta.
+ * Declaracion de servicios para Ofertas.
  * 
  * @author JoaquinCorimayo
  */
-
+@Service
 public interface IOfertaService {
 	public Oferta crearOferta();
-	public void leerOferta();
-	public void actualizarOferta();
-	public void borrarOferta();
-	public void insertarOferta();
-	public void obtenerOferta();	
+
+	public void guardarOferta(Oferta oferta);
+
+	public void borrarOferta(Long id);
+
+	public void actualizarOferta(Oferta oferta);
+
+	public List<Oferta> listarOfertas();
+
+	public Oferta buscarOferta(Long id);
 }
