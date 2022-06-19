@@ -1,5 +1,6 @@
 package ar.edu.unju.fi.tpf.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -8,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import ar.edu.unju.fi.tpf.entity.Ciudadano;
 import ar.edu.unju.fi.tpf.entity.Empleador;
+
+import ar.edu.unju.fi.tpf.util.ListaProvincias;
+import ar.edu.unju.fi.tpf.util.ListaEstadoCivil;
 
 /**
  * Clase que se encarga de tomar las peticiones y controlar que respuesta debe
@@ -19,7 +23,13 @@ import ar.edu.unju.fi.tpf.entity.Empleador;
 
 @Controller
 public class IndexController {
-
+	
+	@Autowired
+	ListaEstadoCivil estadoCivil;
+		
+	@Autowired
+	ListaProvincias provincias;
+	
 	@RequestMapping("/inicio")
 	public String getInicioPage(Model model) {
 		return "index";
@@ -35,6 +45,8 @@ public class IndexController {
 		if (tipoRegistro.equals("ciudadano")) {
 			Ciudadano ciudadano= new Ciudadano();
 			model.addAttribute("ciudadano", ciudadano);
+			model.addAttribute("estadoCivil", estadoCivil.getEstadoCivil());
+			model.addAttribute("provincias", provincias.getProvincias());
 			return "ciudadano_formulario";
 		} else {
 			Empleador empleador = new Empleador();

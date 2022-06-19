@@ -8,7 +8,7 @@ import ar.edu.unju.fi.tpf.entity.CiudadanoOferta;
 /**
  * 
  * @author JoaquinCorimayo
- *
+ * @author LuisQuispe
  */
 
 @Repository
