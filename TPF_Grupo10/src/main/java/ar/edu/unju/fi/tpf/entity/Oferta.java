@@ -1,8 +1,13 @@
 package ar.edu.unju.fi.tpf.entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
@@ -14,6 +19,8 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
+@Entity
+@Table(name = "OFERTA")
 public class Oferta implements Serializable {
 
 	/**
@@ -21,21 +28,35 @@ public class Oferta implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "OFE_ID")
 	private Long id;
+	
+	@Column(name = "OFE_VACANTES")
 	private String cantidadVacantes;
+	@Column(name = "OFE_DISP_HORARIA")
 	private String disponibilidadHoraria;
+	@Column(name = "OFE_PUESTO_REQ")
 	private String puestoRequerido;
+	@Column(name = "OFE_TAREAS")
 	private String principalesTareas;
+	@Column(name = "OFE_RESUMEN")
 	private String resumen;
+	@Column(name = "OFE_CONTACTO")
 	private String datosContacto;
+	@Column(name = "OFE_JORNADA")
 	private String jornada;
+	@Column(name = "OFE_REQ")
 	private String requisitos;
+	@Column(name = "OFE_BENEFICIOS")
 	private String beneficios;
+	@Column(name = "OFE_DISPONIBILIDAD")
 	private String disponibilidad;
+	@Column(name = "OFE_SALARIO")
 	private String salario;
+	@Column(name = "OFE_ESTADO")
 	private boolean estado;
-	private List<Ciudadano> candidatos = new ArrayList<Ciudadano>();
-	private Empleador empleador;
 
 	public Oferta() {
 
@@ -43,8 +64,7 @@ public class Oferta implements Serializable {
 
 	public Oferta(Long id, String cantidadVacantes, String disponibilidadHoraria, String puestoRequerido,
 			String principalesTareas, String resumen, String datosContacto, String jornada, String requisitos,
-			String beneficios, String disponibilidad, String salario, boolean estado, List<Ciudadano> candidatos,
-			Empleador empleador) {
+			String beneficios, String disponibilidad, String salario, boolean estado) {
 		super();
 		this.id = id;
 		this.cantidadVacantes = cantidadVacantes;
@@ -59,8 +79,6 @@ public class Oferta implements Serializable {
 		this.disponibilidad = disponibilidad;
 		this.salario = salario;
 		this.estado = estado;
-		this.candidatos = candidatos;
-		this.empleador = empleador;
 	}
 
 	public Long getId() {
@@ -167,29 +185,13 @@ public class Oferta implements Serializable {
 		this.estado = estado;
 	}
 
-	public List<Ciudadano> getCandidatos() {
-		return candidatos;
-	}
-
-	public void setCandidatos(List<Ciudadano> candidatos) {
-		this.candidatos = candidatos;
-	}
-
-	public Empleador getEmpleador() {
-		return empleador;
-	}
-
-	public void setEmpleador(Empleador empleador) {
-		this.empleador = empleador;
-	}
-
 	@Override
 	public String toString() {
 		return "Oferta [id=" + id + ", cantidadVacantes=" + cantidadVacantes + ", disponibilidadHoraria="
 				+ disponibilidadHoraria + ", puestoRequerido=" + puestoRequerido + ", principalesTareas="
 				+ principalesTareas + ", resumen=" + resumen + ", datosContacto=" + datosContacto + ", jornada="
 				+ jornada + ", requisitos=" + requisitos + ", beneficios=" + beneficios + ", disponibilidad="
-				+ disponibilidad + ", salario=" + salario + ", estado=" + estado + ", candidatos=" + candidatos
-				+ ", empleador=" + empleador + "]";
+				+ disponibilidad + ", salario=" + salario + ", estado=" + estado + "]";
 	}
+
 }
