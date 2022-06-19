@@ -4,44 +4,103 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import org.springframework.stereotype.Component;
 
 /**
  * Permite la creacion de objetos de tipo Ciudadano.
  * 
  * @author JoaquinCorimayo
- *
+ * 
+ * @author LuisQuispe
  */
 
 @Component
+@Entity
+@Table(name="ciudadanos")
 public class Ciudadano implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="CIU_ID")
 	private Long id;
+	
+	@Max(value = 99999999, message = "DNI debe ser menor que 99999999")
+	@Min(value = 1000000, message = "DNI debe ser mayor que 1000000")
+	@Column(name="CIU_DNI")
 	private String dni;
+	
+	@Size(min=3, max=100, message="La contraseña debe tener entre 4 a 12 caracteres")
+	@NotNull(message = "*Debe ingresar una contraseña")
+	@Column(name="CIU_PASSWORD")
 	private String password;
+	
+	@Size(min=10, max=12, message="Debe ingresar n° de 12 digitos")
+	@NotNull(message = "*Debe ingresar le n° de tramite")
+	@Column(name="CIU_NROTRAMITE")
 	private String numeroTramite;
+	
+	@NotEmpty(message = "El nombre no puede ser vacío")
+	@Size(min = 3, max = 100, message = "El nombre debe tener entre 3 a 100 caracteres")
+	@Column(name = "CIU_NOMBRE")
 	private String nombre;
+	
+	@Size(min = 3, max = 100, message = "El Apellido debe tener entre 3 a 100 caracteres")
+	@NotEmpty(message = "El apellido del alumno no puede ser vacío")
+	@Column(name = "CIU_APELLIDO")
 	private String apellido;
+	
+	@NotEmpty(message = "El email del alumno no puede ser vacío")
+	@Email
+	@Column(name = "ALU_EMAIL")
 	private String email;
+	
+	@NotEmpty
+	@Column(name = "CIU_ESTADOCIVIL")
 	private String estadoCivil;
+	
+	@NotEmpty
+	@Column(name = "CIU_PROVINCIA")
 	private String provincia;
+	
+	@NotEmpty(message = "El n° teléfono no puede ser vacío.")
+	@Column(name = "CIU_TELEFONO")
 	private String telefono;
+	
+	@Column(name = "CIU_CURRICULUM")
 	private Curriculum curriculum;
+	
+	@Column(name = "CIU_CURSOS")
 	private List<Curso> cursos = new ArrayList<Curso>();
+	
+	@Column(name = "CIU_OFERTAS")
 	private List<Oferta> ofertas = new ArrayList<Oferta>();
-
+	
+	@Column(name="CIU_ESTADO")
+	private boolean estado;
 	public Ciudadano() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public Ciudadano(Long id, String dni, String password, String numeroTramite, String nombre, String apellido,
 			String email, String estadoCivil, String provincia, String telefono, Curriculum curriculum,
-			List<Curso> cursos, List<Oferta> ofertas) {
+			List<Curso> cursos, List<Oferta> ofertas,boolean estado) {
 		super();
 		this.id = id;
 		this.dni = dni;
@@ -56,6 +115,7 @@ public class Ciudadano implements Serializable {
 		this.curriculum = curriculum;
 		this.cursos = cursos;
 		this.ofertas = ofertas;
+		this.estado=estado;
 	}
 
 	public Long getId() {
@@ -166,12 +226,20 @@ public class Ciudadano implements Serializable {
 		return serialVersionUID;
 	}
 
+	public boolean isEstado() {
+		return estado;
+	}
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
+	}
+
 	@Override
 	public String toString() {
 		return "Ciudadano [id=" + id + ", dni=" + dni + ", password=" + password + ", numeroTramite=" + numeroTramite
 				+ ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email + ", estadoCivil=" + estadoCivil
 				+ ", provincia=" + provincia + ", telefono=" + telefono + ", curriculum=" + curriculum + ", cursos="
-				+ cursos + ", ofertas=" + ofertas + "]";
+				+ cursos + ", ofertas=" + ofertas + ", estado=" + estado + "]";
 	}
 
 }

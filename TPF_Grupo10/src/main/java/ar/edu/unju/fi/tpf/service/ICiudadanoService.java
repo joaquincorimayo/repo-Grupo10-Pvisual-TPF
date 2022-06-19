@@ -1,18 +1,22 @@
 package ar.edu.unju.fi.tpf.service;
 
+import java.util.List;
+
 import ar.edu.unju.fi.tpf.entity.Ciudadano;
 
 /**
  * Declaracion de servicios para Ciudadano.
  * 
  * @author JoaquinCorimayo
+ * 
+ * @author LuisQuispe
  */
 
 public interface ICiudadanoService {
-	public Ciudadano crearCiudadano();
-	public void leerCiudadano();
-	public void actualizarCiudadano();
-	public void borrarCiudadano();
-	public void insertarCiudadano();
-	public void obtenerCiudadano();	
+	public Ciudadano getCiudadano();
+	public boolean guardarCiudadano(Ciudadano ciudadano);
+	public void modificarCiudadano(Ciudadano ciudadano);
+	public void eliminarCiudadano(String dni);
+	public List<Ciudadano> getListaCiudadano();
+	public Ciudadano buscarCiudadano(String dni);	
 }
