@@ -24,7 +24,9 @@ import ar.edu.unju.fi.tpf.service.IOfertaService;
 @Controller
 @RequestMapping("/oferta")
 public class OfertaController {
+
 	Logger logger = LoggerFactory.getLogger(OfertaController.class);
+
 	@Autowired
 	@Qualifier("OfertaService")
 	private IOfertaService ofertaService;
@@ -41,7 +43,7 @@ public class OfertaController {
 
 		return "redirect:/empleador/inicio";
 	}
-	
+
 	@GetMapping("/editar/{id}")
 	public String getEditarOfertaPage(@PathVariable(value = "id") Long id, Model model) {
 		// Validacion
@@ -49,17 +51,14 @@ public class OfertaController {
 		model.addAttribute("oferta", oferta);
 		return "empleador_editar_oferta";
 	}
-	
+
 	@PostMapping("/modificar")
 	public String editarOferta(@ModelAttribute("oferta") Oferta oferta) {
 		// VALIDACION
-		// modificacion
-//		Oferta Modif = ofertaService.buscarOferta(oferta.getId());
-//		ofertaService.actualizarOferta(Modif);
 		ofertaService.actualizarOferta(oferta);
 		return "redirect:/empleador/ver-ofertas-creadas";
 	}
-	
+
 	@GetMapping("/eliminar/{id}")
 	public String eliminarOferta(@PathVariable(value = "id") Long id) {
 		ofertaService.borrarOferta(id);

@@ -23,23 +23,23 @@
 					<th>Salario</th>
 					<th>Opciones</th>
 				</tr>
-				<tr th:each="o: ${ofertas}">
-					<td th:text="${o.id}"></td>
-					<td th:text="${o.cantidadVacantes}"></td>
-					<td th:text="${o.disponibilidadHoraria}"></td>
-					<td th:text="${o.puestoRequerido}"></td>
-					<td th:text="${o.principalesTareas}"></td>
-					<td th:text="${o.resumen}"></td>
-					<td th:text="${o.datosContacto}"></td>
-					<td th:text="${o.jornada}"></td>
-					<td th:text="${o.requisitos}"></td>
-					<td th:text="${o.beneficios}"></td>
-					<td th:text="${o.disponibilidad}"></td>
-					<td th:text="${o.salario}"></td>
-					<td>
-						<a th:href="@{/oferta/editar/}+${o.id}">Editar</a> 
-						<a th:href="@{/oferta/eliminar/}+${o.id}">Eliminar</a>
-					</td>
+				<tr th:each="o: ${ofertas}" th:if="${o.estado}==true">
+						<td th:text="${o.id}"></td>
+						<td th:text="${o.cantidadVacantes}"></td>
+						<td th:text="${o.disponibilidadHoraria}"></td>
+						<td th:text="${o.puestoRequerido}"></td>
+						<td th:text="${o.principalesTareas}"></td>
+						<td th:text="${o.resumen}"></td>
+						<td th:text="${o.datosContacto}"></td>
+						<td th:text="${o.jornada}"></td>
+						<td th:text="${o.requisitos}"></td>
+						<td th:text="${o.beneficios}"></td>
+						<td th:text="${o.disponibilidad}"></td>
+						<td th:text="${o.salario}"></td>
+						<td>
+							<a th:href="@{/oferta/editar/}+${o.id}">Editar</a> 
+							<a th:href="@{/oferta/eliminar/}+${o.id}">Eliminar</a>
+						</td>
 				</tr>
 			
 			</table>

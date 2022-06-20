@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+
+	<body>
+	
+		<form th:action="@{/empleador/login-empleador-login}" method="POST" th:object="${empleador}" autocomplete="off">
+			<div>
+				<label for="login-dni">Ingresar dni: </label> 
+				<input th:field=*{dni} type="text" id="login-dni" placeholder="Ingresa tu dni">
+			</div>
+			<div>
+				<label for="login-password">Ingresar contraseña: </label> 
+				<input th:field=*{password} type="password" id="login-password" placeholder="Ingresa tu contraseña">
+			</div>
+			<div>
+				<button type="submit">Ingresar</button>
+				<button th:href="@{/inicio}">Cancelar</button>
+			</div>
+		</form>
+		
+	</body>
+</html>

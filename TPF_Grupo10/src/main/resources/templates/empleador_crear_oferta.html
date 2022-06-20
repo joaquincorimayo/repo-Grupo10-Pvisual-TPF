@@ -12,12 +12,6 @@
 			<form th:action="@{/oferta/guardar}" method="POST" th:object="${oferta}" autocomplete="off">
 				
 				<div>
-					<label for="fid">TEMPORAL ID: </label> 
-					<input th:field=*{id} type="number" id="fid">
-<!-- 					<div th:if="${#fields.hasErrors('puestoRequerido')}" th:errors="*{puestoRequerido}"></div> -->
-				</div>
-				
-				<div>
 					<label for="fcantidadV">Ingresar candidad de vacantes disponibles: </label> 
 					<input th:field=*{cantidadVacantes} type="text" id="fcantidadV" placeholder="00000">
 <!-- 					<div th:if="${#fields.hasErrors('cantidadVacantes')}" th:errors="*{cantidadVacantes}"></div> -->

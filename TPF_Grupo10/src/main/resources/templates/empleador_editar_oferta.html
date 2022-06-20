@@ -12,13 +12,13 @@
 	
 		<!-- Formulario de edicion -->
 		<form th:action="@{/oferta/modificar}" method="POST" th:object="${oferta}">
-	
+		
 			<!-- Propiedades que no debe ser modificada, solamente se visualiza.-->
 			<div>
 				<input type="hidden" th:field="*{id}"> 
-				<label for="iof">Numero de oferta: </label>
+				<label for="inputid">#</label>
 				<div>
-					<input type="number" id="iof" th:value="*{id}" disabled="disabled">
+					<input type="text" id="inputid" th:value="*{id}" disabled="disabled">
 				</div>
 			</div>
 			
