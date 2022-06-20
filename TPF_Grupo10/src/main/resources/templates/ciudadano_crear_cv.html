@@ -6,6 +6,62 @@
 	</head>
 
 	<body>
-	
+		<header th:replace="layouts/ciudadano_header::fheader"></header>
+		<h1>Crear Curriculum</h1>
+ 		<form th:action="@{/curriculum/guardar}" method="POST" th:object="${curriculum}" autocomplete="off"> 
+			<div>
+				<label for="intContacto">Apellido: </label> 
+			</div>
+			
+			<div>
+				<label for="intContacto">Nombre: </label> 
+			</div>
+			
+			<div>
+				<label for="intContacto">DNI: </label> 
+			</div>
+			
+			<div>
+				<label for="intContacto">Email: </label> 
+			</div>
+			
+			<div>
+				<label for="intContacto">Telefono: </label> 
+			</div>
+			
+			<div>
+				<label for="intContacto">Estado Civil: </label> 
+			</div>
+			
+			<div>
+				<label for="intContacto">Provincia: </label> 
+			</div>
+			
+			<div>
+				<label for="intContacto">Contacto: </label> 
+				<input th:field=*{contacto} type="text" id="intContacto" placeholder="contacto">
+			</div>
+				
+			<div>
+				<label for="inIdioma">Idiomas: </label> 
+				<input th:field=*{idiomas} type="text" id="inIdioma" >
+			</div>
+		
+			<div>
+				<label for="inConInf">Conocimientos Infomaticos: </label> 
+				<input th:field=*{conocimientosInfomaticos} type="text" id="inConInf" >
+			</div>
+			
+			<div>
+				<label for="inExpLab">Experiencia Laboral: </label> 
+				<input th:field=*{experienciaLaboral} type="text" id="inExpLab" >
+			</div>
+				
+			<div>
+				<button type="submit">Crear</button>
+				<button th:href="@{/ciudadano/inicio}">Cancelar</button>
+			</div>
+		</form>		
+		<footer th:replace="layouts/ciudadano_footer::ffooter"></footer>
 	</body>
 </html>
