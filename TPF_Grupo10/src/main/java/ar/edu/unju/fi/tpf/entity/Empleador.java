@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,6 +26,7 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
+@Entity
 @Table(name="EMPLEADOR")
 public class Empleador implements Serializable {
 
@@ -48,19 +50,19 @@ public class Empleador implements Serializable {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "EMP_INICIO_ACTIVIDAD")
 	private LocalDate fechaInicioActividad;
-	@Column(name = "CIU_EMAIL")
+	@Column(name = "EMP_EMAIL")
 	private String email;
-	@Column(name = "CIU_TEL")
+	@Column(name = "EMP_TEL")
 	private String telefono;
-	@Column(name = "CIU_DOMICILIO")
+	@Column(name = "EMP_DOMICILIO")
 	private String domicilio;
-	@Column(name = "CIU_PROVINCIA")
+	@Column(name = "EMP_PROVINCIA")
 	private String provincia;
-	@Column(name = "CIU_PAG_WEB")
+	@Column(name = "EMP_PAG_WEB")
 	private String paginaWeb;
-	@Column(name = "CIU_DESCRIPCION")
+	@Column(name = "EMP_DESCRIPCION")
 	private String descripcion;
-	@Column(name = "CIU_ESTADO")
+	@Column(name = "EMP_ESTADO")
 	private boolean estado;
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

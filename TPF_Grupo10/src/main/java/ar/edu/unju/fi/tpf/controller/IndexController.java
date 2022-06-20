@@ -3,9 +3,9 @@ package ar.edu.unju.fi.tpf.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import ar.edu.unju.fi.tpf.entity.Ciudadano;
 import ar.edu.unju.fi.tpf.entity.Empleador;
@@ -30,12 +30,12 @@ public class IndexController {
 	@Autowired
 	ListaProvincias provincias;
 	
-	@RequestMapping("/inicio")
+	@GetMapping("/inicio")
 	public String getInicioPage(Model model) {
 		return "index";
 	}
 
-	@RequestMapping("/nuevo-registro")
+	@GetMapping("/nuevo-registro")
 	public String getFormularioRegistroPage(Model model) {
 		return "index_nuevo_registro";
 	}
@@ -55,7 +55,7 @@ public class IndexController {
 		}
 	}
 
-	@RequestMapping("/iniciar-sesion")
+	@GetMapping("/iniciar-sesion")
 	public String getInicioSesionPage(Model model) {
 		return "index_iniciar_sesion";
 	}
@@ -66,6 +66,7 @@ public class IndexController {
 			return "redirect:/ciudadano/inicio";
 		} else {
 			return "redirect:/empleador/inicio";
+			//return "redirect:/empleador/login-empleador";
 		}
 	}
 }

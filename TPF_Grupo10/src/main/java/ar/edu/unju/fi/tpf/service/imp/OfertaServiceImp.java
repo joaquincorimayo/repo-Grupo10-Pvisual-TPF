@@ -1,14 +1,15 @@
 package ar.edu.unju.fi.tpf.service.imp;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ar.edu.unju.fi.tpf.entity.Oferta;
+import ar.edu.unju.fi.tpf.repositorty.IOfertaRepository;
 import ar.edu.unju.fi.tpf.service.IOfertaService;
-import ar.edu.unju.fi.tpf.util.ListaOfertas;
 
 /**
  * Implementacion de servicios para Ofertas.
@@ -17,11 +18,10 @@ import ar.edu.unju.fi.tpf.util.ListaOfertas;
  */
 @Service("OfertaService")
 public class OfertaServiceImp implements IOfertaService {
-
+	Logger logger = LoggerFactory.getLogger(OfertaServiceImp.class);
+	
 	@Autowired
-	private ListaOfertas lista;
-	// @Autowired
-	// private IOfertaRepository ofertaRepository;
+	private IOfertaRepository ofertaRepository;
 
 	@Override
 	public Oferta crearOferta() {
@@ -31,54 +31,41 @@ public class OfertaServiceImp implements IOfertaService {
 	@Override
 	public void guardarOferta(Oferta oferta) {
 		oferta.setEstado(true);
-		lista.getOfertas().add(oferta);
-		// REPO
+		ofertaRepository.save(oferta);
 	}
 
 	@Override
 	public void borrarOferta(Long id) {
-		for (int i = 0; i < lista.getOfertas().size(); i++) {
-			if (lista.getOfertas().get(i).getId() == id) {
-				lista.getOfertas().get(i).setEstado(false);
-				// REPO
-			}
-		}
+		Oferta ofertaBorrar = buscarOferta(id);
+		ofertaBorrar.setEstado(false);
+		ofertaRepository.save(ofertaBorrar);
 	}
 
 	@Override
 	public void actualizarOferta(Oferta oferta) {
-		for (int i = 0; i < lista.getOfertas().size(); i++) {
-			if (lista.getOfertas().get(i).getId() == oferta.getId()) {
-				oferta.setEstado(true); // Solo pruebas
-				lista.getOfertas().set(i, oferta);
-				// REPO
-			}
-		}
+		Oferta ofertaNueva = buscarOferta(oferta.getId());
+		mapearOferta(oferta, ofertaNueva);
+		ofertaRepository.save(ofertaNueva);
+	}
+
+	public void mapearOferta(Oferta desde, Oferta hacia) {
+		// Mas opciones segun formulario para modificar
+		hacia.setCantidadVacantes(desde.getCantidadVacantes());
 	}
 
 	@Override
 	public List<Oferta> listarOfertas() {
-		List<Oferta> aux_ofertas = new ArrayList<Oferta>();
-		// REPO
-		for (int i = 0; i < lista.getOfertas().size(); i++) {
-			if (lista.getOfertas().get(i).isEstado() == true) {
-				aux_ofertas.add(lista.getOfertas().get(i));
-			}
-		}
-
-		return aux_ofertas;
+		return ofertaRepository.findAll();
 	}
 
 	@Override
 	public Oferta buscarOferta(Long id) {
 		Oferta oferta = new Oferta();
-
-		for (int i = 0; i < lista.getOfertas().size(); i++) {
-			if (lista.getOfertas().get(i).getId() == id) {
-				oferta = lista.getOfertas().get(i);
+		for (int i = 0; i < ofertaRepository.findAll().size(); i++) {
+			if (ofertaRepository.findAll().get(i).getId() == id) {
+				oferta = ofertaRepository.findAll().get(i);
 			}
 		}
-
 		return oferta;
 	}
 

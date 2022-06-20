@@ -1,14 +1,15 @@
 package ar.edu.unju.fi.tpf.service.imp;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ar.edu.unju.fi.tpf.entity.Empleador;
+import ar.edu.unju.fi.tpf.repositorty.IEmpleadorRepository;
 import ar.edu.unju.fi.tpf.service.IEmpleadorService;
-import ar.edu.unju.fi.tpf.util.ListaEmpleadores;
 
 /**
  * Implementacion de servicios para Empleador.
@@ -18,11 +19,11 @@ import ar.edu.unju.fi.tpf.util.ListaEmpleadores;
 
 @Service("EmpleadorService")
 public class EmpleadorServiceImp implements IEmpleadorService {
+	
+	Logger logger = LoggerFactory.getLogger(EmpleadorServiceImp.class);
 
 	@Autowired
-	private ListaEmpleadores lista;
-	// @Autowired
-	// private IEmpleadorRepository empleadorRepository;
+	private IEmpleadorRepository empleadorRepository;
 
 	@Override
 	public Empleador crearEmpleador() {
@@ -32,50 +33,40 @@ public class EmpleadorServiceImp implements IEmpleadorService {
 	@Override
 	public void guardarEmpleador(Empleador empleador) {
 		empleador.setEstado(true);
-		lista.getEmpleadores().add(empleador);
-		// REPO
+		empleadorRepository.save(empleador);
 	}
 
 	@Override
 	public void borrarEmpleador(Long id) {
-		for (int i = 0; i < lista.getEmpleadores().size(); i++) {
-			if (lista.getEmpleadores().get(i).getId() == id) {
-				lista.getEmpleadores().get(i).setEstado(false);
-				// REPO
-			}
-		}
+		Empleador empleadorBorrar = buscarEmpleador(id);
+		empleadorBorrar.setEstado(false);
+		empleadorRepository.save(empleadorBorrar);
 	}
 
 	@Override
 	public void actualizarEmpleador(Empleador empleador) {
-		for (int i = 0; i < lista.getEmpleadores().size(); i++) {
-			if (lista.getEmpleadores().get(i).getId() == empleador.getId()) {
-				lista.getEmpleadores().set(i, empleador);
-				// REPO
-			}
-		}
+		Empleador empleadorNuevo = buscarEmpleador(empleador.getId());
+		mapearEmpleado(empleador, empleadorNuevo);
+		empleadorRepository.save(empleadorNuevo);
+	}
+	
+	public void mapearEmpleado(Empleador desde, Empleador hacia) {
+		// OPC del formulario
+		hacia.setEmail(desde.getEmail());
 	}
 
 	@Override
 	public List<Empleador> listarEmpleadores() {
-		List<Empleador> aux_empleadores = new ArrayList<Empleador>();
-		// REPO
-		for (int i = 0; i < lista.getEmpleadores().size(); i++) {
-			if (lista.getEmpleadores().get(i).isEstado()==true) {
-				aux_empleadores.add(lista.getEmpleadores().get(i));
-			}
-		}
-
-		return aux_empleadores;
+		return empleadorRepository.findAll();
 	}
 
 	@Override
 	public Empleador buscarEmpleador(Long id) {
 		Empleador empleador = new Empleador();
 
-		for (int i = 0; i < lista.getEmpleadores().size(); i++) {
-			if (lista.getEmpleadores().get(i).getId() == id) {
-				empleador = lista.getEmpleadores().get(i);
+		for (int i = 0; i < empleadorRepository.findAll().size(); i++) {
+			if (empleadorRepository.findAll().get(i).getId() == id) {
+				empleador = empleadorRepository.findAll().get(i);
 			}
 		}
 
