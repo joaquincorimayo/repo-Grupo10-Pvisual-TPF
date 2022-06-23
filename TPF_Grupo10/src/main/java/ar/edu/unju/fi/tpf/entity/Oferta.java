@@ -1,12 +1,18 @@
 package ar.edu.unju.fi.tpf.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -57,14 +63,21 @@ public class Oferta implements Serializable {
 	private String salario;
 	@Column(name = "OFE_ESTADO")
 	private boolean estado;
-
+	
+	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinTable(	name = "OFERTA_CIUDADANO",
+				joinColumns = @JoinColumn(name = "OFE_ID"),
+				inverseJoinColumns = @JoinColumn(name = "CIU_ID")
+			)
+	private List<Ciudadano> ciudadanos = new ArrayList<Ciudadano>();
+	
 	public Oferta() {
 
 	}
 
 	public Oferta(Long id, String cantidadVacantes, String disponibilidadHoraria, String puestoRequerido,
 			String principalesTareas, String resumen, String datosContacto, String jornada, String requisitos,
-			String beneficios, String disponibilidad, String salario, boolean estado) {
+			String beneficios, String disponibilidad, String salario, boolean estado, List<Ciudadano> ciudadanos) {
 		super();
 		this.id = id;
 		this.cantidadVacantes = cantidadVacantes;
@@ -79,6 +92,7 @@ public class Oferta implements Serializable {
 		this.disponibilidad = disponibilidad;
 		this.salario = salario;
 		this.estado = estado;
+		this.ciudadanos = ciudadanos;
 	}
 
 	public Long getId() {
@@ -185,13 +199,25 @@ public class Oferta implements Serializable {
 		this.estado = estado;
 	}
 
+	public List<Ciudadano> getCiudadanos() {
+		return ciudadanos;
+	}
+
+	public void setCiudadanos(List<Ciudadano> ciudadanos) {
+		this.ciudadanos = ciudadanos;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	@Override
 	public String toString() {
 		return "Oferta [id=" + id + ", cantidadVacantes=" + cantidadVacantes + ", disponibilidadHoraria="
 				+ disponibilidadHoraria + ", puestoRequerido=" + puestoRequerido + ", principalesTareas="
 				+ principalesTareas + ", resumen=" + resumen + ", datosContacto=" + datosContacto + ", jornada="
 				+ jornada + ", requisitos=" + requisitos + ", beneficios=" + beneficios + ", disponibilidad="
-				+ disponibilidad + ", salario=" + salario + ", estado=" + estado + "]";
+				+ disponibilidad + ", salario=" + salario + ", estado=" + estado + ", ciudadanos=" + ciudadanos + "]";
 	}
-
+	
 }

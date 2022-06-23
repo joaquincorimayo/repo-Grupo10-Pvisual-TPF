@@ -13,8 +13,9 @@ import ar.edu.unju.fi.tpf.entity.Ciudadano;
  */
 
 public interface ICiudadanoService {
+	
 	public Ciudadano getCiudadano();
-	public boolean guardarCiudadano(Ciudadano ciudadano);
+	public void guardarCiudadano(Ciudadano ciudadano);
 	public void modificarCiudadano(Ciudadano ciudadano);
 	public void eliminarCiudadano(String dni);
 	public List<Ciudadano> getListaCiudadano();

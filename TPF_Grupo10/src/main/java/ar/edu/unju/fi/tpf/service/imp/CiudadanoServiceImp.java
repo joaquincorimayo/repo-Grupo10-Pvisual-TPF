@@ -17,7 +17,6 @@ import ar.edu.unju.fi.tpf.service.ICiudadanoService;
  * @author LuisQuispe
  */
 
-//@Service("CiudadanoService")
 @Service
 public class CiudadanoServiceImp implements ICiudadanoService{
 
@@ -30,18 +29,25 @@ public class CiudadanoServiceImp implements ICiudadanoService{
 	}
 
 	@Override
-	public boolean guardarCiudadano(Ciudadano ciudadano) {
-		Ciudadano ci=ciudadanoRepository.findByDni(ciudadano.getDni());
-		if (ci==null) {
-			ciudadano.setEstado(true);
-			ciudadanoRepository.save(ciudadano);
-		}
-		return false;
+	public void guardarCiudadano(Ciudadano ciudadano) {
+		ciudadano.setEstado(true);
+		ciudadanoRepository.save(ciudadano);
 	}
 
 	@Override
 	public void modificarCiudadano(Ciudadano ciudadano) {
+		Ciudadano ciNuevo = buscarCiudadano(ciudadano.getDni());
+		actulizarCiudadano(ciudadano, ciNuevo);
 		ciudadanoRepository.save(ciudadano);
+	}
+	public void actulizarCiudadano(Ciudadano desde, Ciudadano hacia) {
+		hacia.setApellido(desde.getApellido());
+		hacia.setNombre(desde.getNombre());
+		hacia.setEmail(desde.getEmail());
+		hacia.setEstadoCivil(desde.getEstadoCivil());
+		hacia.setProvincia(desde.getProvincia());
+		hacia.setTelefono(desde.getTelefono());
+		hacia.setFechaNac(desde.getFechaNac());
 	}
 
 	@Override
@@ -53,13 +59,17 @@ public class CiudadanoServiceImp implements ICiudadanoService{
 
 	@Override
 	public List<Ciudadano> getListaCiudadano() {
-		return ciudadanoRepository.findByEstado(true);
+		return ciudadanoRepository.findAll();
 	}
 
 	@Override
 	public Ciudadano buscarCiudadano(String dni) {
-		return ciudadanoRepository.findByDni(dni);
+		Ciudadano ciudadano = new Ciudadano();
+		for (int i=0; i<ciudadanoRepository.findAll().size();i++) {
+			if (ciudadanoRepository.findAll().get(i).getDni()==dni);
+				ciudadano = ciudadanoRepository.findAll().get(i);
+		}
+		return ciudadano;
 	}
-	
-	
+
 }

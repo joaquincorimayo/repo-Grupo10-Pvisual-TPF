@@ -11,6 +11,4 @@ public interface ICurriculumRepository extends JpaRepository<Curriculum, Long>{
 	
 	public Optional<Curriculum> findById(Long id);
 	public List<Curriculum> findByEstado(boolean estado);
-	
-
 }

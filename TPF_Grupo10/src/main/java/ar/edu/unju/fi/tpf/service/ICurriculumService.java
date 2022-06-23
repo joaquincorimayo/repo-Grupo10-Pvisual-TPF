@@ -1,5 +1,7 @@
 package ar.edu.unju.fi.tpf.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import ar.edu.unju.fi.tpf.entity.Curriculum;
@@ -13,10 +15,12 @@ import ar.edu.unju.fi.tpf.entity.Curriculum;
  */
 @Service
 public interface ICurriculumService {
-	public Curriculum crearCurriculum();
-	public void leerCurriculum();
-	public void modificarCurriculum(Curriculum curriculum);
+	
+	public Curriculum getCurriculum();
 	public void guardarCurriculum(Curriculum curriculum);
+	public void modificarCurriculum(Curriculum curriculum);
+	public void eliminarCurriculum(Long id);
+	public List<Curriculum> getListaCurriculum();
 	public Curriculum buscarCurriculum(Long id);
-	public void eliminarCurriculum(Long id);	
+
 }

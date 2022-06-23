@@ -5,6 +5,17 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+
 import org.springframework.stereotype.Component;
 
 /**
@@ -15,21 +26,39 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
+@Entity
+@Table(name = "CURSO")
 public class Curso implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "CUR_ID")
 	private Long id;
+	@Column(name = "CUR_CATEGORIA")
 	private String categoria;
+	@Column(name = "CUR_TITULO")
 	private String titulo;
+	@Column(name = "CUR_FECHAINICIO")
 	private LocalDate fechaInicio;
+	@Column(name = "CUR_FECHAFIN")	
 	private LocalDate fechaFin;
+	@Column(name = "CUR_MODALIDAD")
 	private String modalidad;
+	@Column(name = "CUR_DETALLES")
 	private String detalles;
+	@Column(name = "CUR_NOMBREDOCENTE")
 	private String nombreDocente;
+	
+	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinTable(	name = "CURSO_CIUDADANO",
+				joinColumns = @JoinColumn(name = "CUR_ID"),
+				inverseJoinColumns = @JoinColumn(name = "CIU_ID")
+				)
 	private List<Ciudadano> ciudadanos = new ArrayList<Ciudadano>();
 
 	public Curso() {

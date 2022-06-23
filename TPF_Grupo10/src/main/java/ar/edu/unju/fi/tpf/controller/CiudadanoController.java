@@ -18,9 +18,9 @@ import ar.edu.unju.fi.tpf.entity.Oferta;
 import ar.edu.unju.fi.tpf.service.ICiudadanoService;
 import ar.edu.unju.fi.tpf.service.IOfertaService;
 
-//import ar.edu.unju.fi.tpf.entity.Curriculum;
-//import ar.edu.unju.fi.tpf.service.ICurriculumService;
+import ar.edu.unju.fi.tpf.service.ICurriculumService;
 
+import ar.edu.unju.fi.tpf.util.ListaConocimientosInformaticos;
 
 /**
  * Permite manejar-responder a peticiones que recibe para
@@ -41,22 +41,11 @@ public class CiudadanoController {
 	private ICiudadanoService ciudadanoService;
 	@Autowired
 	private IOfertaService ofertaService;
+	@Autowired
+	private ICurriculumService curriculumService;
+	@Autowired
+	ListaConocimientosInformaticos conInf;
 		
-//	@PostMapping("/guardar")
-//	public ModelAndView guardarCiudadanoPage(@Validated @ModelAttribute("ciudadano") Ciudadano ciudadano,
-//			BindingResult bindingResult) {
-//		if (bindingResult.hasErrors()) {
-//			logger.info("Method: guardarCiudadanoPage() - Information: Error en ingreso de datos para Ciudadano.");
-//			ModelAndView mav=new ModelAndView("ciudadano_formulario");
-//			mav.addObject("ciudadano", ciudadano);
-//		}
-//		ModelAndView mav=new ModelAndView("redirect:/ciudadano");
-//		if(ciudadanoService.guardarCiudadano(ciudadano)) {
-//			logger.info("Se agrego ciudadano");
-//		}
-//		return mav;
-//	}
-	
 	//Guardado Provisorio
 	@PostMapping("/guardar")
 	public String guardarCiudadanoPage(@ModelAttribute("ciudadano") Ciudadano ciudadano) {
@@ -68,6 +57,12 @@ public class CiudadanoController {
 		return "redirect:/inicio";
 	}
 	
+	@RequestMapping("/editar")
+	public String getEditarPage(Model model) {
+		return "ciudadano_formulario_editar";
+	}
+	
+	//DESACTIVADO HASTA SOLUCIONAR PROBLEMA DE LOGIN
 //	@GetMapping("/editar/{dni}")
 //	public ModelAndView getEditarCiudadanoPage(@PathVariable(value="dni") String dni) {
 //		ModelAndView mav=new ModelAndView("ciudadano_formulario_editar");
@@ -95,7 +90,7 @@ public class CiudadanoController {
 //		ciudadanoService.eliminarCiudadano(dni);
 //		return mav;
 //	}
-//	
+	
 	@RequestMapping("/inicio")
 	public String getInicioPage(Model model) {
 		return "ciudadano_inicio";
@@ -103,20 +98,25 @@ public class CiudadanoController {
 	
 	@GetMapping("/crear-cv")
 	public String getNuevoCVPage(Model model){
+		Ciudadano ciudadano = new Ciudadano();
+		model.addAttribute("conInf", conInf.getConoInf());
 		Curriculum curriculum =new Curriculum();
-//		model.addAttribute("ciudadano", ciudadanoService.getCiudadano());
+		curriculum.setCiudadano(ciudadano);
 		model.addAttribute("curriculum", curriculum);
 		return "ciudadano_crear_cv";
 	}
-	
+
 	@GetMapping("/ver-cv")
 	public String getCVPage(Model model) {
-	//	model.addAttribute("curriculum", curriculumService.leerCurriculum());
+		Curriculum curriculum = curriculumService.buscarCurriculum(1l);
+		model.addAttribute("curriculum", curriculum);
 		return "ciudadano_ver_cv";
 	}
 		
 	@GetMapping("/cursos")
 	public String getListaCursosPage(Model model) {
+//		List<Curso> cursos = cursoService.listarCurso();
+//		model.addAttribute("cursos", cursos);
 		return "ciudadano_lista_cursos";
 	}
 	
@@ -126,9 +126,11 @@ public class CiudadanoController {
 		model.addAttribute("ofertas", ofertas);
 		return "ciudadano_lista_ofertas";
 	}
+	
 	@RequestMapping("/salir")
 	public String getLogoutPage(Model model) {
 		return "redirect:/inicio";
 	}
 }
+
 

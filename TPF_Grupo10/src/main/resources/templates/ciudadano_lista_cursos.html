@@ -6,6 +6,40 @@
 	</head>
 
 	<body>
+		<header th:replace="layouts/ciudadano_header::fheader"></header>
+<!-- 	completar con filtrado  -->
+		<table>
+			<tr>
+				<th>#</th>
+				<th>Titulo</th>
+				<th>Categoria</th>
+				<th>Fecha de Inicio</th>
+				<th>Fecha de Fin</th>
+				<th>Modalidad</th>
+				<th>Detalles</th>
+				<th>Docente</th>
+				<th>Opciones</th>
+			</tr>
+				<tr th:each="c: ${cursos}" th:if="${o.estado}==true">
+				<td th:text="${c.id}"></td>
+				<td th:text="${c.titulo}"></td>
+				<td th:text="${c.categoria}"></td>
+				<td th:text="${c.fechaInicio}"></td>
+				<td th:text="${c.fechaFin}"></td>
+				<td th:text="${c.modalidad}"></td>
+				<td th:text="${c.detalles}"></td>
+				<td th:text="${c.nombreDocente}"></td>
+				<td>
+<!-- 			<a th:href="@{/curso/inscribirse/}+${o.id}">Inscribirse</a>  -->
+				<a th:href="@{/curso/inscribirse/}">Inscribirse</a> 
+					</td>
+				</tr>
 	
+		</table>
+			<div>
+				<button th:href="@{/inicio}">Salir</button>
+			</div>
+			
+		<footer th:replace="layouts/ciudadano_footer::ffooter"></footer>		
 	</body>
 </html>
