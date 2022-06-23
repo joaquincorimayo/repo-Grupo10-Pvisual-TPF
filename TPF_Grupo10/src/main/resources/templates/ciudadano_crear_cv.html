@@ -49,7 +49,9 @@
 		
 			<div>
 				<label for="inConInf">Conocimientos Infomaticos: </label> 
-				<input th:field=*{conocimientosInfomaticos} type="text" id="inConInf" >
+				<select th:field="*{conocimientosInfomaticos}" id="inConInf">
+						<option th:each="ci : ${conInf}" th:value="${ci}" th:text="${ci}"></option>
+				  	</select>
 			</div>
 			
 			<div>

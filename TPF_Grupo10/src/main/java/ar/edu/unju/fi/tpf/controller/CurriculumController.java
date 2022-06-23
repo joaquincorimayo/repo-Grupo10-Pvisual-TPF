@@ -3,7 +3,6 @@ package ar.edu.unju.fi.tpf.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +20,7 @@ public class CurriculumController {
 	Logger logger = LoggerFactory.getLogger(OfertaController.class);
 	
 	@Autowired
-	@Qualifier("CurriculumService")
+//	@Qualifier("CurriculumService")
 	private ICurriculumService curriculumService;
 	
 	@PostMapping("/guardar")
@@ -34,22 +33,23 @@ public class CurriculumController {
 		return "redirect:/ciudadano/inicio";
 	}
 	
-	@GetMapping("/editar/{id}")
+	@GetMapping("/editar-cv/{id}")
 	public String getEditarCurriculumPage(@PathVariable(value="id") Long id, Model model) {
 		Curriculum curriculum = curriculumService.buscarCurriculum(id);
 		model.addAttribute("curriculum", curriculum);
 		return "ciudadano_editar_cv";
 	}
 	
-	@RequestMapping("/modificar")
+	@RequestMapping("/modificar-cv")
 	public String editarCurriculum(Model model) {
 		return "redirect:/ciudadano/inicio";
 	}
 	
-	@GetMapping("/eliminar/{id}")
+	@GetMapping("/eliminar-cv/{id}")
 	public String eliminarCurriculum(@PathVariable(value="id")Long id) {
 		curriculumService.eliminarCurriculum(id);
 		return "redirect:/ciudadano/inicio";
 	}
 	
 }
+

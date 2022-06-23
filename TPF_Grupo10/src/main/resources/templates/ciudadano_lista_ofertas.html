@@ -6,6 +6,42 @@
 	</head>
 
 	<body>
-	
+		<header th:replace="layouts/ciudadano_header::fheader"></header>
+			<table>
+				<tr>
+					<th>#</th>
+					<th>Cantidad De Vacantes Disponible</th>
+					<th>Disponibilidad Horaria</th>
+					<th>Puesto Requerido</th>
+					<th>Principales Tareas</th>
+					<th>Resumen</th>
+					<th>Datos de Contacto</th>
+					<th>Jornada</th>
+					<th>Requisitos</th>
+					<th>Beneficios</th>
+					<th>Disponibilidad Horaria</th>
+					<th>Salario</th>
+					<th>Opciones</th>
+				</tr>
+				<tr th:each="o: ${ofertas}" th:if="${o.estado}==true">
+						<td th:text="${o.id}"></td>
+						<td th:text="${o.cantidadVacantes}"></td>
+						<td th:text="${o.disponibilidadHoraria}"></td>
+						<td th:text="${o.puestoRequerido}"></td>
+						<td th:text="${o.principalesTareas}"></td>
+						<td th:text="${o.resumen}"></td>
+						<td th:text="${o.datosContacto}"></td>
+						<td th:text="${o.jornada}"></td>
+						<td th:text="${o.requisitos}"></td>
+						<td th:text="${o.beneficios}"></td>
+						<td th:text="${o.disponibilidad}"></td>
+						<td th:text="${o.salario}"></td>
+						<td>
+							<a th:href="@{/ciudadano/ofertas/}">Postularse</a> 
+						</td>
+				</tr>
+			
+			</table>
+		<footer th:replace="layouts/ciudadano_footer::ffooter"></footer>
 	</body>
 </html>

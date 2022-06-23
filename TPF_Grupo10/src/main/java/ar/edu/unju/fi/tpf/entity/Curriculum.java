@@ -2,14 +2,14 @@ package ar.edu.unju.fi.tpf.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
 
 import org.springframework.stereotype.Component;
 
@@ -32,35 +32,39 @@ public class Curriculum implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="CUR_ID")
+	@Column(name="CURR_ID")
 	private Long id;
 	
+	@OneToOne(mappedBy = "curriculum", cascade = CascadeType.ALL)
 	private Ciudadano ciudadano;
 	
-	@Column(name="CUR_CONTACTO")
+	@Column(name="CURR_CONTACTO")
 	private String contacto;
 	
-	@Column(name="CUR_EDUCACION")
+	@Column(name="CURR_EDUCACION")
 	private String educacion;
 	
-	@Column(name="CUR_IDIOMAS")
-	private boolean idiomas;
+	@Column(name="CURR_IDIOMAS")
+	private String idiomas;
 	
-	@Column(name="CUR_CONINF")
-	private boolean conocimientosInfomaticos;
+	@Column(name="CURR_CONINF")
+	private String conocimientosInfomaticos;
 	
-	@Column(name="CUR_EXPLAB")
-	private boolean experienciaLaboral;
+	@Column(name="CURR_EXPLAB")
+	private String experienciaLaboral;
 	
-	@Column(name="CUR_ESTADO")
+	@Column(name="CUR_DOMICIOLIO")
+	private String domicilio;
+	
+	@Column(name="CURR_ESTADO")
 	private boolean estado;
 
 	public Curriculum() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Curriculum(Long id, Ciudadano ciudadano, String contacto, String educacion, boolean idiomas,
-			boolean conocimientosInfomaticos, boolean experienciaLaboral, boolean estado) {
+	public Curriculum(Long id, Ciudadano ciudadano, String contacto, String educacion, String idiomas,
+			String conocimientosInfomaticos, String experienciaLaboral, String domicilio, boolean estado) {
 		super();
 		this.id = id;
 		this.ciudadano = ciudadano;
@@ -69,6 +73,7 @@ public class Curriculum implements Serializable {
 		this.idiomas = idiomas;
 		this.conocimientosInfomaticos = conocimientosInfomaticos;
 		this.experienciaLaboral = experienciaLaboral;
+		this.domicilio = domicilio;
 		this.estado = estado;
 	}
 
@@ -104,32 +109,36 @@ public class Curriculum implements Serializable {
 		this.educacion = educacion;
 	}
 
-	public boolean isIdiomas() {
+	public String getIdiomas() {
 		return idiomas;
 	}
 
-	public void setIdiomas(boolean idiomas) {
+	public void setIdiomas(String idiomas) {
 		this.idiomas = idiomas;
 	}
 
-	public boolean isConocimientosInfomaticos() {
+	public String getConocimientosInfomaticos() {
 		return conocimientosInfomaticos;
 	}
 
-	public void setConocimientosInfomaticos(boolean conocimientosInfomaticos) {
+	public void setConocimientosInfomaticos(String conocimientosInfomaticos) {
 		this.conocimientosInfomaticos = conocimientosInfomaticos;
 	}
 
-	public boolean isExperienciaLaboral() {
+	public String getExperienciaLaboral() {
 		return experienciaLaboral;
 	}
 
-	public void setExperienciaLaboral(boolean experienciaLaboral) {
+	public void setExperienciaLaboral(String experienciaLaboral) {
 		this.experienciaLaboral = experienciaLaboral;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public String getDomicilio() {
+		return domicilio;
+	}
+
+	public void setDomicilio(String domicilio) {
+		this.domicilio = domicilio;
 	}
 
 	public boolean isEstado() {
@@ -140,11 +149,16 @@ public class Curriculum implements Serializable {
 		this.estado = estado;
 	}
 
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	@Override
 	public String toString() {
 		return "Curriculum [id=" + id + ", ciudadano=" + ciudadano + ", contacto=" + contacto + ", educacion="
 				+ educacion + ", idiomas=" + idiomas + ", conocimientosInfomaticos=" + conocimientosInfomaticos
-				+ ", experienciaLaboral=" + experienciaLaboral + ", estado=" + estado + "]";
+				+ ", experienciaLaboral=" + experienciaLaboral + ", domicilio=" + domicilio + ", estado=" + estado
+				+ "]";
 	}
 
 }

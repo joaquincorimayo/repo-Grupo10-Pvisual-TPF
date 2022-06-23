@@ -1,6 +1,7 @@
 package ar.edu.unju.fi.tpf.entity;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,13 +10,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+//import javax.validation.constraints.Email;
+//import javax.validation.constraints.Max;
+//import javax.validation.constraints.Min;
+//import javax.validation.constraints.NotEmpty;
+//import javax.validation.constraints.NotNull;
+//import javax.validation.constraints.Size;
 
 import org.springframework.stereotype.Component;
 
@@ -29,7 +33,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Entity
-@Table(name = "ciudadanos")
+@Table(name = "CIUDADANO")
 public class Ciudadano implements Serializable {
 
 	/**
@@ -42,71 +46,71 @@ public class Ciudadano implements Serializable {
 	@Column(name = "CIU_ID")
 	private Long id;
 
-	@Max(value = 99999999, message = "DNI debe ser menor que 99999999")
-	@Min(value = 1000000, message = "DNI debe ser mayor que 1000000")
+//	@Max(value = 99999999, message = "DNI debe ser menor que 99999999")
+//	@Min(value = 1000000, message = "DNI debe ser mayor que 1000000")
 	@Column(name = "CIU_DNI")
 	private String dni;
 
-	@Size(min = 3, max = 100, message = "La contraseña debe tener entre 4 a 12 caracteres")
-	@NotNull(message = "*Debe ingresar una contraseña")
+//	@Size(min = 3, max = 100, message = "La contraseña debe tener entre 4 a 12 caracteres")
+//	@NotNull(message = "*Debe ingresar una contraseña")
 	@Column(name = "CIU_PASSWORD")
 	private String password;
 
-	@Size(min = 10, max = 12, message = "Debe ingresar n° de 12 digitos")
-	@NotNull(message = "*Debe ingresar le n° de tramite")
+//	@Size(min = 10, max = 12, message = "Debe ingresar n° de 12 digitos")
+//	@NotNull(message = "*Debe ingresar le n° de tramite")
 	@Column(name = "CIU_NROTRAMITE")
 	private String numeroTramite;
 
-	@NotEmpty(message = "El nombre no puede ser vacío")
-	@Size(min = 3, max = 100, message = "El nombre debe tener entre 3 a 100 caracteres")
+//	@NotEmpty(message = "El nombre no puede ser vacío")
+//	@Size(min = 3, max = 100, message = "El nombre debe tener entre 3 a 100 caracteres")
 	@Column(name = "CIU_NOMBRE")
 	private String nombre;
 
-	@Size(min = 3, max = 100, message = "El Apellido debe tener entre 3 a 100 caracteres")
-	@NotEmpty(message = "El apellido del alumno no puede ser vacío")
+//	@Size(min = 3, max = 100, message = "El Apellido debe tener entre 3 a 100 caracteres")
+//	@NotEmpty(message = "El apellido del alumno no puede ser vacío")
 	@Column(name = "CIU_APELLIDO")
 	private String apellido;
 
-	@NotEmpty(message = "El email del alumno no puede ser vacío")
-	@Email
+//	@NotEmpty(message = "El email del alumno no puede ser vacío")
+//	@Email
 	@Column(name = "ALU_EMAIL")
 	private String email;
 
-	@NotEmpty
+//	@NotEmpty
 	@Column(name = "CIU_ESTADOCIVIL")
 	private String estadoCivil;
 
-	@NotEmpty
+//	@NotEmpty
 	@Column(name = "CIU_PROVINCIA")
 	private String provincia;
 
-	@NotEmpty(message = "El n° teléfono no puede ser vacío.")
+//	@NotEmpty(message = "El n° teléfono no puede ser vacío.")
 	@Column(name = "CIU_TELEFONO")
 	private String telefono;
 
-	@Column(name = "CIU_CURRICULUM")
-	private Curriculum curriculum;
-
-//	@Column(name = "CIU_CURSOS")
-//	private List<Curso> cursos = new ArrayList<Curso>();
-
+	@Column(name="CIU_FECNAC")
+	private LocalDate fechaNac;
+	
 	@Column(name = "CIU_ESTADO")
 	private boolean estado;
+	
+	@OneToOne
+	@JoinColumn(name = "CURR_ID")
+	private Curriculum curriculum;
+	
+	@ManyToMany(mappedBy = "ciudadanos")
+	private List<Oferta> ofertas = new ArrayList<Oferta>();
+	
+	@ManyToMany(mappedBy = "ciudadanos")
+	private List<Curso> cursos = new ArrayList<Curso>();
 
 	public Ciudadano() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Ciudadano(Long id,
-			@Max(value = 99999999, message = "DNI debe ser menor que 99999999") @Min(value = 1000000, message = "DNI debe ser mayor que 1000000") String dni,
-			@Size(min = 3, max = 100, message = "La contraseña debe tener entre 4 a 12 caracteres") @NotNull(message = "*Debe ingresar una contraseña") String password,
-			@Size(min = 10, max = 12, message = "Debe ingresar n° de 12 digitos") @NotNull(message = "*Debe ingresar le n° de tramite") String numeroTramite,
-			@NotEmpty(message = "El nombre no puede ser vacío") @Size(min = 3, max = 100, message = "El nombre debe tener entre 3 a 100 caracteres") String nombre,
-			@Size(min = 3, max = 100, message = "El Apellido debe tener entre 3 a 100 caracteres") @NotEmpty(message = "El apellido del alumno no puede ser vacío") String apellido,
-			@NotEmpty(message = "El email del alumno no puede ser vacío") @Email String email,
-			@NotEmpty String estadoCivil, @NotEmpty String provincia,
-			@NotEmpty(message = "El n° teléfono no puede ser vacío.") String telefono, Curriculum curriculum,
-			List<Curso> cursos, boolean estado) {
+	public Ciudadano(Long id, String dni, String password, String numeroTramite, String nombre, String apellido,
+			String email, String estadoCivil, String provincia, String telefono, LocalDate fechaNac,
+			Curriculum curriculum, boolean estado, List<Oferta> ofertas, List<Curso> cursos) {
 		super();
 		this.id = id;
 		this.dni = dni;
@@ -118,9 +122,11 @@ public class Ciudadano implements Serializable {
 		this.estadoCivil = estadoCivil;
 		this.provincia = provincia;
 		this.telefono = telefono;
+		this.fechaNac = fechaNac;
 		this.curriculum = curriculum;
-//		this.cursos = cursos;
 		this.estado = estado;
+		this.ofertas = ofertas;
+		this.cursos = cursos;
 	}
 
 	public Long getId() {
@@ -203,6 +209,14 @@ public class Ciudadano implements Serializable {
 		this.telefono = telefono;
 	}
 
+	public LocalDate getFechaNac() {
+		return fechaNac;
+	}
+
+	public void setFechaNac(LocalDate fechaNac) {
+		this.fechaNac = fechaNac;
+	}
+
 	public Curriculum getCurriculum() {
 		return curriculum;
 	}
@@ -210,14 +224,6 @@ public class Ciudadano implements Serializable {
 	public void setCurriculum(Curriculum curriculum) {
 		this.curriculum = curriculum;
 	}
-
-//	public List<Curso> getCursos() {
-//		return cursos;
-//	}
-//
-//	public void setCursos(List<Curso> cursos) {
-//		this.cursos = cursos;
-//	}
 
 	public boolean isEstado() {
 		return estado;
@@ -227,18 +233,33 @@ public class Ciudadano implements Serializable {
 		this.estado = estado;
 	}
 
-//	@Override
-//	public String toString() {
-//		return "Ciudadano [id=" + id + ", dni=" + dni + ", password=" + password + ", numeroTramite=" + numeroTramite
-//				+ ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email + ", estadoCivil=" + estadoCivil
-//				+ ", provincia=" + provincia + ", telefono=" + telefono + ", curriculum=" + curriculum + ", cursos="
-//				+ cursos + ", estado=" + estado + "]";
-//	}
+	public List<Oferta> getOfertas() {
+		return ofertas;
+	}
+
+	public void setOfertas(List<Oferta> ofertas) {
+		this.ofertas = ofertas;
+	}
+
+	public List<Curso> getCursos() {
+		return cursos;
+	}
+
+	public void setCursos(List<Curso> cursos) {
+		this.cursos = cursos;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	@Override
 	public String toString() {
 		return "Ciudadano [id=" + id + ", dni=" + dni + ", password=" + password + ", numeroTramite=" + numeroTramite
 				+ ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email + ", estadoCivil=" + estadoCivil
-				+ ", provincia=" + provincia + ", telefono=" + telefono + ", curriculum=" + curriculum + ", estado=" + estado + "]";
+				+ ", provincia=" + provincia + ", telefono=" + telefono + ", fechaNac=" + fechaNac + ", curriculum="
+				+ curriculum + ", estado=" + estado + ", ofertas=" + ofertas + ", cursos=" + cursos + "]";
 	}
-
+	
+	
 }
