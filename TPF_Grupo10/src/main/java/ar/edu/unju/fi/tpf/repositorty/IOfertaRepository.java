@@ -5,6 +5,13 @@ import org.springframework.stereotype.Repository;
 
 import ar.edu.unju.fi.tpf.entity.Oferta;
 
+/**
+ * 
+ * @author JoaquinCorimayo
+ * 
+ * @author LuisQuispe
+ */
+
 @Repository
 public interface IOfertaRepository extends JpaRepository<Oferta, Long> {
 }

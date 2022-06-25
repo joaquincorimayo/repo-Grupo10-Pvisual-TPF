@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta charset="utf-8">
+		<title>Login</title>
+	</head>
+	
+	<body>
+			<form class="form" th:action="@{/login}" method="post">
+				<label for="usname">Usuario:</label> 
+				<input type="text" id="usname" placeholder="Ingresar usuario" name="usname"> 
+				
+				<label for="uspass">Contraseña:</label> 
+				<input type="password" id="uspass" placeholder="Password" name="uspass">
+	
+				<button type="submit">Ingresar</button>
+				<a th:href="@{/inicio}">Cancelar</a>
+			</form>
+	
+			<div th:if="${param.error}" role="alert">Combinación Invalida de Usuario y Contraseña</div>
+<!-- 			<div th:if="${param.logout}" role="alert">Ha salido del Sistema. Gracias!</div> -->
+	</body>
+
+</html>

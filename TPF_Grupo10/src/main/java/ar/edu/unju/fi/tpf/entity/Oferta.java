@@ -24,16 +24,12 @@ import org.springframework.stereotype.Component;
 @Table(name = "OFERTA")
 public class Oferta implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "OFE_ID")
 	private Long id;
-	
 	@Column(name = "OFE_VACANTES")
 	private String cantidadVacantes;
 	@Column(name = "OFE_DISP_HORARIA")
@@ -58,21 +54,11 @@ public class Oferta implements Serializable {
 	private String salario;
 	@Column(name = "OFE_ESTADO")
 	private boolean estado;
-	
-//	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-//	@JoinTable(	name = "OFERTA_CIUDADANO",
-//				joinColumns = @JoinColumn(name = "OFE_ID"),
-//				inverseJoinColumns = @JoinColumn(name = "CIU_ID")
-//			)
-//	private List<Ciudadano> ciudadanos = new ArrayList<Ciudadano>();
-	
+
 	public Oferta() {
 
 	}
 
-//	public Oferta(Long id, String cantidadVacantes, String disponibilidadHoraria, String puestoRequerido,
-//			String principalesTareas, String resumen, String datosContacto, String jornada, String requisitos,
-//			String beneficios, String disponibilidad, String salario, boolean estado, List<Ciudadano> ciudadanos) {
 	public Oferta(Long id, String cantidadVacantes, String disponibilidadHoraria, String puestoRequerido,
 			String principalesTareas, String resumen, String datosContacto, String jornada, String requisitos,
 			String beneficios, String disponibilidad, String salario, boolean estado) {
@@ -90,7 +76,6 @@ public class Oferta implements Serializable {
 		this.disponibilidad = disponibilidad;
 		this.salario = salario;
 		this.estado = estado;
-//		this.ciudadanos = ciudadanos;
 	}
 
 	public Long getId() {
@@ -197,14 +182,6 @@ public class Oferta implements Serializable {
 		this.estado = estado;
 	}
 
-//	public List<Ciudadano> getCiudadanos() {
-//		return ciudadanos;
-//	}
-//
-//	public void setCiudadanos(List<Ciudadano> ciudadanos) {
-//		this.ciudadanos = ciudadanos;
-//	}
-
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -216,13 +193,6 @@ public class Oferta implements Serializable {
 				+ principalesTareas + ", resumen=" + resumen + ", datosContacto=" + datosContacto + ", jornada="
 				+ jornada + ", requisitos=" + requisitos + ", beneficios=" + beneficios + ", disponibilidad="
 				+ disponibilidad + ", salario=" + salario + ", estado=" + estado + "]";
-//	@Override
-//	public String toString() {
-//		return "Oferta [id=" + id + ", cantidadVacantes=" + cantidadVacantes + ", disponibilidadHoraria="
-//				+ disponibilidadHoraria + ", puestoRequerido=" + puestoRequerido + ", principalesTareas="
-//				+ principalesTareas + ", resumen=" + resumen + ", datosContacto=" + datosContacto + ", jornada="
-//				+ jornada + ", requisitos=" + requisitos + ", beneficios=" + beneficios + ", disponibilidad="
-//				+ disponibilidad + ", salario=" + salario + ", estado=" + estado + ", ciudadanos=" + ciudadanos + "]";
 	}
 
 }

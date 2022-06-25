@@ -36,11 +36,10 @@ public class OfertaController {
 	@PostMapping("/guardar")
 	public String guardarOfertaNueva(@ModelAttribute("oferta") Oferta oferta) {
 		// validacion
-		// try-catch
 		try {
 			ofertaService.guardarOferta(oferta);
 		} catch (Exception e) {
-			System.out.println("error");
+			System.out.println("Error en: /oferta/guardar");
 		}
 
 		return "redirect:/empleador/inicio";

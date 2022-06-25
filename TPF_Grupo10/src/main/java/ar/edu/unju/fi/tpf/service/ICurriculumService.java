@@ -15,12 +15,17 @@ import ar.edu.unju.fi.tpf.entity.Curriculum;
  */
 @Service
 public interface ICurriculumService {
-	
+
 	public Curriculum getCurriculum();
+
 	public void guardarCurriculum(Curriculum curriculum);
+
 	public void modificarCurriculum(Curriculum curriculum);
+
 	public void eliminarCurriculum(Long id);
+
 	public List<Curriculum> getListaCurriculum();
+
 	public Curriculum buscarCurriculum(Long id);
 
 }
