@@ -19,6 +19,8 @@ import ar.edu.unju.fi.tpf.service.IOfertaService;
  * Clase controladora de Ofertas
  * 
  * @author JoaquinCorimayo.
+ * 
+ * @author LuisQuispe
  */
 
 @Controller

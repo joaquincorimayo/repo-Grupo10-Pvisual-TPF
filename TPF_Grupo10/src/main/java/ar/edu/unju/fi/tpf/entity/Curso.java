@@ -2,18 +2,15 @@ package ar.edu.unju.fi.tpf.entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+//import java.util.ArrayList;
+//import java.util.List;
 
-import javax.persistence.CascadeType;
+//import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -53,20 +50,24 @@ public class Curso implements Serializable {
 	private String detalles;
 	@Column(name = "CUR_NOMBREDOCENTE")
 	private String nombreDocente;
+	@Column(name="CUR_INSCRIPTOS")
+	private boolean contador;
 	
-	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinTable(	name = "CURSO_CIUDADANO",
-				joinColumns = @JoinColumn(name = "CUR_ID"),
-				inverseJoinColumns = @JoinColumn(name = "CIU_ID")
-				)
-	private List<Ciudadano> ciudadanos = new ArrayList<Ciudadano>();
+//	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+//	@JoinTable(	name = "CURSO_CIUDADANO",
+//				joinColumns = @JoinColumn(name = "CUR_ID"),
+//				inverseJoinColumns = @JoinColumn(name = "CIU_ID")
+//				)
+//	private List<Ciudadano> ciudadanos = new ArrayList<Ciudadano>();
 
 	public Curso() {
 
 	}
 
+//	public Curso(Long id, String categoria, String titulo, LocalDate fechaInicio, LocalDate fechaFin, String modalidad,
+//			String detalles, String nombreDocente, List<Ciudadano> ciudadanos) {
 	public Curso(Long id, String categoria, String titulo, LocalDate fechaInicio, LocalDate fechaFin, String modalidad,
-			String detalles, String nombreDocente, List<Ciudadano> ciudadanos) {
+				String detalles, String nombreDocente, boolean contador) {
 		super();
 		this.id = id;
 		this.categoria = categoria;
@@ -76,7 +77,8 @@ public class Curso implements Serializable {
 		this.modalidad = modalidad;
 		this.detalles = detalles;
 		this.nombreDocente = nombreDocente;
-		this.ciudadanos = ciudadanos;
+		this.contador = contador;
+//		this.ciudadanos = ciudadanos;
 	}
 
 	public Long getId() {
@@ -143,23 +145,38 @@ public class Curso implements Serializable {
 		this.nombreDocente = nombreDocente;
 	}
 
-	public List<Ciudadano> getCiudadanos() {
-		return ciudadanos;
-	}
-
-	public void setCiudadanos(List<Ciudadano> ciudadanos) {
-		this.ciudadanos = ciudadanos;
-	}
+//	public List<Ciudadano> getCiudadanos() {
+//		return ciudadanos;
+//	}
+//
+//	public void setCiudadanos(List<Ciudadano> ciudadanos) {
+//		this.ciudadanos = ciudadanos;
+//	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
+	
+	public boolean isContador() {
+		return contador;
+	}
+
+	public void setContador(boolean contador) {
+		this.contador = contador;
+	}
+
+	//	@Override
+//	public String toString() {
+//		return "Curso [id=" + id + ", categoria=" + categoria + ", titulo=" + titulo + ", fechaInicio=" + fechaInicio
+//				+ ", fechaFin=" + fechaFin + ", modalidad=" + modalidad + ", detalles=" + detalles + ", nombreDocente="
+//				+ nombreDocente + ", ciudadanos=" + ciudadanos + "]";
+//	}
 	@Override
 	public String toString() {
 		return "Curso [id=" + id + ", categoria=" + categoria + ", titulo=" + titulo + ", fechaInicio=" + fechaInicio
 				+ ", fechaFin=" + fechaFin + ", modalidad=" + modalidad + ", detalles=" + detalles + ", nombreDocente="
-				+ nombreDocente + ", ciudadanos=" + ciudadanos + "]";
+				+ nombreDocente + "]";
 	}
 
 }

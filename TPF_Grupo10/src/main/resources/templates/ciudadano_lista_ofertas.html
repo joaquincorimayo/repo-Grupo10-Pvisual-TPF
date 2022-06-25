@@ -37,10 +37,10 @@
 						<td th:text="${o.disponibilidad}"></td>
 						<td th:text="${o.salario}"></td>
 						<td>
-							<a th:href="@{/ciudadano/ofertas/}">Postularse</a> 
+							<a th:href="@{/postulacion/nuevaPostulacion/}+${o.id}">Postularse</a> 
 						</td>
 				</tr>
-			
+
 			</table>
 		<footer th:replace="layouts/ciudadano_footer::ffooter"></footer>
 	</body>

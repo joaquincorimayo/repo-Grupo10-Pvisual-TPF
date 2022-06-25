@@ -31,13 +31,18 @@
 				</div>
 				
 				<div>
+					<label for="inFechaNac">Fecha de Nacimiento: </label> 
+					<input th:field=*{fechaNac} type="date" id="inFechaNac">
+				</div>
+				
+				<div>
 					<label for="inEmail">Email </label> 
 					<input th:field=*{email} type="email" id="inEmail" placeholder="correo@electronico.com">>
 				</div>
 				
 				<div>
 					<label for="inEstadoCivil">Estado Civil</label>
-					<select th:field="*{estadoCivil}" id="estadoId">
+					<select th:field="*{estadoCivil}" id="inEstadoCivil">
 						<option th:each="estado : ${estadoCivil}" th:value="${estado}" th:text="${estado}"></option>
 				  	</select>
 		  		</div>
@@ -68,4 +73,4 @@
 		
 		<footer th:replace="layouts/index_footer::ffooter"></footer>
 	</body>
-</html>l>
+</html>

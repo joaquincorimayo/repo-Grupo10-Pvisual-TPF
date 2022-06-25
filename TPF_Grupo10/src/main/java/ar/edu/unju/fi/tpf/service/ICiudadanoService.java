@@ -20,4 +20,5 @@ public interface ICiudadanoService {
 	public void eliminarCiudadano(String dni);
 	public List<Ciudadano> getListaCiudadano();
 	public Ciudadano buscarCiudadano(String dni);	
+	public Ciudadano buscarIdCiudadano(Long id);
 }

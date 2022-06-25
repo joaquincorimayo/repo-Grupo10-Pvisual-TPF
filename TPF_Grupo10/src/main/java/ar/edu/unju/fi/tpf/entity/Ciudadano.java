@@ -2,16 +2,16 @@ package ar.edu.unju.fi.tpf.entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+//import java.util.ArrayList;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
+//import javax.persistence.JoinColumn;
+//import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 //import javax.validation.constraints.Email;
@@ -21,6 +21,7 @@ import javax.persistence.Table;
 //import javax.validation.constraints.NotNull;
 //import javax.validation.constraints.Size;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 /**
@@ -87,22 +88,24 @@ public class Ciudadano implements Serializable {
 //	@NotEmpty(message = "El n° teléfono no puede ser vacío.")
 	@Column(name = "CIU_TELEFONO")
 	private String telefono;
-
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name="CIU_FECNAC")
 	private LocalDate fechaNac;
 	
 	@Column(name = "CIU_ESTADO")
 	private boolean estado;
 	
-	@OneToOne
-	@JoinColumn(name = "CURR_ID")
+//	@OneToOne
+//	@JoinColumn(name = "CURR_ID")
+	@OneToOne(mappedBy = "ciudadano", cascade = CascadeType.ALL)
 	private Curriculum curriculum;
 	
-	@ManyToMany(mappedBy = "ciudadanos")
-	private List<Oferta> ofertas = new ArrayList<Oferta>();
-	
-	@ManyToMany(mappedBy = "ciudadanos")
-	private List<Curso> cursos = new ArrayList<Curso>();
+//	@ManyToMany(mappedBy = "ciudadanos")
+//	private List<Oferta> ofertas = new ArrayList<Oferta>();
+//	
+//	@ManyToMany(mappedBy = "ciudadanos")
+//	private List<Curso> cursos = new ArrayList<Curso>();
 
 	public Ciudadano() {
 		// TODO Auto-generated constructor stub
@@ -110,7 +113,7 @@ public class Ciudadano implements Serializable {
 
 	public Ciudadano(Long id, String dni, String password, String numeroTramite, String nombre, String apellido,
 			String email, String estadoCivil, String provincia, String telefono, LocalDate fechaNac,
-			Curriculum curriculum, boolean estado, List<Oferta> ofertas, List<Curso> cursos) {
+			Curriculum curriculum, boolean estado) {
 		super();
 		this.id = id;
 		this.dni = dni;
@@ -125,8 +128,6 @@ public class Ciudadano implements Serializable {
 		this.fechaNac = fechaNac;
 		this.curriculum = curriculum;
 		this.estado = estado;
-		this.ofertas = ofertas;
-		this.cursos = cursos;
 	}
 
 	public Long getId() {
@@ -233,33 +234,17 @@ public class Ciudadano implements Serializable {
 		this.estado = estado;
 	}
 
-	public List<Oferta> getOfertas() {
-		return ofertas;
-	}
-
-	public void setOfertas(List<Oferta> ofertas) {
-		this.ofertas = ofertas;
-	}
-
-	public List<Curso> getCursos() {
-		return cursos;
-	}
-
-	public void setCursos(List<Curso> cursos) {
-		this.cursos = cursos;
-	}
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
-	@Override
-	public String toString() {
-		return "Ciudadano [id=" + id + ", dni=" + dni + ", password=" + password + ", numeroTramite=" + numeroTramite
-				+ ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email + ", estadoCivil=" + estadoCivil
-				+ ", provincia=" + provincia + ", telefono=" + telefono + ", fechaNac=" + fechaNac + ", curriculum="
-				+ curriculum + ", estado=" + estado + ", ofertas=" + ofertas + ", cursos=" + cursos + "]";
-	}
-	
+//	@Override
+//	public String toString() {
+//		return "Ciudadano [id=" + id + ", dni=" + dni + ", password=" + password + ", numeroTramite=" + numeroTramite
+//				+ ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email + ", estadoCivil=" + estadoCivil
+//				+ ", provincia=" + provincia + ", telefono=" + telefono + ", fechaNac=" + fechaNac + ", curriculum="
+//				+ curriculum + ", estado=" + estado + ", ofertas=" + ofertas + ", cursos=" + cursos + "]";
+//	}
 	
 }

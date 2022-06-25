@@ -7,34 +7,47 @@
 
 	<body>
 		<header th:replace="layouts/ciudadano_header::fheader"></header>
-		<h1>Crear Curriculum</h1>
+		<h1>Creación del Curriculum</h1>
  		<form th:action="@{/curriculum/guardar}" method="POST" th:object="${curriculum}" autocomplete="off"> 
+			
 			<div>
-				<label for="intContacto">Apellido: </label> 
+				<label>Apellido: </label>
+				<label th:text="${ciudadano.apellido}"></label>
 			</div>
 			
 			<div>
-				<label for="intContacto">Nombre: </label> 
+				<label>Nombre: </label>
+				<label th:text="${ciudadano.nombre}"></label>
 			</div>
 			
 			<div>
-				<label for="intContacto">DNI: </label> 
+				<label for="intContacto">DNI: </label>
+				<label th:text="${ciudadano.dni}"></label> 
 			</div>
 			
 			<div>
 				<label for="intContacto">Email: </label> 
+				<label th:text="${ciudadano.email}"></label>
 			</div>
 			
 			<div>
 				<label for="intContacto">Telefono: </label> 
+				<label th:text="${ciudadano.telefono}"></label>
 			</div>
 			
 			<div>
 				<label for="intContacto">Estado Civil: </label> 
+				<label th:text="${ciudadano.estadoCivil}"></label>
 			</div>
 			
 			<div>
 				<label for="intContacto">Provincia: </label> 
+				<label th:text="${ciudadano.provincia}"></label>
+			</div>
+			
+			<div>
+				<label for="intDomicilio">Domicilio: </label> 
+				<input th:field=*{domicilio} type="text" id="intDomicilio" placeholder="domicilio">
 			</div>
 			
 			<div>
@@ -51,7 +64,7 @@
 				<label for="inConInf">Conocimientos Infomaticos: </label> 
 				<select th:field="*{conocimientosInfomaticos}" id="inConInf">
 						<option th:each="ci : ${conInf}" th:value="${ci}" th:text="${ci}"></option>
-				  	</select>
+				  </select>
 			</div>
 			
 			<div>

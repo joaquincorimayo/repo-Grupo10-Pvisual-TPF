@@ -76,7 +76,5 @@ public class CiudadanoOferta implements Serializable{
 	public String toString() {
 		return "CiudadanoOferta [id=" + id + ", oferta=" + oferta + ", ciudadano=" + ciudadano + "]";
 	}
-	
-	
 
 }

@@ -1,5 +1,6 @@
 package ar.edu.unju.fi.tpf.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -15,11 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ar.edu.unju.fi.tpf.entity.Ciudadano;
 import ar.edu.unju.fi.tpf.entity.Curriculum;
 import ar.edu.unju.fi.tpf.entity.Oferta;
-import ar.edu.unju.fi.tpf.service.ICiudadanoService;
+import ar.edu.unju.fi.tpf.entity.Curso;
+import ar.edu.unju.fi.tpf.repositorty.ICiudadanoRepository;
+
 import ar.edu.unju.fi.tpf.service.IOfertaService;
-
+import ar.edu.unju.fi.tpf.service.ICiudadanoService;
 import ar.edu.unju.fi.tpf.service.ICurriculumService;
-
+import ar.edu.unju.fi.tpf.service.ICursoService;
 import ar.edu.unju.fi.tpf.util.ListaConocimientosInformaticos;
 
 /**
@@ -45,8 +48,11 @@ public class CiudadanoController {
 	private ICurriculumService curriculumService;
 	@Autowired
 	ListaConocimientosInformaticos conInf;
-		
-	//Guardado Provisorio
+	@Autowired
+	private ICiudadanoRepository ciudadanoRepository;
+	@Autowired
+	private ICursoService cursoService; 
+	
 	@PostMapping("/guardar")
 	public String guardarCiudadanoPage(@ModelAttribute("ciudadano") Ciudadano ciudadano) {
 		try {
@@ -91,32 +97,57 @@ public class CiudadanoController {
 //		return mav;
 //	}
 	
-	@RequestMapping("/inicio")
+	@GetMapping("/inicio")
 	public String getInicioPage(Model model) {
 		return "ciudadano_inicio";
 	}
 	
 	@GetMapping("/crear-cv")
 	public String getNuevoCVPage(Model model){
-		Ciudadano ciudadano = new Ciudadano();
-		model.addAttribute("conInf", conInf.getConoInf());
+//		Long idCiudadano = usuario.getId();
+		// cambiar "1l" por el usuario actual
+		Ciudadano ciudadano= ciudadanoService.buscarIdCiudadano(1l);
+		model.addAttribute("ciudadano", ciudadano);
 		Curriculum curriculum =new Curriculum();
-		curriculum.setCiudadano(ciudadano);
+		model.addAttribute("conInf", conInf.getConoInf());
 		model.addAttribute("curriculum", curriculum);
 		return "ciudadano_crear_cv";
 	}
 
 	@GetMapping("/ver-cv")
 	public String getCVPage(Model model) {
-		Curriculum curriculum = curriculumService.buscarCurriculum(1l);
-		model.addAttribute("curriculum", curriculum);
+//		Long idCiudadano = usuario.getId();
+		List<Curriculum> curriculum = curriculumService.getListaCurriculum();
+		Curriculum curenviar = new Curriculum();
+		for (Curriculum curriculumc : curriculum) {
+			// cambiar "1l" por el usuario actual (idciudadano)
+			if(curriculumc.getCiudadano().getId()==1l) {
+				curenviar = curriculumc;
+			}
+		}
+		
+		Curso curso1 = new Curso(1l, "cc", "cc", LocalDate.of(2022, 1, 1), LocalDate.of(2022, 3, 1), "cc", "ccc", "ccc", false);
+		cursoService.guardarCurso(curso1);
+		Curso curso2 = new Curso(2l, "dd", "dd", LocalDate.of(2022, 2, 2), LocalDate.of(2022, 3, 2), "dd", "ddd", "ddd", false);
+		cursoService.guardarCurso(curso2);
+		Curso curso3 = new Curso(3l, "ee", "ee", LocalDate.of(2022, 3, 3), LocalDate.of(2022, 4, 3), "ee", "eee", "eee", false);
+		cursoService.guardarCurso(curso3);
+		
+		model.addAttribute("curriculum", curenviar);
 		return "ciudadano_ver_cv";
 	}
 		
 	@GetMapping("/cursos")
 	public String getListaCursosPage(Model model) {
-//		List<Curso> cursos = cursoService.listarCurso();
-//		model.addAttribute("cursos", cursos);
+//		Curso curso1 = new Curso(1l, "cc", "cc", LocalDate.of(2022, 1, 1), LocalDate.of(2022, 3, 1), "cc", "ccc", "ccc");
+//		cursoService.guardarCurso(curso1);
+//		Curso curso2 = new Curso(2l, "dd", "dd", LocalDate.of(2022, 2, 2), LocalDate.of(2022, 3, 2), "dd", "ddd", "ddd");
+//		cursoService.guardarCurso(curso2);
+//		Curso curso3 = new Curso(3l, "ee", "ee", LocalDate.of(2022, 3, 3), LocalDate.of(2022, 4, 3), "ee", "eee", "eee");
+//		cursoService.guardarCurso(curso3);
+		
+		List<Curso> cursos = cursoService.listarCursos();
+		model.addAttribute("cursos", cursos);
 		return "ciudadano_lista_cursos";
 	}
 	
@@ -132,5 +163,3 @@ public class CiudadanoController {
 		return "redirect:/inicio";
 	}
 }
-
-

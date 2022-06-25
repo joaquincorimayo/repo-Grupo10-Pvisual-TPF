@@ -1,6 +1,7 @@
 package ar.edu.unju.fi.tpf.service.imp;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -70,6 +71,12 @@ public class CiudadanoServiceImp implements ICiudadanoService{
 				ciudadano = ciudadanoRepository.findAll().get(i);
 		}
 		return ciudadano;
+	}
+
+	@Override
+	public Ciudadano buscarIdCiudadano(Long id) {
+		Optional<Ciudadano> ciuda = ciudadanoRepository.findById(id);
+		return ciuda.get();
 	}
 
 }
