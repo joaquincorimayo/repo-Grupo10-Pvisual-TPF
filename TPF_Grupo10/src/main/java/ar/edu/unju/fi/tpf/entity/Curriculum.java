@@ -2,12 +2,12 @@ package ar.edu.unju.fi.tpf.entity;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -35,7 +35,9 @@ public class Curriculum implements Serializable {
 	@Column(name="CURR_ID")
 	private Long id;
 	
-	@OneToOne(mappedBy = "curriculum", cascade = CascadeType.ALL)
+//	@OneToOne(mappedBy = "curriculum", cascade = CascadeType.ALL)
+	@OneToOne
+	@JoinColumn(name = "CIU_ID")
 	private Ciudadano ciudadano;
 	
 	@Column(name="CURR_CONTACTO")
@@ -53,7 +55,7 @@ public class Curriculum implements Serializable {
 	@Column(name="CURR_EXPLAB")
 	private String experienciaLaboral;
 	
-	@Column(name="CUR_DOMICIOLIO")
+	@Column(name="CURR_DOMICILIO")
 	private String domicilio;
 	
 	@Column(name="CURR_ESTADO")

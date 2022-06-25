@@ -20,7 +20,7 @@
 				<th>Docente</th>
 				<th>Opciones</th>
 			</tr>
-				<tr th:each="c: ${cursos}" th:if="${o.estado}==true">
+				<tr th:each="c: ${cursos}" th:if="${c.contador == false}">
 				<td th:text="${c.id}"></td>
 				<td th:text="${c.titulo}"></td>
 				<td th:text="${c.categoria}"></td>
@@ -30,8 +30,7 @@
 				<td th:text="${c.detalles}"></td>
 				<td th:text="${c.nombreDocente}"></td>
 				<td>
-<!-- 			<a th:href="@{/curso/inscribirse/}+${o.id}">Inscribirse</a>  -->
-				<a th:href="@{/curso/inscribirse/}">Inscribirse</a> 
+				<a th:href="@{/inscripcion/nuevaInscripcion/}+${c.id}">Inscribirse</a> 
 					</td>
 				</tr>
 	

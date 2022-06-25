@@ -29,6 +29,7 @@ public class CurriculumServiceImp implements ICurriculumService {
 	@Override
 	public void guardarCurriculum(Curriculum curriculum) {
 		curriculum.setEstado(true);
+		System.out.println("\n\n"+curriculum.getCiudadano().getId());
 		curriculumRepository.save(curriculum);
 	}
 

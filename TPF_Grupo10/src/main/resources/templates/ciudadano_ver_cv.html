@@ -8,58 +8,71 @@
 	<body>
 		<header th:replace="layouts/ciudadano_header::fheader"></header>
 		<h1>Curriculum</h1>
-<!--  		<form th:action="@{/ciudadano/ver-cv}" method="POST" th:object="${curriculum}" autocomplete="off">  -->
- 		<form th:action="@{/ciudadano/ver-cv}" > 
-			<div>
-				<label for="intContacto">Apellido: </label> 
-			</div>
-			
-			<div>
-				<label for="intContacto">Nombre: </label> 
-			</div>
-			
-			<div>
-				<label for="intContacto">DNI: </label> 
-			</div>
-			
-			<div>
-				<label for="intContacto">Email: </label> 
-			</div>
-			
-			<div>
-				<label for="intContacto">Telefono: </label> 
-			</div>
-			
-			<div>
-				<label for="intContacto">Estado Civil: </label> 
-			</div>
-			
-			<div>
-				<label for="intContacto">Provincia: </label> 
-			</div>
-			
-			<div>
-				<label for="intContacto">Contacto: </label> 
-			</div>
 				
-			<div>
-				<label for="inIdioma">Idiomas: </label> 
-			</div>
+		<div>
+			<label>Apellido: </label>
+			<label th:text="${curriculum.ciudadano.apellido}"></label>
+		</div>
+			
+		<div>
+			<label>Nombre: </label>
+			<label th:text="${curriculum.ciudadano.nombre}"></label>
+		</div>
+			
+		<div>
+			<label>DNI: </label>
+			<label th:text="${curriculum.ciudadano.dni}"></label>
+		</div>
 		
-			<div>
-				<label for="inConInf">Conocimientos Infomaticos: </label> 
-
-			</div>
+		<div>
+			<label>N°Tramite DNI: </label>
+			<label th:text="${curriculum.ciudadano.numeroTramite}"></label>
+		</div>
+		
+		<div>
+			<label>Fecha de Nacimiento: </label> 
+			<label th:text="${curriculum.ciudadano.fechaNac}"></label>
+		</div>
 			
-			<div>
-				<label for="inExpLab">Experiencia Laboral: </label> 
-			</div>
+		<div>
+			<label for="intContacto">Email: </label> 
+			<label th:text="${curriculum.ciudadano.email}"></label>
+		</div>
+		
+		<div>
+			<label for="intContacto">Telefono: </label> 
+			<label th:text="${curriculum.ciudadano.telefono}"></label>
+		</div>
+			
+		<div>
+			<label for="intContacto">Estado Civil: </label> 
+			<label th:text="${curriculum.ciudadano.estadoCivil}"></label>
+		</div>
+			
+		<div>
+			<label for="intContacto">Provincia: </label>
+			<label th:text="${curriculum.ciudadano.Provincia}"></label> 
+		</div>
+			
+		<div>
+			<label for="intDomicilio">Domicilio: </label> 
+			<label th:text="${curriculum.domicilio}"></label>
+		</div>
+			
+		<div>
+			<label for="intContacto">Contacto: </label> 
+			<label th:text="${curriculum.contacto}"></label>
+		</div>
 				
-			<div>
-				<button th:href="@{/ciudadano/editar-cv}">Editar</button>
-				<button th:href="@{/ciudadano/inicio}">Salir</button>
-			</div>
-		</form>		
+		<div>
+		
+		<label for="inIdioma">Idiomas: </label> 
+			<label th:text="${curriculum.idiomas}"></label>
+			
+		</div>
+<!-- 		<button th:href="@{/ciudadano/editar-cv}">Editar</button> -->
+			<a th:href="@{/ciudadano/inicio}">Salir</a>
+				
 		<footer th:replace="layouts/ciudadano_footer::ffooter"></footer>
 	</body>
 </html>

@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import ar.edu.unju.fi.tpf.entity.Ciudadano;
 import ar.edu.unju.fi.tpf.entity.Curriculum;
+import ar.edu.unju.fi.tpf.service.ICiudadanoService;
 import ar.edu.unju.fi.tpf.service.ICurriculumService;
 
 @Controller
@@ -22,11 +24,17 @@ public class CurriculumController {
 	@Autowired
 //	@Qualifier("CurriculumService")
 	private ICurriculumService curriculumService;
+	@Autowired
+	private ICiudadanoService ciudadanoService;
 	
 	@PostMapping("/guardar")
 	public String guardarNuevoCurriculum(@ModelAttribute("curriculum") Curriculum curriculum) {
+		Ciudadano ciudadano= ciudadanoService.buscarIdCiudadano(1l);
 		try {
+//			Ciudadano ciudadano = ciudadanoService.buscarIdCiudadano(curriculum.getCiudadano().getId());
+			curriculum.setCiudadano(ciudadano); 
 			curriculumService.guardarCurriculum(curriculum);
+
 		} catch (Exception e) {
 			System.out.println("Error");
 		}
@@ -52,4 +60,3 @@ public class CurriculumController {
 	}
 	
 }
-
