@@ -12,14 +12,17 @@ import ar.edu.unju.fi.tpf.repositorty.IOfertaRepository;
 import ar.edu.unju.fi.tpf.service.IOfertaService;
 
 /**
- * Implementacion de servicios para Ofertas.
+ * Implementacion de servicios.
  * 
  * @author JoaquinCorimayo
+ * 
+ * @author LuisQuispe
  */
+
 @Service("OfertaService")
 public class OfertaServiceImp implements IOfertaService {
 	Logger logger = LoggerFactory.getLogger(OfertaServiceImp.class);
-	
+
 	@Autowired
 	private IOfertaRepository ofertaRepository;
 

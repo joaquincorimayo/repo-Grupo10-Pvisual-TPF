@@ -10,6 +10,14 @@ import ar.edu.unju.fi.tpf.entity.Curso;
 import ar.edu.unju.fi.tpf.repositorty.ICursoRepository;
 import ar.edu.unju.fi.tpf.service.ICursoService;
 
+/**
+ * Implementacion de servicios.
+ * 
+ * @author JoaquinCorimayo
+ * 
+ * @author LuisQuispe
+ */
+
 @Service
 public class CursoServiceImp implements ICursoService{
 	@Autowired

@@ -1,10 +1,9 @@
 package ar.edu.unju.fi.tpf.repositorty;
 
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import ar.edu.unju.fi.tpf.entity.Empleador;
+import ar.edu.unju.fi.tpf.entity.Usuario;
 
 /**
  * 
@@ -14,6 +13,7 @@ import ar.edu.unju.fi.tpf.entity.Empleador;
  */
 
 @Repository
-public interface IEmpleadorRepository extends JpaRepository<Empleador, Long> {
-
+public interface IUsuarioRepository extends JpaRepository<Usuario, Long> {
+	public Usuario findByUsername(String username);
+	public Usuario findByStatus(boolean status);
 }

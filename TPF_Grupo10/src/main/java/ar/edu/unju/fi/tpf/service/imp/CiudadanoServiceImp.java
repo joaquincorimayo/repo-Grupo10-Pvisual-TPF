@@ -3,15 +3,20 @@ package ar.edu.unju.fi.tpf.service.imp;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import ar.edu.unju.fi.tpf.entity.Ciudadano;
+import ar.edu.unju.fi.tpf.entity.Usuario;
 import ar.edu.unju.fi.tpf.repositorty.ICiudadanoRepository;
 import ar.edu.unju.fi.tpf.service.ICiudadanoService;
+import ar.edu.unju.fi.tpf.service.IUsuarioService;
 
 /**
- * Implementacion de servicios para Ciudadano.
+ * Implementacion de servicios.
  * 
  * @author JoaquinCorimayo
  * 
@@ -21,8 +26,12 @@ import ar.edu.unju.fi.tpf.service.ICiudadanoService;
 @Service
 public class CiudadanoServiceImp implements ICiudadanoService{
 
+	Logger logger = LoggerFactory.getLogger(CiudadanoServiceImp.class);
+	
 	@Autowired
 	private ICiudadanoRepository ciudadanoRepository;
+	@Autowired
+	private IUsuarioService usuarioService;
 
 	@Override
 	public Ciudadano getCiudadano() {
@@ -31,8 +40,19 @@ public class CiudadanoServiceImp implements ICiudadanoService{
 
 	@Override
 	public void guardarCiudadano(Ciudadano ciudadano) {
+		
 		ciudadano.setEstado(true);
+		String pw_enc = ciudadano.getPassword();
+		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(4);
+		ciudadano.setPassword(bCryptPasswordEncoder.encode(pw_enc));
 		ciudadanoRepository.save(ciudadano);
+		
+		Usuario usuario = usuarioService.crearUsuario();
+		usuario.setUsername(ciudadano.getDni());
+		usuario.setPassword(ciudadano.getPassword());
+		usuario.setRole("CIUDADANO");
+		usuario.setIdActivo(ciudadano.getId());
+		usuarioService.guardarUsuario(usuario);
 	}
 
 	@Override

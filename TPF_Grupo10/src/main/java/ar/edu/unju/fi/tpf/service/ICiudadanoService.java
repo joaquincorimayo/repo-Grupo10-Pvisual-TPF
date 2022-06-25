@@ -13,12 +13,18 @@ import ar.edu.unju.fi.tpf.entity.Ciudadano;
  */
 
 public interface ICiudadanoService {
-	
+
 	public Ciudadano getCiudadano();
+
 	public void guardarCiudadano(Ciudadano ciudadano);
+
 	public void modificarCiudadano(Ciudadano ciudadano);
+
 	public void eliminarCiudadano(String dni);
+
 	public List<Ciudadano> getListaCiudadano();
-	public Ciudadano buscarCiudadano(String dni);	
+
+	public Ciudadano buscarCiudadano(String dni);
+
 	public Ciudadano buscarIdCiudadano(Long id);
 }

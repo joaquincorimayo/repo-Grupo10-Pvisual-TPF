@@ -11,6 +11,14 @@ import ar.edu.unju.fi.tpf.entity.CiudadanoOferta;
 import ar.edu.unju.fi.tpf.repositorty.ICiudadanoOfertaRepository;
 import ar.edu.unju.fi.tpf.service.ICiudadanoOfertaService;
 
+/**
+ * Implementacion de servicios.
+ * 
+ * @author JoaquinCorimayo
+ * 
+ * @author LuisQuispe
+ */
+
 @Service
 public class CiudadanoOfertaServiceImp implements ICiudadanoOfertaService {
 

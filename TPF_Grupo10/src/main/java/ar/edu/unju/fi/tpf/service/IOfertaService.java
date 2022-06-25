@@ -7,10 +7,13 @@ import org.springframework.stereotype.Service;
 import ar.edu.unju.fi.tpf.entity.Oferta;
 
 /**
- * Declaracion de servicios para Ofertas.
+ * Declaracion de servicios para Oferta.
  * 
  * @author JoaquinCorimayo
+ * 
+ * @author LuisQuispe
  */
+
 @Service
 public interface IOfertaService {
 	public Oferta crearOferta();

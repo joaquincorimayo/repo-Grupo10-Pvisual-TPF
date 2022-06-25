@@ -11,11 +11,19 @@ import ar.edu.unju.fi.tpf.entity.CiudadanoCurso;
 import ar.edu.unju.fi.tpf.repositorty.ICiudadanoCursoRepository;
 import ar.edu.unju.fi.tpf.service.ICiudadanoCursoService;
 
+/**
+ * Implementacion de servicios.
+ * 
+ * @author JoaquinCorimayo
+ * 
+ * @author LuisQuispe
+ */
+
 @Service
-public class CiudadanoCursoServiceImp implements ICiudadanoCursoService{
-	
+public class CiudadanoCursoServiceImp implements ICiudadanoCursoService {
+
 	Logger logger = LoggerFactory.getLogger(CiudadanoCursoServiceImp.class);
-	
+
 	@Autowired
 	ICiudadanoCursoRepository ciudadanoCursoRepository;
 
@@ -27,32 +35,25 @@ public class CiudadanoCursoServiceImp implements ICiudadanoCursoService{
 	@Override
 	public void guardarCiudadanoCurso(CiudadanoCurso ciudadanoCurso) {
 		ciudadanoCursoRepository.save(ciudadanoCurso);
-		
+
 	}
 
 	@Override
 	public void eliminarCiudadanoCurso(Long id) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void modificarCiudadanoCurso(CiudadanoCurso ciudadanoCurso) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public List<CiudadanoCurso> listarCiudadanoCurso() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public CiudadanoCurso buscarCiudadanoCurso(Long id) {
-		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 }
- 

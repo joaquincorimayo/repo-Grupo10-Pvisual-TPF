@@ -5,11 +5,12 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import ar.edu.unju.fi.tpf.entity.Empleador;
-
 /**
  * Declaracion de servicios para Empleador.
  * 
  * @author JoaquinCorimayo
+ * 
+ * @author LuisQuispe
  */
 
 @Service

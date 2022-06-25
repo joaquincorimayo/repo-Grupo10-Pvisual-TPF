@@ -10,9 +10,11 @@ import ar.edu.unju.fi.tpf.repositorty.ICurriculumRepository;
 import ar.edu.unju.fi.tpf.service.ICurriculumService;
 
 /**
- * Implementacion de servicios para Curriculum.
+ * Implementacion de servicios.
  * 
  * @author JoaquinCorimayo
+ * 
+ * @author LuisQuispe
  */
 
 @Service
