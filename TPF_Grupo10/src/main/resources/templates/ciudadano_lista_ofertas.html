@@ -21,6 +21,7 @@
 					<th>Beneficios</th>
 					<th>Disponibilidad Horaria</th>
 					<th>Salario</th>
+					<th>Empelador</th>
 					<th>Opciones</th>
 				</tr>
 				<tr th:each="o: ${ofertas}" th:if="${o.estado}==true">
@@ -36,12 +37,14 @@
 						<td th:text="${o.beneficios}"></td>
 						<td th:text="${o.disponibilidad}"></td>
 						<td th:text="${o.salario}"></td>
+						<td th:text="${o.empleador.nombreComercial}"></td>
 						<td>
 							<a th:href="@{/postulacion/nuevaPostulacion/}+${o.id}">Postularse</a> 
 						</td>
 				</tr>
 
 			</table>
+			<h4 th:if="${postulado}==true">Ya te postulaste</h4>
 		<footer th:replace="layouts/ciudadano_footer::ffooter"></footer>
 	</body>
 </html>

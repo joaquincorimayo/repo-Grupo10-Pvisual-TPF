@@ -27,5 +27,7 @@ public interface ICiudadanoOfertaService {
 	public List<CiudadanoOferta> listarCiudadanoOferta();
 
 	public CiudadanoOferta buscarCiudadanoOferta(Long id);
+	
+	public boolean verificarPostulacion(Long idUsuario, Long idOferta);
 
 }

@@ -3,6 +3,7 @@ package ar.edu.unju.fi.tpf.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import ar.edu.unju.fi.tpf.entity.Ciudadano;
 import ar.edu.unju.fi.tpf.entity.Empleador;
-
+import ar.edu.unju.fi.tpf.service.IUsuarioService;
 import ar.edu.unju.fi.tpf.util.ListaProvincias;
 import ar.edu.unju.fi.tpf.util.ListaEstadoCivil;
 
@@ -32,9 +33,14 @@ public class IndexController {
 
 	@Autowired
 	ListaProvincias provincias;
+	
+	@Autowired
+	@Qualifier("UsuarioService")
+	IUsuarioService usuarioService;
 
 	@GetMapping("/inicio")
 	public String getInicioPage(Model model) {
+		usuarioService.cerrarSesionesError();
 		return "index";
 	}
 

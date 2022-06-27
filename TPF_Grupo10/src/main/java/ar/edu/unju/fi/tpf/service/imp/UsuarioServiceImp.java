@@ -47,4 +47,12 @@ public class UsuarioServiceImp implements IUsuarioService{
 		return usuarioRepository.findByUsername(name);
 	}
 
+	@Override
+	public void cerrarSesionesError() {
+		// En caso de error, cerrar sesiones de todos los usuarios.
+		for (Usuario usuario : usuarioRepository.findAll()) {
+			usuario.setStatus(false);
+		}
+	}
+
 }

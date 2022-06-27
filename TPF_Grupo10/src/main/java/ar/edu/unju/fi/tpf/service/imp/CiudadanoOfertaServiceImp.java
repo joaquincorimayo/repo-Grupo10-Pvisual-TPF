@@ -60,4 +60,18 @@ public class CiudadanoOfertaServiceImp implements ICiudadanoOfertaService {
 		return null;
 	}
 
+	@Override
+	public boolean verificarPostulacion(Long idUsuario, Long idOferta) {
+		boolean bandera = true;
+
+		for (CiudadanoOferta ciof : ciudadanoOfertaRepository.findAll()) {
+			if (ciof.getCiudadano().getId() == idUsuario) {
+				if (ciof.getOferta().getId() == idOferta) {
+					bandera = false;
+				}
+			}
+		}
+		return bandera;
+	}
+
 }

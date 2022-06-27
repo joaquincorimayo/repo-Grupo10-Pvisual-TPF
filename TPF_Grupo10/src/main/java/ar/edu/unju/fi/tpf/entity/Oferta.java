@@ -7,7 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -30,6 +31,7 @@ public class Oferta implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "OFE_ID")
 	private Long id;
+	
 	@Column(name = "OFE_VACANTES")
 	private String cantidadVacantes;
 	@Column(name = "OFE_DISP_HORARIA")
@@ -54,6 +56,9 @@ public class Oferta implements Serializable {
 	private String salario;
 	@Column(name = "OFE_ESTADO")
 	private boolean estado;
+	@ManyToOne
+	@JoinColumn(name = "EMP_ID")
+	private Empleador empleador;
 
 	public Oferta() {
 
@@ -61,7 +66,7 @@ public class Oferta implements Serializable {
 
 	public Oferta(Long id, String cantidadVacantes, String disponibilidadHoraria, String puestoRequerido,
 			String principalesTareas, String resumen, String datosContacto, String jornada, String requisitos,
-			String beneficios, String disponibilidad, String salario, boolean estado) {
+			String beneficios, String disponibilidad, String salario, boolean estado, Empleador empleador) {
 		super();
 		this.id = id;
 		this.cantidadVacantes = cantidadVacantes;
@@ -76,6 +81,7 @@ public class Oferta implements Serializable {
 		this.disponibilidad = disponibilidad;
 		this.salario = salario;
 		this.estado = estado;
+		this.empleador = empleador;
 	}
 
 	public Long getId() {
@@ -182,8 +188,12 @@ public class Oferta implements Serializable {
 		this.estado = estado;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public Empleador getEmpleador() {
+		return empleador;
+	}
+
+	public void setEmpleador(Empleador empleador) {
+		this.empleador = empleador;
 	}
 
 	@Override
@@ -192,7 +202,7 @@ public class Oferta implements Serializable {
 				+ disponibilidadHoraria + ", puestoRequerido=" + puestoRequerido + ", principalesTareas="
 				+ principalesTareas + ", resumen=" + resumen + ", datosContacto=" + datosContacto + ", jornada="
 				+ jornada + ", requisitos=" + requisitos + ", beneficios=" + beneficios + ", disponibilidad="
-				+ disponibilidad + ", salario=" + salario + ", estado=" + estado + "]";
+				+ disponibilidad + ", salario=" + salario + ", estado=" + estado + ", empleador=" + empleador + "]";
 	}
 
 }

@@ -12,8 +12,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import ar.edu.unju.fi.tpf.entity.Empleador;
 import ar.edu.unju.fi.tpf.entity.Oferta;
+import ar.edu.unju.fi.tpf.entity.Usuario;
+import ar.edu.unju.fi.tpf.service.IEmpleadorService;
 import ar.edu.unju.fi.tpf.service.IOfertaService;
+import ar.edu.unju.fi.tpf.service.IUsuarioService;
 
 /**
  * Clase controladora de Ofertas
@@ -32,11 +36,20 @@ public class OfertaController {
 	@Autowired
 	@Qualifier("OfertaService")
 	private IOfertaService ofertaService;
+	@Autowired
+	@Qualifier("UsuarioService")
+	private IUsuarioService usuarioService;
+	@Autowired
+	@Qualifier("EmpleadorService")
+	private IEmpleadorService empleadorService;
 
 	@PostMapping("/guardar")
 	public String guardarOfertaNueva(@ModelAttribute("oferta") Oferta oferta) {
 		// validacion
 		try {
+			Usuario usuario = usuarioService.getUsuarioActivo();
+			Empleador empleador = empleadorService.buscarEmpleador(usuario.getIdActivo());
+			oferta.setEmpleador(empleador);
 			ofertaService.guardarOferta(oferta);
 		} catch (Exception e) {
 			System.out.println("Error en: /oferta/guardar");

@@ -1,5 +1,6 @@
 package ar.edu.unju.fi.tpf.service.imp;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -70,6 +71,19 @@ public class OfertaServiceImp implements IOfertaService {
 			}
 		}
 		return oferta;
+	}
+
+	@Override
+	public List<Oferta> listarOfertasId(Long id) {
+		List<Oferta> aux_ofertas = new ArrayList<Oferta>();
+		
+		for (Oferta oferta : ofertaRepository.findAll()) {
+			if (oferta.getEmpleador().getId() == id) {
+				aux_ofertas.add(oferta);
+			}
+		}
+
+		return aux_ofertas;
 	}
 
 }
