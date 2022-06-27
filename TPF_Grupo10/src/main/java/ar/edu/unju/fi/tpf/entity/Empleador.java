@@ -5,10 +5,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,10 +28,8 @@ import org.springframework.stereotype.Component;
 @Table(name="EMPLEADOR")
 public class Empleador implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "EMP_ID")
@@ -65,7 +61,7 @@ public class Empleador implements Serializable {
 	@Column(name = "EMP_ESTADO")
 	private boolean estado;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="empleador")
 	private List<Oferta> ofertas = new ArrayList<Oferta>();
 
 	public Empleador() {
@@ -204,10 +200,13 @@ public class Empleador implements Serializable {
 		this.ofertas = ofertas;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	@Override
+	public String toString() {
+		return "Empleador [id=" + id + ", cuit=" + cuit + ", password=" + password + ", razonSocial=" + razonSocial
+				+ ", nombreComercial=" + nombreComercial + ", fechaInicioActividad=" + fechaInicioActividad + ", email="
+				+ email + ", telefono=" + telefono + ", domicilio=" + domicilio + ", provincia=" + provincia
+				+ ", paginaWeb=" + paginaWeb + ", descripcion=" + descripcion + ", estado=" + estado + ", ofertas="
+				+ ofertas + "]";
 	}
-
-	
 
 }

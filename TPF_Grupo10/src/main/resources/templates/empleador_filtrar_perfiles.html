@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+	<head>
+		<meta charset="utf-8">
+		<title>Lista de postulantes</title>
+	</head>
+	<body>
+	<header th:replace="layouts/empleador_header::fheader"></header>
+		<h1>Lista de postulantes</h1>
+		<h3>Filtrar por: </h3>
+		<h5>Provincia (lista de provincias)</h5>
+		<h5>Palabras claves (lista de palabras claves)</h5>
+		
+		<table>
+				<tr>
+					<th>#</th>
+					<th>Nombre</th>
+					<th>Email</th>
+					<th>Estado Civil</th>
+					<th>Provincia</th>
+					<th>Telefono</th>
+					<th>Fecha Nacimiento</th>
+				</tr>
+				<tr th:each="o: ${perfiles}">
+						<td th:text="${o.id}"></td>
+						<td th:text="${o.nombre}"></td>
+						<td th:text="${o.email}"></td>
+						<td th:text="${o.estadoCivil}"></td>
+						<td th:text="${o.provincia}"></td>
+						<td th:text="${o.telefono}"></td>
+						<td th:text="${o.fechaNac}"></td>
+						<td>
+							<a href=#>Contratar</a> 
+						</td>
+				</tr>
+
+			</table>
+	
+	</body>
+</html>

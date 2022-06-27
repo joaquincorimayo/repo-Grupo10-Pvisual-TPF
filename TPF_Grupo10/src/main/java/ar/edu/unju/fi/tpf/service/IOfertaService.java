@@ -27,4 +27,6 @@ public interface IOfertaService {
 	public List<Oferta> listarOfertas();
 
 	public Oferta buscarOferta(Long id);
+	
+	public List<Oferta> listarOfertasId(Long id);
 }

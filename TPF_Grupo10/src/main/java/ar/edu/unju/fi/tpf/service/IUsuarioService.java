@@ -23,4 +23,6 @@ public interface IUsuarioService {
 	public Usuario getUsuarioActivo();
 
 	public Usuario getUsuario(String name);
+	
+	public void cerrarSesionesError();
 }

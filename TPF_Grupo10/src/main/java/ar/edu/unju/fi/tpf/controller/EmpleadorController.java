@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import ar.edu.unju.fi.tpf.entity.Ciudadano;
 import ar.edu.unju.fi.tpf.entity.Empleador;
 import ar.edu.unju.fi.tpf.entity.Oferta;
 import ar.edu.unju.fi.tpf.entity.Usuario;
+import ar.edu.unju.fi.tpf.service.ICiudadanoService;
 import ar.edu.unju.fi.tpf.service.IEmpleadorService;
 import ar.edu.unju.fi.tpf.service.IOfertaService;
 import ar.edu.unju.fi.tpf.service.IUsuarioService;
@@ -43,6 +45,9 @@ public class EmpleadorController {
 	@Autowired
 	@Qualifier("UsuarioService")
 	private IUsuarioService usuarioService;
+	
+	@Autowired
+	private ICiudadanoService ciudadanoService;
 
 	@GetMapping("/inicio")
 	public String getInicioPage(Model model) {
@@ -60,9 +65,17 @@ public class EmpleadorController {
 
 	@GetMapping("/ver-ofertas-creadas")
 	public String getListaOfertasPage(Model model) {
-		List<Oferta> ofertas = ofertaService.listarOfertas();
+		Usuario usuario = usuarioService.getUsuarioActivo();
+		List<Oferta> ofertas = ofertaService.listarOfertasId(usuario.getIdActivo());
 		model.addAttribute("ofertas", ofertas);
 		return "empleador_lista_ofertas";
+	}
+	
+	@GetMapping("perfiles")
+	public String algo(Model model) {
+		List<Ciudadano> perfiles = ciudadanoService.getListaCiudadano();
+		model.addAttribute("perfiles", perfiles);
+		return "empleador_filtrar_perfiles";
 	}
 
 	@GetMapping("/salir")
