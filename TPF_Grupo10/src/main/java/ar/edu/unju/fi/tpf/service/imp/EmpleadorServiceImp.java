@@ -90,4 +90,14 @@ public class EmpleadorServiceImp implements IEmpleadorService {
 		return empleador;
 	}
 
+	public boolean existeEmpleador(String cuit) {
+		boolean bandera = false;
+		for (int i = 0; i < empleadorRepository.findAll().size(); i++) {
+			if (empleadorRepository.findAll().get(i).getCuit().equals(cuit)) {
+				bandera = true;
+			}
+		}
+		return bandera;
+	}
+
 }

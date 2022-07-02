@@ -107,9 +107,10 @@ public class EmpleadorController {
 	@PostMapping("/guardar")
 	public String guardarEmpleadorPage(@Validated @ModelAttribute("empleador") Empleador empleador, BindingResult br,
 			Model model) {
-		if (br.hasErrors()) {
+		if (br.hasErrors() || empleadorService.existeEmpleador(empleador.getCuit())) {
 			model.addAttribute("empleador", empleador);
 			model.addAttribute("provincias", provincias.getProvincias());
+			model.addAttribute("existeEmpleador", empleadorService.existeEmpleador(empleador.getCuit()));
 			return "empleador_formulario";
 		}
 

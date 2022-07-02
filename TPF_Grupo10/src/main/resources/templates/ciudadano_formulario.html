@@ -144,7 +144,9 @@
 										nombre de usuario)</label>
 									<div class="text-danger" th:if="${#fields.hasErrors('dni')}"
 										th:errors="*{dni}"></div>
+									<div class="text-danger" th:if="${existeCiudadano}==true">El ciudadano ya existe.</div>	
 								</div>
+								
 								<!-- Password input -->
 								<div class="form-outline mb-4">
 									<input th:field=*{password} type="password"
