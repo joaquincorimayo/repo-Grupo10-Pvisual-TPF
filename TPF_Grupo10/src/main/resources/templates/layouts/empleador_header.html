@@ -1,17 +1,33 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
-	<head>
-		<meta charset="utf-8">
-		<title></title>
-	</head>
+<head>
+<meta charset="utf-8">
+<title></title>
+</head>
 
-	<body>
-		<header th:fragment="fheader">
-			<a th:href="@{/empleador/inicio}">Inicio</a>
-			<a th:href="@{/empleador/crear-oferta}">Crear Oferta</a>
-			<a th:href="@{/empleador/ver-ofertas-creadas}">Ver Ofertas</a>
-			<a th:href="@{/empleador/perfiles}">Buscar Perfiles</a>
-			<a th:href="@{/empleador/salir}">Salir</a>
-		</header>
-	</body>
+<body>
+	<header th:fragment="fheader">
+		<nav
+			class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0">
+			<a th:href="@{/empleador/inicio}"
+				class="navbar-brand d-flex align-items-center border-end px-4 px-lg-5">
+				<h2 class="m-0">
+					<i class="fa fa-car text-primary me-2">Empresario</i>
+				</h2>
+			</a>
+			<div class="navbar-nav ms-auto p-4 p-lg-0">
+				<a th:href="@{/empleador/inicio}" class="nav-item nav-link active">Inicio</a>
+				<a th:href="@{/empleador/crear-oferta}" class="nav-item nav-link">Crear
+					oferta</a> <a th:href="@{/empleador/ver-ofertas-creadas}"
+					class="nav-item nav-link">Ver ofertas creadas</a> <a
+					th:href="@{/empleador/perfiles}" class="nav-item nav-link">Buscar
+					perfiles</a>
+			</div>
+			<a th:href="@{/empleador/salir}"
+				class="btn btn-primary py-4 d-none d-lg-block">Finalizar sesion<i
+				class="fa fa-arrow-right"></i>
+			</a>
+		</nav>
+	</header>
+</body>
 </html>

@@ -3,13 +3,28 @@
 <head>
 <meta charset="utf-8">
 <title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+	crossorigin="anonymous">
 </head>
 
 <body>
-	<header th:fragment="fheader">
-		<a th:href="@{/inicio}">Inicio</a>
-		<a th:href="@{/nuevo-registro}">Registrarse</a>
-		<a th:href="@{/login}">Iniciar Sesion</a>
+	<header th:fragment="fheader" class="blog-header lh-1 py-3">
+		<div
+			class="row flex-nowrap justify-content-between align-items-center">
+			<div class="col-4 pt-1">
+				<a class="link-secondary" th:href="@{/inicio}">Inicio</a>
+			</div>
+			<div class="col-4 text-center">
+				<a class="blog-header-logo text-dark" th:href="@{/nuevo-registro}">Registrarse</a>
+			</div>
+			<div class="col-4 d-flex justify-content-end align-items-center">
+				<a class="btn btn-sm btn-outline-secondary" th:href="@{/login}">Iniciar sesion</a>
+			</div>
+		</div>
 	</header>
 </body>
 

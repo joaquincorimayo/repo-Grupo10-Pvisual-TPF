@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,6 +28,8 @@ import ar.edu.unju.fi.tpf.service.ICiudadanoService;
 import ar.edu.unju.fi.tpf.service.ICurriculumService;
 import ar.edu.unju.fi.tpf.service.ICursoService;
 import ar.edu.unju.fi.tpf.util.ListaConocimientosInformaticos;
+import ar.edu.unju.fi.tpf.util.ListaEstadoCivil;
+import ar.edu.unju.fi.tpf.util.ListaProvincias;
 
 /**
  * Permite manejar-responder a peticiones que recibe para el objeto ciudadano
@@ -48,12 +52,16 @@ public class CiudadanoController {
 	@Autowired
 	private ICurriculumService curriculumService;
 	@Autowired
-	ListaConocimientosInformaticos conInf;
+	private ListaConocimientosInformaticos conInf;
 	@Autowired
 	private ICursoService cursoService;
 	@Autowired
 	@Qualifier("UsuarioService")
 	private IUsuarioService usuarioService;
+	@Autowired
+	private ListaEstadoCivil estadoCivil;
+	@Autowired
+	private ListaProvincias provincias;
 
 	@GetMapping("/inicio")
 	public String getInicioPage(Model model) {
@@ -71,11 +79,16 @@ public class CiudadanoController {
 	public String getNuevoCVPage(Model model) {
 		Usuario usuario = usuarioService.getUsuarioActivo();
 		Ciudadano ciudadano = ciudadanoService.buscarIdCiudadano(usuario.getIdActivo());
-		model.addAttribute("ciudadano", ciudadano);
-		Curriculum curriculum = new Curriculum();
-		model.addAttribute("conInf", conInf.getConoInf());
-		model.addAttribute("curriculum", curriculum);
-		return "ciudadano_crear_cv";
+		if (ciudadano.getCurriculum() != null) {
+			model.addAttribute("creado", true);
+			return "ciudadano_crear_cv";
+		} else {
+			model.addAttribute("ciudadano", ciudadano);
+			Curriculum curriculum = new Curriculum();
+			model.addAttribute("conInf", conInf.getConoInf());
+			model.addAttribute("curriculum", curriculum);
+			return "ciudadano_crear_cv";
+		}
 	}
 
 	@GetMapping("/ver-cv")
@@ -89,14 +102,14 @@ public class CiudadanoController {
 			}
 		}
 
-		Curso curso1 = new Curso(1l, "cc", "cc", LocalDate.of(2022, 1, 1), LocalDate.of(2022, 3, 1), "cc", "ccc", "ccc",
-				false);
+		Curso curso1 = new Curso(1l, "categoria1", "titulo1", LocalDate.of(2022, 1, 1), LocalDate.of(2022, 3, 1),
+				"modalidad1", "detalles1", "docente1", false);
 		cursoService.guardarCurso(curso1);
-		Curso curso2 = new Curso(2l, "dd", "dd", LocalDate.of(2022, 2, 2), LocalDate.of(2022, 3, 2), "dd", "ddd", "ddd",
-				false);
+		Curso curso2 = new Curso(2l, "categoria2", "titulo2", LocalDate.of(2022, 2, 2), LocalDate.of(2022, 3, 2),
+				"modalidad2", "detalles2", "docente2", false);
 		cursoService.guardarCurso(curso2);
-		Curso curso3 = new Curso(3l, "ee", "ee", LocalDate.of(2022, 3, 3), LocalDate.of(2022, 4, 3), "ee", "eee", "eee",
-				false);
+		Curso curso3 = new Curso(3l, "categoria3", "titulo3", LocalDate.of(2022, 3, 3), LocalDate.of(2022, 4, 3),
+				"modalidad3", "detalles3", "docente3", false);
 		cursoService.guardarCurso(curso3);
 
 		model.addAttribute("curriculum", curenviar);
@@ -105,13 +118,6 @@ public class CiudadanoController {
 
 	@GetMapping("/cursos")
 	public String getListaCursosPage(Model model) {
-//		Curso curso1 = new Curso(1l, "cc", "cc", LocalDate.of(2022, 1, 1), LocalDate.of(2022, 3, 1), "cc", "ccc", "ccc");
-//		cursoService.guardarCurso(curso1);
-//		Curso curso2 = new Curso(2l, "dd", "dd", LocalDate.of(2022, 2, 2), LocalDate.of(2022, 3, 2), "dd", "ddd", "ddd");
-//		cursoService.guardarCurso(curso2);
-//		Curso curso3 = new Curso(3l, "ee", "ee", LocalDate.of(2022, 3, 3), LocalDate.of(2022, 4, 3), "ee", "eee", "eee");
-//		cursoService.guardarCurso(curso3);
-
 		List<Curso> cursos = cursoService.listarCursos();
 		model.addAttribute("cursos", cursos);
 		return "ciudadano_lista_cursos";
@@ -131,8 +137,27 @@ public class CiudadanoController {
 		return "redirect:/inicio";
 	}
 
+	@GetMapping("/nuevo")
+	public String getNuevoCiudadanoPage(Model model) {
+		Ciudadano ciudadano = new Ciudadano();
+		model.addAttribute("ciudadano", ciudadano);
+		model.addAttribute("estadoCivil", estadoCivil.getEstadoCivil());
+		model.addAttribute("provincias", provincias.getProvincias());
+		return "ciudadano_formulario";
+	}
+
 	@PostMapping("/guardar")
-	public String guardarCiudadanoPage(@ModelAttribute("ciudadano") Ciudadano ciudadano) {
+	public String guardarCiudadanoPage(@Validated @ModelAttribute("ciudadano") Ciudadano ciudadano, BindingResult br,
+			Model model) {
+
+		if (br.hasErrors() || ciudadano.obtenerEdad() < 18) {
+			model.addAttribute("ciudadano", ciudadano);
+			model.addAttribute("estadoCivil", estadoCivil.getEstadoCivil());
+			model.addAttribute("provincias", provincias.getProvincias());
+			model.addAttribute("errorEdad", true);
+			return "ciudadano_formulario";
+		}
+
 		try {
 			ciudadanoService.guardarCiudadano(ciudadano);
 		} catch (Exception e) {
@@ -140,35 +165,4 @@ public class CiudadanoController {
 		}
 		return "redirect:/inicio";
 	}
-	
-
-	// DESACTIVADO HASTA SOLUCIONAR PROBLEMA DE LOGIN
-//	@GetMapping("/editar/{dni}")
-//	public ModelAndView getEditarCiudadanoPage(@PathVariable(value="dni") String dni) {
-//		ModelAndView mav=new ModelAndView("ciudadano_formulario_editar");
-//		mav.addObject("ciudadano", ciudadanoService.buscarCiudadano(dni));
-//		return mav;
-//	}
-
-//	@PostMapping("/modificar")
-//	public ModelAndView editarDatosCiudadano(@Validated @ModelAttribute("ciudadano") Ciudadano ciudadano,
-//			BindingResult bindingResult) {
-//		if(bindingResult.hasErrors()) {
-//			logger.info("Error al editar ciudadano");
-//			ModelAndView mav= new ModelAndView("ciudadano_formulario_editar");
-//			mav.addObject("ciudadano", ciudadano);
-//			return mav;
-//		}
-//		ModelAndView mav=new ModelAndView("redirect:/ciudadano");
-//		ciudadanoService.modificarCiudadano(ciudadano);
-//		return mav;
-//	}
-
-//	@GetMapping("/eliminar/{dni}")
-//	public ModelAndView getEliminarAlumno(@PathVariable(value="dni")String dni) {
-//		ModelAndView mav=new ModelAndView("redirect:/ciudadano/inicio");
-//		ciudadanoService.eliminarCiudadano(dni);
-//		return mav;
-//	}
-
 }

@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,8 +46,14 @@ public class OfertaController {
 	private IEmpleadorService empleadorService;
 
 	@PostMapping("/guardar")
-	public String guardarOfertaNueva(@ModelAttribute("oferta") Oferta oferta) {
-		// validacion
+	public String guardarOfertaNueva(@Validated @ModelAttribute("oferta") Oferta oferta, BindingResult br,
+			Model model) {
+
+		if (br.hasErrors()) {
+			model.addAttribute("oferta", oferta);
+			return "empleador_crear_oferta";
+		}
+
 		try {
 			Usuario usuario = usuarioService.getUsuarioActivo();
 			Empleador empleador = empleadorService.buscarEmpleador(usuario.getIdActivo());
@@ -60,15 +68,18 @@ public class OfertaController {
 
 	@GetMapping("/editar/{id}")
 	public String getEditarOfertaPage(@PathVariable(value = "id") Long id, Model model) {
-		// Validacion
 		Oferta oferta = ofertaService.buscarOferta(id);
 		model.addAttribute("oferta", oferta);
 		return "empleador_editar_oferta";
 	}
 
 	@PostMapping("/modificar")
-	public String editarOferta(@ModelAttribute("oferta") Oferta oferta) {
-		// VALIDACION
+	public String editarOferta(@Validated @ModelAttribute("oferta") Oferta oferta, BindingResult br, Model model) {
+		if (br.hasErrors()) {
+			System.out.println("error en /oferta/guardar -> "+ br.getAllErrors());
+			model.addAttribute("oferta", oferta);
+			return "empleador_editar_oferta";
+		}
 		ofertaService.actualizarOferta(oferta);
 		return "redirect:/empleador/ver-ofertas-creadas";
 	}

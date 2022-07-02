@@ -1,87 +1,223 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
-	<head>
-		<meta charset="utf-8">
-		<title>Formulario empleador</title>
-	</head>
+<head>
+<meta charset="utf-8">
+<title>Formulario empleador</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+	crossorigin="anonymous">
+<link type="text/css" href="css/style.css" rel="stylesheet" />
 
-	<body>
-		<header th:replace="layouts/index_header::fheader"></header>
-			<h1>Completar el registro</h1>
-			<form th:action="@{/empleador/guardar}" method="POST" th:object="${empleador}" autocomplete="off">
-				<div>
-					<label for="fcuit">Ingresar ciut: </label> 
-					<input th:field=*{cuit} type="text" id="fcuit" placeholder="00-00000000-0">
-<!-- 					<div th:if="${#fields.hasErrors('cuit')}" th:errors="*{cuit}"></div> -->
+<style>
+.background-radial-gradient {
+	background-color: hsl(218, 41%, 15%);
+	background-image: radial-gradient(650px circle at 0% 0%, hsl(218, 41%, 35%)
+		15%, hsl(218, 41%, 30%) 35%, hsl(218, 41%, 20%) 75%,
+		hsl(218, 41%, 19%) 80%, transparent 100%),
+		radial-gradient(1250px circle at 100% 100%, hsl(218, 41%, 45%) 15%,
+		hsl(218, 41%, 30%) 35%, hsl(218, 41%, 20%) 75%, hsl(218, 41%, 19%) 80%,
+		transparent 100%);
+}
+
+#radius-shape-1 {
+	height: 220px;
+	width: 220px;
+	top: -60px;
+	left: -130px;
+	background: radial-gradient(#44006b, #ad1fff);
+	overflow: hidden;
+}
+
+#radius-shape-2 {
+	border-radius: 38% 62% 63% 37%/70% 33% 67% 30%;
+	bottom: -60px;
+	right: -110px;
+	width: 300px;
+	height: 300px;
+	background: radial-gradient(#44006b, #ad1fff);
+	overflow: hidden;
+}
+
+.bg-glass {
+	background-color: hsla(0, 0%, 100%, 0.9) !important;
+	backdrop-filter: saturate(200%) blur(25px);
+}
+</style>
+</head>
+
+<body>
+	<!-- Section: Design Block -->
+	<section class="background-radial-gradient overflow-hidden">
+		<div
+			class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
+			<div class="row gx-lg-5 align-items-center mb-5">
+				<div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
+					<h1 class="my-5 display-5 fw-bold ls-tight"
+						style="color: hsl(218, 81%, 95%)">
+						La mejor opcion <br /> <span style="color: hsl(218, 81%, 75%)">para
+							tu empresa</span>
+					</h1>
+					<p class="mb-4 opacity-70" style="color: hsl(218, 81%, 85%)">
+						La mejor plataforma para buscar y contratar empleados de todo el
+						mundo segun tus necesidades.</p>
 				</div>
-				
-				<div>
-					<label for="fpass">Ingresar password: </label> 
-					<input th:field=*{password} type="password" id="fpass" placeholder="*********">
-<!-- 					<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div> -->
+
+				<div class="col-lg-6 mb-5 mb-lg-0 position-relative">
+					<div id="radius-shape-1"
+						class="position-absolute rounded-circle shadow-5-strong"></div>
+					<div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
+
+					<div class="card bg-glass">
+						<div class="card-body px-4 py-5 px-md-5">
+
+							<form th:action="@{/empleador/guardar}" method="POST"
+								th:object="${empleador}" autocomplete="off">
+								<div class="row">
+									<div class="col-md-6 mb-4">
+										<div class="form-outline">
+											<input th:field=*{paginaWeb} type="text" id="pgweb"
+												class="form-control" /> <label class="form-label"
+												for="pgweb">Pagina Web</label>
+											<div class="text-danger"
+												th:if="${#fields.hasErrors('paginaWeb')}"
+												th:errors="*{paginaWeb}"></div>
+										</div>
+									</div>
+									<div class="col-md-6 mb-4">
+										<div class="form-outline">
+												<select th:field="*{provincia}" id="inProvincia">
+													<option th:each="provincia : ${provincias}"
+														th:value="${provincia}" th:text="${provincia}"></option>
+												</select>
+												<label class="form-label"
+												for="inProvincia">Provincia</label>
+											<div class="text-danger"
+												th:if="${#fields.hasErrors('provincia')}"
+												th:errors="*{provincia}"></div>
+										</div>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-md-6 mb-4">
+										<div class="form-outline">
+											<input th:field=*{domicilio} type="text" id="fdom"
+												class="form-control" /> <label class="form-label"
+												for="fdom">Domicilio</label>
+											<div class="text-danger"
+												th:if="${#fields.hasErrors('domicilio')}"
+												th:errors="*{domicilio}"></div>
+										</div>
+									</div>
+									<div class="col-md-6 mb-4">
+										<div class="form-outline">
+											<input th:field=*{telefono} type="tel" id="ftel"
+												class="form-control" /> <label class="form-label"
+												for="ftel">Telefono</label>
+											<div class="text-danger"
+												th:if="${#fields.hasErrors('telefono')}"
+												th:errors="*{telefono}"></div>
+										</div>
+									</div>
+								</div>
+
+
+								<div class="row">
+									<div class="col-md-6 mb-4">
+										<div class="form-outline">
+											<input th:field=*{nombreComercial} type="text"
+												id="fncomercial" class="form-control" /> <label
+												class="form-label" for="fncomercial">Nombre
+												comercial</label>
+											<div class="text-danger"
+												th:if="${#fields.hasErrors('nombreComercial')}"
+												th:errors="*{nombreComercial}"></div>
+										</div>
+									</div>
+									<div class="col-md-6 mb-4">
+										<div class="form-outline">
+											<input th:field=*{razonSocial} type="text" id="frsocial"
+												class="form-control" /> <label class="form-label"
+												for="frsocial">Razón social</label>
+											<div class="text-danger"
+												th:if="${#fields.hasErrors('razonSocial')}"
+												th:errors="*{razonSocial}"></div>
+										</div>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-md-6 mb-4">
+										<div class="form-outline">
+											<input th:field=*{fechaInicioActividad} type="date"
+												id="ffinicio" class="form-control" /> <label
+												class="form-label" for="ffinicio">Fecha inicio de
+												actividad</label>
+											<div class="text-danger"
+												th:if="${#fields.hasErrors('fechaInicioActividad')}"
+												th:errors="*{fechaInicioActividad}"></div>
+										</div>
+									</div>
+									<div class="col-md-6 mb-4">
+										<div class="form-outline">
+											<input th:field=*{email} type="email" id="femail"
+												class="form-control" /> <label class="form-label"
+												for="femail">Email</label>
+											<div class="text-danger"
+												th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+										</div>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-md-6 mb-4">
+										<div class="form-outline">
+											<textarea class="form-control rounded-0"
+												th:field=*{descripcion} id="fdes" rows="3"></textarea>
+											<label class="form-label" for="fdes">Descripcion</label>
+											<div class="text-danger"
+												th:if="${#fields.hasErrors('descripcion')}"
+												th:errors="*{descripcion}"></div>
+										</div>
+									</div>
+								</div>
+
+								<!-- User input -->
+								<div class="form-outline mb-4">
+									<input th:field=*{cuit} type="text" id="fcuit"
+										class="form-control" /> <label class="form-label" for="fcuit">CIUT
+										(recorda que sera tu nombre de usuario)</label>
+									<div class="text-danger" th:if="${#fields.hasErrors('cuit')}"
+										th:errors="*{cuit}"></div>
+								</div>
+
+								<!-- Password input -->
+								<div class="form-outline mb-4">
+									<input th:field=*{password} type="password" id="fpass"
+										class="form-control" /> <label class="form-label" for="fpass">Password</label>
+									<div class="text-danger"
+										th:if="${#fields.hasErrors('password')}"
+										th:errors="*{password}"></div>
+								</div>
+
+								<!-- Submit button -->
+								<button type="submit" class="btn btn-primary btn-block mb-4">
+									Registrase</button>
+							</form>
+
+						</div>
+					</div>
 				</div>
-				
-				<div>
-					<label for="frsocial">Ingresar razón social: </label> 
-					<input th:field=*{razonSocial} type="text" id="frsocial" placeholder="razon social">
-<!-- 					<div th:if="${#fields.hasErrors('razonSocial')}" th:errors="*{razonSocial}"></div> -->
-				</div>
-				
-				<div>
-					<label for="fncomercial">Ingresar nombre comercial: </label> 
-					<input th:field=*{nombreComercial} type="text" id="fncomercial" placeholder="nombre comercial">
-<!-- 					<div th:if="${#fields.hasErrors('nombreComercial')}" th:errors="*{nombreComercial}"></div> -->
-				</div>
-				
-				<div>
-					<label for="ffinicio">Ingresar fecha inicio actividad: </label> 
-					<input th:field=*{fechaInicioActividad} type="date" id="ffinicio">
-<!-- 					<div th:if="${#fields.hasErrors('fechaInicioActividad')}" th:errors="*{fechaInicioActividad}"></div> -->
-				</div>
-				
-				<div>
-					<label for="femail">Ingresar email: </label> 
-					<input th:field=*{email} type="email" id="femail" placeholder="correo_electronico@gmail.com">
-<!-- 					<div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div> -->
-				</div>
-				
-				<div>
-					<label for="ftel">Ingresar telefono: </label> 
-					<input th:field=*{telefono} type="tel" id="ftel" placeholder="**********">
-<!-- 					<div th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></div> -->
-				</div>
-				
-				<div>
-					<label for="fdom">Ingresar domicilio: </label> 
-					<input th:field=*{domicilio} type="text" id="fdom" placeholder="domicilio">
-<!-- 					<div th:if="${#fields.hasErrors('domicilio')}" th:errors="*{domicilio}"></div> -->
-				</div>
-				
-				<div>
-					<label for="fprov">Ingresar provincia: </label> 
-					<input th:field=*{provincia} type="text" id="fprov" placeholder="provincia">
-<!-- 					<div th:if="${#fields.hasErrors('provincia')}" th:errors="*{provincia}"></div> -->
-				</div>
-				
-				<div>
-					<label for="fpage">Ingresar pagina web: </label> 
-					<input th:field=*{paginaWeb} type="text" id="fpage" placeholder="www.paginaweb.com">
-<!-- 					<div th:if="${#fields.hasErrors('paginaWeb')}" th:errors="*{paginaWeb}"></div> -->
-				</div>
-				
-				<div>
-					<label for="fdes">Ingresar descripcion: </label> 
-					<input th:field=*{descripcion} type="text" id="fdes" placeholder="Ingrese una descripcion breve">
-<!-- 					<div th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></div> -->
-				</div>
-				
-				<div>
-					<button type="submit">Registrase</button>
-					<button th:href="@{/inicio}">Cancelar</button>
-				</div>
-				
-			</form>
-		
-		<footer th:replace="layouts/index_footer::ffooter"></footer>
-	</body>
+			</div>
+		</div>
+	</section>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+		crossorigin="anonymous"></script>
+</body>
 </html>

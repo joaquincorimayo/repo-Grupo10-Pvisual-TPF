@@ -1,87 +1,132 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
-	<head>
-		<meta charset="utf-8">
-		<title>Formulario nueva oferta</title>
-	</head>
+<head>
+<meta charset="utf-8">
+<title>Formulario nueva oferta</title>
 
-	<body>
-		<h1>REGISTRO - Nueva oferta laboral</h1>
-			<form th:action="@{/oferta/guardar}" method="POST" th:object="${oferta}" autocomplete="off">
-				<div>
-					<label for="fcantidadV">Candidad de vacantes disponibles: </label> 
-					<input th:field=*{cantidadVacantes} type="text" id="fcantidadV" placeholder="00000">
-<!-- 					<div th:if="${#fields.hasErrors('cantidadVacantes')}" th:errors="*{cantidadVacantes}"></div> -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+	crossorigin="anonymous">
+<link type="text/css" href="css/empleador_style.css" rel="stylesheet" />
+</head>
+<body class="container">
+	<h1 class="text-center">Nueva oferta laboral</h1>
+	<form th:action="@{/oferta/guardar}" method="POST"
+		th:object="${oferta}" autocomplete="off">
+
+		<!-- 2 column grid layout with text inputs for the first and last names -->
+		<div class="row mb-4">
+			<div class="col">
+				<div class="form-outline">
+					<input th:field=*{puestoRequerido} type="text" id="fpreq"
+						class="form-control" /> <label class="form-label" for="fpreq">Puesto
+						requerido</label>
+					<div class="text-danger"
+						th:if="${#fields.hasErrors('puestoRequerido')}"
+						th:errors="*{puestoRequerido}"></div>
 				</div>
-				
-<!-- 				BUSCAR EJEMPLOS -->
-<!-- 				<div> -->
-<!-- 					<label for="fpass">Disponibilidad horaria: </label>  -->
-<!-- 					<input th:field=*{password} type="text" id="fpass" placeholder="*********"> -->
-<!-- <!-- 					<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div> -->
-<!-- 				</div> -->
-				
-				<div>
-					<label for="fpreq">Puesto requerido: </label> 
-					<input th:field=*{puestoRequerido} type="text" id="fpreq">
-<!-- 					<div th:if="${#fields.hasErrors('puestoRequerido')}" th:errors="*{puestoRequerido}"></div> -->
+			</div>
+			<div class="col">
+				<div class="form-outline">
+					<input th:field=*{principalesTareas} type="text" id="ftareas"
+						class="form-control" /> <label class="form-label" for="ftareas">Principales
+						tareas</label>
+					<div class="text-danger"
+						th:if="${#fields.hasErrors('principalesTareas')}"
+						th:errors="*{principalesTareas}"></div>
 				</div>
-				
-				<div>
-					<label for="ftareas">Principales tareas: </label> 
-					<input th:field=*{principalesTareas} type="text" id="ftareas" placeholder="">
-<!-- 					<div th:if="${#fields.hasErrors('principalesTareas')}" th:errors="*{principalesTareas}"></div> -->
+			</div>
+		</div>
+
+
+		<div class="row mb-4">
+			<div class="col">
+				<div class="form-outline">
+					<input th:field=*{datosContacto} type="text" id="fcont"
+						class="form-control" /> <label class="form-label" for="fcont">Contacto</label>
+					<div class="text-danger"
+						th:if="${#fields.hasErrors('datosContacto')}"
+						th:errors="*{datosContacto}"></div>
 				</div>
-				
-				<div>
-					<label for="fres">Resumen breve: </label> 
-					<input th:field=*{resumen} type="text" id="fres">
-<!-- 					<div th:if="${#fields.hasErrors('resumen')}" th:errors="*{resumen}"></div> -->
+			</div>
+			<div class="col">
+				<div class="form-outline">
+					<input th:field=*{jornada} type="text" id="fjor"
+						class="form-control" /> <label class="form-label" for="fjor">Jornada</label>
+					<div class="text-danger" th:if="${#fields.hasErrors('jornada')}"
+						th:errors="*{jornada}"></div>
 				</div>
-				
-				<div>
-					<label for="fcont">Contacto: </label> 
-					<input th:field=*{datosContacto} type="text" id="fcont" placeholder="">
-<!-- 					<div th:if="${#fields.hasErrors('datosContacto')}" th:errors="*{datosContacto}"></div> -->
+			</div>
+		</div>
+
+		<div class="row mb-4">
+			<div class="col">
+				<div class="form-outline">
+					<input th:field=*{cantidadVacantes} type="text" id="fcantidadV"
+						class="form-control" /> <label class="form-label"
+						for="fcantidadV">Candidad de vacantes disponibles</label>
+					<div class="text-danger"
+						th:if="${#fields.hasErrors('cantidadVacantes')}"
+						th:errors="*{cantidadVacantes}"></div>
 				</div>
-				
-				<div>
-					<label for="fjor">Jornada: </label> 
-					<input th:field=*{jornada} type="text" id="fjor" placeholder="">
-<!-- 					<div th:if="${#fields.hasErrors('jornada')}" th:errors="*{jornada}"></div> -->
+			</div>
+			<div class="col">
+				<div class="form-outline">
+					<input th:field=*{salario} type="text" id="fsal"
+						class="form-control" /> <label class="form-label" for="fsal">Salario</label>
+					<div class="text-danger" th:if="${#fields.hasErrors('salario')}"
+						th:errors="*{salario}"></div>
 				</div>
-				
-				<div>
-					<label for="freq">Requisitos: </label> 
-					<input th:field=*{requisitos} type="text" id="freq" placeholder="">
-<!-- 					<div th:if="${#fields.hasErrors('requisitos')}" th:errors="*{requisitos}"></div> -->
-				</div>
-				
-				<div>
-					<label for="fben">Beneficios: </label> 
-					<input th:field=*{beneficios} type="text" id="fben" placeholder="">
-<!-- 					<div th:if="${#fields.hasErrors('beneficios')}" th:errors="*{beneficios}"></div> -->
-				</div>
-				
-				<div>
-					<label for="fdisp">Disponibilidad: </label> 
-					<input th:field=*{disponibilidad} type="text" id="fdisp" placeholder="">
-<!-- 			    <div th:if="${#fields.hasErrors('disponibilidad')}" th:errors="*{disponibilidad}"></div>  -->
-				</div>
-				
-				<div>
-					<label for="fsal">Salario: </label> 
-					<input th:field=*{salario} type="text" id="fsal" placeholder="">
-<!-- 					<div th:if="${#fields.hasErrors('salario')}" th:errors="*{salario}"></div> -->
-				</div>
-				
-				<div>
-					<button type="submit">Crear oferta</button>
-					<button th:href="@{/empleador/inicio}">Cancelar</button>
-				</div>
-				
-			</form>
+			</div>
+		</div>
+
+		<div class="form-outline mb-4">
+			<input th:field=*{requisitos} type="text" id="freq"
+				class="form-control" /> <label class="form-label" for="freq">Requisitos</label>
+			<div class="text-danger" th:if="${#fields.hasErrors('requisitos')}"
+				th:errors="*{requisitos}"></div>
+		</div>
+
+		<div class="form-outline mb-4">
+			<input th:field=*{beneficios} type="text" id="fben"
+				class="form-control" /> <label class="form-label" for="fben">Beneficios</label>
+			<div class="text-danger" th:if="${#fields.hasErrors('beneficios')}"
+				th:errors="*{beneficios}"></div>
+		</div>
+
+		<div class="form-outline mb-4">
+			<input th:field=*{disponibilidadHoraria} type="text" id="fdispH"
+				class="form-control" /> <label class="form-label" for="fdispH">Disponibilidad</label>
+			<div class="text-danger"
+				th:if="${#fields.hasErrors('disponibilidadHoraria')}"
+				th:errors="*{disponibilidadHoraria}"></div>
+		</div>
 		
-		<footer th:replace="layouts/empleador_footer::ffooter"></footer>
-	</body>
+		<div class="form-outline mb-4">
+			<input th:field=*{disponibilidad} type="text" id="fdisp"
+				class="form-control" /> <label class="form-label" for="fdisp">Disponibilidad</label>
+			<div class="text-danger"
+				th:if="${#fields.hasErrors('disponibilidad')}"
+				th:errors="*{disponibilidad}"></div>
+		</div>
+
+		<div class="form-outline mb-4">
+			<textarea class="form-control" th:field=*{resumen} id="fres" rows="4"></textarea>
+			<label class="form-label" for="fres">Resumen</label>
+			<div class="text-danger" th:if="${#fields.hasErrors('resumen')}"
+				th:errors="*{resumen}"></div>
+		</div>
+
+		<button type="submit" class="btn btn-primary btn-block mb-4">Crear
+			oferta</button>
+	</form>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+		crossorigin="anonymous"></script>
+</body>
 </html>

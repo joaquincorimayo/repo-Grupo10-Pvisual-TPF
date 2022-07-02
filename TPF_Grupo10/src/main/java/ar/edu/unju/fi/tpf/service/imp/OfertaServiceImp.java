@@ -55,6 +55,16 @@ public class OfertaServiceImp implements IOfertaService {
 	public void mapearOferta(Oferta desde, Oferta hacia) {
 		// Mas opciones segun formulario para modificar
 		hacia.setCantidadVacantes(desde.getCantidadVacantes());
+		hacia.setDisponibilidadHoraria(desde.getDisponibilidadHoraria());
+		hacia.setPuestoRequerido(desde.getPuestoRequerido());
+		hacia.setPrincipalesTareas(desde.getPrincipalesTareas());
+		hacia.setResumen(desde.getResumen());
+		hacia.setDatosContacto(desde.getDatosContacto());
+		hacia.setJornada(desde.getJornada());
+		hacia.setRequisitos(desde.getRequisitos());
+		hacia.setBeneficios(desde.getBeneficios());
+		hacia.setDisponibilidad(desde.getDisponibilidad());
+		hacia.setSalario(desde.getSalario());
 	}
 
 	@Override
@@ -76,7 +86,7 @@ public class OfertaServiceImp implements IOfertaService {
 	@Override
 	public List<Oferta> listarOfertasId(Long id) {
 		List<Oferta> aux_ofertas = new ArrayList<Oferta>();
-		
+
 		for (Oferta oferta : ofertaRepository.findAll()) {
 			if (oferta.getEmpleador().getId() == id) {
 				aux_ofertas.add(oferta);
