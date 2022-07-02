@@ -192,6 +192,7 @@
 										(recorda que sera tu nombre de usuario)</label>
 									<div class="text-danger" th:if="${#fields.hasErrors('cuit')}"
 										th:errors="*{cuit}"></div>
+									<div class="text-danger" th:if="${existeEmpleador}==true">El empleador ya existe.</div>
 								</div>
 
 								<!-- Password input -->

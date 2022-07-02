@@ -92,6 +92,17 @@ public class CiudadanoServiceImp implements ICiudadanoService{
 		}
 		return ciudadano;
 	}
+	
+	@Override
+	public boolean existeCiudadno(String dni) {
+		boolean bandera = false;
+		for (int i=0; i<ciudadanoRepository.findAll().size();i++) {
+			if (ciudadanoRepository.findAll().get(i).getDni().equals(dni)) {
+				bandera= true;
+			}
+		}
+		return bandera;
+	}
 
 	@Override
 	public Ciudadano buscarIdCiudadano(Long id) {

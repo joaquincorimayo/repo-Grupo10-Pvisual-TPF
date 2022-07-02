@@ -26,4 +26,6 @@ public interface IEmpleadorService {
 	public List<Empleador> listarEmpleadores();
 
 	public Empleador buscarEmpleador(Long id);
+	
+	public boolean existeEmpleador (String cuit);
 }

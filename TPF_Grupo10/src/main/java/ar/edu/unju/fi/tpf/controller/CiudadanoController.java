@@ -150,16 +150,18 @@ public class CiudadanoController {
 	public String guardarCiudadanoPage(@Validated @ModelAttribute("ciudadano") Ciudadano ciudadano, BindingResult br,
 			Model model) {
 
-		if (br.hasErrors() || ciudadano.obtenerEdad() < 18) {
+		if (br.hasErrors() || ciudadano.obtenerEdad() < 18 || (ciudadanoService.existeCiudadno(ciudadano.getDni()))) {
 			model.addAttribute("ciudadano", ciudadano);
 			model.addAttribute("estadoCivil", estadoCivil.getEstadoCivil());
 			model.addAttribute("provincias", provincias.getProvincias());
-			model.addAttribute("errorEdad", true);
+			model.addAttribute("errorEdad", ciudadano.obtenerEdad());
+			model.addAttribute("existeCiudadano", ciudadanoService.existeCiudadno(ciudadano.getDni()));
 			return "ciudadano_formulario";
 		}
 
 		try {
 			ciudadanoService.guardarCiudadano(ciudadano);
+
 		} catch (Exception e) {
 			System.out.println("Error en: /ciudadano/guardar");
 		}
