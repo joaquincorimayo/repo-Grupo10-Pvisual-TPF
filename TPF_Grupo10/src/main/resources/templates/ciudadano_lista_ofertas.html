@@ -1,50 +1,52 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
-	<head>
-		<meta charset="utf-8">
-		<title></title>
-	</head>
+<head>
+<meta charset="utf-8">
+<title>Ofertas</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+	crossorigin="anonymous">
+<style>
+.card {
+/* 	background: #222; */
+	border: 1px solid #dd2476;
+/* 	color: rgba(250, 250, 250, 0.8); */
+	margin-bottom: 2rem;
+}
+</style>
+</head>
 
-	<body>
-		<header th:replace="layouts/ciudadano_header::fheader"></header>
-			<table>
-				<tr>
-					<th>#</th>
-					<th>Cantidad De Vacantes Disponible</th>
-					<th>Disponibilidad Horaria</th>
-					<th>Puesto Requerido</th>
-					<th>Principales Tareas</th>
-					<th>Resumen</th>
-					<th>Datos de Contacto</th>
-					<th>Jornada</th>
-					<th>Requisitos</th>
-					<th>Beneficios</th>
-					<th>Disponibilidad Horaria</th>
-					<th>Salario</th>
-					<th>Empelador</th>
-					<th>Opciones</th>
-				</tr>
-				<tr th:each="o: ${ofertas}" th:if="${o.estado}==true">
-						<td th:text="${o.id}"></td>
-						<td th:text="${o.cantidadVacantes}"></td>
-						<td th:text="${o.disponibilidadHoraria}"></td>
-						<td th:text="${o.puestoRequerido}"></td>
-						<td th:text="${o.principalesTareas}"></td>
-						<td th:text="${o.resumen}"></td>
-						<td th:text="${o.datosContacto}"></td>
-						<td th:text="${o.jornada}"></td>
-						<td th:text="${o.requisitos}"></td>
-						<td th:text="${o.beneficios}"></td>
-						<td th:text="${o.disponibilidad}"></td>
-						<td th:text="${o.salario}"></td>
-						<td th:text="${o.empleador.nombreComercial}"></td>
-						<td>
-							<a th:href="@{/postulacion/nuevaPostulacion/}+${o.id}">Postularse</a> 
-						</td>
-				</tr>
-
-			</table>
-			<h4 th:if="${postulado}==true">Ya te postulaste</h4>
-		<footer th:replace="layouts/ciudadano_footer::ffooter"></footer>
-	</body>
+<body>
+	<header th:replace="layouts/ciudadano_header::fheader"></header>
+	<br />
+	<br />
+	<br />
+	<h1>Lista de ofertas disponibles</h1>
+	<div class="container mx-auto mt-4">
+		<div class="row">
+			<div class="col-md-4">
+				<div class="card" style="width: 18rem;" th:each="o: ${ofertas}"
+					th:if="${o.estado}==true">
+					<div class="card-body">
+						<h5 class="card-title" th:text="'#'+${o.id}+' '+ ${o.empleador.nombreComercial}"></h5>
+						<h6 class="card-subtitle mb-2 text-muted" th:text="${o.puestoRequerido} + ' ' + ${o.datosContacto}"></h6>
+						<p class="card-text" th:text="${o.resumen}"></p>
+						<p class="card-text" th:text="'$'+${o.salario}"></p>
+						<a th:href="@{/postulacion/nuevaPostulacion/}+${o.id}" class="btn mr-2"><i class="fas fa-link"></i>Postularse</a> 
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<h3 th:if="${#lists.isEmpty(ofertas)}"
+		class="container bg-danger bg-gradient text-center text-white">No
+		hay ofertas cargadas!</h3>
+		
+	<h4 th:if="${postulado}==true" class="container bg-danger bg-gradient text-center text-white">Ya te postulaste</h4>
+	<footer th:replace="layouts/ciudadano_footer::ffooter"></footer>
+</body>
 </html>

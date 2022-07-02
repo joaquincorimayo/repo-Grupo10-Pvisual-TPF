@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 import org.springframework.stereotype.Component;
 
@@ -35,26 +36,31 @@ public class Curriculum implements Serializable {
 	@Column(name="CURR_ID")
 	private Long id;
 	
-//	@OneToOne(mappedBy = "curriculum", cascade = CascadeType.ALL)
 	@OneToOne
 	@JoinColumn(name = "CIU_ID")
 	private Ciudadano ciudadano;
 	
+	@NotEmpty(message = "Este campo no puede estar vacio")
 	@Column(name="CURR_CONTACTO")
 	private String contacto;
 	
+	@NotEmpty(message = "Este campo no puede estar vacio")
 	@Column(name="CURR_EDUCACION")
 	private String educacion;
 	
+	@NotEmpty(message = "Este campo no puede estar vacio")
 	@Column(name="CURR_IDIOMAS")
 	private String idiomas;
 	
+	@NotEmpty(message = "Este campo no puede estar vacio")
 	@Column(name="CURR_CONINF")
 	private String conocimientosInfomaticos;
 	
+	@NotEmpty(message = "Este campo no puede estar vacio")
 	@Column(name="CURR_EXPLAB")
 	private String experienciaLaboral;
 	
+	@NotEmpty(message = "Este campo no puede estar vacio")
 	@Column(name="CURR_DOMICILIO")
 	private String domicilio;
 	

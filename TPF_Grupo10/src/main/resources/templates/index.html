@@ -1,13 +1,121 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
-	<head>
-		<meta charset="utf-8">
-		<title>Inicio</title>
-	</head>
+<head>
+<meta charset="utf-8">
+<title>Inicio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+	crossorigin="anonymous">
+<link type="text/css" href="css/style.css" rel="stylesheet" />
+</head>
 
-	<body>
+
+<body>
+
+	<div class="container">
 		<header th:replace="layouts/index_header::fheader"></header>
-		
+	</div>
+
+
+	<main class="container">
+		<div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
+			<div class="col-md-6 px-0">
+				<h1 class="display-4 fst-italic">Sigue aprendiendo en los
+					momentos clave</h1>
+				<p class="lead my-3">Cursos online impartidos por expertos sobre
+					una gran variedad de temas para todas las etapas de tu carrera.
+					Instructores con experiencia en el mercado.</p>
+			</div>
+		</div>
+
+		<div class="row mb-2">
+			<div class="col-md-6">
+				<div
+					class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+					<div class="col p-4 d-flex flex-column position-static">
+						<strong class="d-inline-block mb-2 text-primary">Mundo</strong>
+						<h3 class="mb-0">Demuestra tus aptitudes</h3>
+						<div class="mb-1 text-muted">Nov 12</div>
+						<p class="card-text mb-auto">Obtén certificados que puedes
+							añadir a tu perfil APUIn profesional.</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<div
+					class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+					<div class="col p-4 d-flex flex-column position-static">
+						<strong class="d-inline-block mb-2 text-success">Diseño</strong>
+						<h3 class="mb-0">Aprende a tu ritmo</h3>
+						<div class="mb-1 text-muted">Nov 11</div>
+						<p class="mb-auto">Ve vídeos cortos o métete de lleno en un
+							curso.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="row g-5">
+			<div class="col-md-8">
+				<h3 class="pb-4 mb-4 fst-italic border-bottom">Programacion
+					visual</h3>
+
+				<article class="blog-post">
+					<h2 class="blog-post-title mb-1">Blog post</h2>
+					<p class="blog-post-meta">
+						Jueves 30, 2022 by <a href="#">Joaquin Corimayo</a>
+					</p>
+
+
+					<p>This is some additional paragraph placeholder content. It
+						has been written to fill the available space and show how a longer
+						snippet of text affects the surrounding content. We'll repeat it
+						often to keep the demonstration flowing, so be on the lookout for
+						this exact same string of text.</p>
+					<hr>
+					<h2>Informacion</h2>
+					<p>Obtén acceso a cursos para tu equipo, ya se trate de una
+						empresa, centro de enseñanza superior o la administración pública.</p>
+				</article>
+				<hr>
+				<article class="blog-post">
+					<h2 class="blog-post-title mb-1">Otro blog post</h2>
+					<p class="blog-post-meta">
+						December 23, 2022 by <a href="#">Joaquin Corimayo</a>
+					</p>
+
+
+					<p>Aprende de la mano de expertos del sector y aprovéchate de
+						la experiencia de una red global.</p>
+				</article>
+			</div>
+
+
+			<div class="col-md-4">
+				<div class="position-sticky" style="top: 2rem;">
+					<div class="p-4 mb-3 bg-light rounded">
+						<h4 class="fst-italic">Acerca de</h4>
+						<p class="mb-0">Compra APUIn Learning para tu equipo, ya forme
+							parte de una empresa, institución educativa o de la
+							administración pública.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</main>
+	<div class="blog-footer">
 		<footer th:replace="layouts/index_footer::ffooter"></footer>
-	</body>
+	</div>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+		crossorigin="anonymous"></script>
+</body>
 </html>

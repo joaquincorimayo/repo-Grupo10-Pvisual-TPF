@@ -12,6 +12,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
@@ -35,29 +41,53 @@ public class Empleador implements Serializable {
 	@Column(name = "EMP_ID")
 	private Long id;
 	
+	@Max(value = 99999999, message = "El cuit debe ser menor que 99.999.999")
+	@Min(value = 1000000, message = "El cuit debe ser mayor que 1.000.000")
 	@Column(name = "EMP_CUIT")
 	private String cuit;
+	
+	@Size(min = 8, max = 100, message = "La contraseña debe tener entre 8 caracteres")
+	@NotNull(message = "Ingresar contraseña")
 	@Column(name = "EMP_PASSWORD")
 	private String password;
+	
+	@NotEmpty(message = "Este campo no puede estar vacio")
 	@Column(name = "EMP_R_SOCIAL")
 	private String razonSocial;
+	
+	@NotEmpty(message = "Este campo no puede estar vacio")
 	@Column(name = "EMP_N_COMERCIAL")
 	private String nombreComercial;
+	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "EMP_INICIO_ACTIVIDAD")
 	private LocalDate fechaInicioActividad;
+	
+	@NotEmpty(message = "El email no puede ser vacío")
+	@Email
 	@Column(name = "EMP_EMAIL")
 	private String email;
+	
+	@NotEmpty(message = "Este campo no puede estar vacio")
 	@Column(name = "EMP_TEL")
 	private String telefono;
+	
+	@NotEmpty(message = "Este campo no puede estar vacio")
 	@Column(name = "EMP_DOMICILIO")
 	private String domicilio;
+	
+	@NotEmpty(message = "Este campo no puede estar vacio")
 	@Column(name = "EMP_PROVINCIA")
 	private String provincia;
+	
+	@NotEmpty(message = "Este campo no puede estar vacio")
 	@Column(name = "EMP_PAG_WEB")
 	private String paginaWeb;
+	
+	@NotEmpty(message = "Este campo no puede estar vacio")
 	@Column(name = "EMP_DESCRIPCION")
 	private String descripcion;
+	
 	@Column(name = "EMP_ESTADO")
 	private boolean estado;
 	

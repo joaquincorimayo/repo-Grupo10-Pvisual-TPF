@@ -3,6 +3,7 @@ package ar.edu.unju.fi.tpf.entity;
 import java.io.Serializable;
 import java.time.LocalDate;
 //import java.util.ArrayList;
+import java.time.Period;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,12 +15,19 @@ import javax.persistence.Id;
 //import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
 //import javax.validation.constraints.Email;
 //import javax.validation.constraints.Max;
 //import javax.validation.constraints.Min;
 //import javax.validation.constraints.NotEmpty;
 //import javax.validation.constraints.NotNull;
 //import javax.validation.constraints.Size;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
@@ -37,78 +45,67 @@ import org.springframework.stereotype.Component;
 @Table(name = "CIUDADANO")
 public class Ciudadano implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "CIU_ID")
 	private Long id;
 
-//	@Max(value = 99999999, message = "DNI debe ser menor que 99999999")
-//	@Min(value = 1000000, message = "DNI debe ser mayor que 1000000")
+	@Max(value = 99999999, message = "El dni debe ser menor que 99.999.999")
+	@Min(value = 1000000, message = "El dni debe ser mayor que 1.000.000")
 	@Column(name = "CIU_DNI")
 	private String dni;
 
-//	@Size(min = 3, max = 100, message = "La contraseña debe tener entre 4 a 12 caracteres")
-//	@NotNull(message = "*Debe ingresar una contraseña")
+	@Size(min = 8, max = 1000, message = "La contraseña debe tener entre 8 caracteres")
+	@NotNull(message = "Ingresar contraseña")
 	@Column(name = "CIU_PASSWORD")
 	private String password;
 
-//	@Size(min = 10, max = 12, message = "Debe ingresar n° de 12 digitos")
-//	@NotNull(message = "*Debe ingresar le n° de tramite")
+	@Size(min = 10, max = 12, message = "El numero de tramite tiene que tener 12 digitos")
+	@NotNull(message = "Tenes que ingresar el numero de tramite")
 	@Column(name = "CIU_NROTRAMITE")
 	private String numeroTramite;
 
-//	@NotEmpty(message = "El nombre no puede ser vacío")
-//	@Size(min = 3, max = 100, message = "El nombre debe tener entre 3 a 100 caracteres")
+	@NotEmpty(message = "El nombre no puede estar vacio")
+	@Size(min = 3, max = 100, message = "El nombre debe tener entre 3 a 100 caracteres")
 	@Column(name = "CIU_NOMBRE")
 	private String nombre;
 
-//	@Size(min = 3, max = 100, message = "El Apellido debe tener entre 3 a 100 caracteres")
-//	@NotEmpty(message = "El apellido del alumno no puede ser vacío")
+	@Size(min = 3, max = 100, message = "El Apellido debe tener entre 3 a 100 caracteres")
+	@NotEmpty(message = "El apellido no puede ser vacío")
 	@Column(name = "CIU_APELLIDO")
 	private String apellido;
 
-//	@NotEmpty(message = "El email del alumno no puede ser vacío")
-//	@Email
+	@NotEmpty(message = "El email no puede ser vacío")
+	@Email
 	@Column(name = "ALU_EMAIL")
 	private String email;
 
-//	@NotEmpty
+	@NotEmpty
 	@Column(name = "CIU_ESTADOCIVIL")
 	private String estadoCivil;
 
-//	@NotEmpty
+	@NotEmpty
 	@Column(name = "CIU_PROVINCIA")
 	private String provincia;
 
-//	@NotEmpty(message = "El n° teléfono no puede ser vacío.")
+	@NotEmpty(message = "Tenes que ingresar un numero de telefono")
 	@Column(name = "CIU_TELEFONO")
 	private String telefono;
-	
+
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@Column(name="CIU_FECNAC")
+	@Column(name = "CIU_FECNAC")
+	@Past(message = "La fecha no puede ser mayo a la actual")
 	private LocalDate fechaNac;
-	
+
 	@Column(name = "CIU_ESTADO")
 	private boolean estado;
-	
-//	@OneToOne
-//	@JoinColumn(name = "CURR_ID")
+
 	@OneToOne(mappedBy = "ciudadano", cascade = CascadeType.ALL)
 	private Curriculum curriculum;
-	
-//	@ManyToMany(mappedBy = "ciudadanos")
-//	private List<Oferta> ofertas = new ArrayList<Oferta>();
-//	
-//	@ManyToMany(mappedBy = "ciudadanos")
-//	private List<Curso> cursos = new ArrayList<Curso>();
 
 	public Ciudadano() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Ciudadano(Long id, String dni, String password, String numeroTramite, String nombre, String apellido,
@@ -128,6 +125,13 @@ public class Ciudadano implements Serializable {
 		this.fechaNac = fechaNac;
 		this.curriculum = curriculum;
 		this.estado = estado;
+	}
+	
+	public int obtenerEdad() {
+		LocalDate ahora = LocalDate.now();
+
+		Period periodo = Period.between(fechaNac, ahora);
+		return periodo.getYears();
 	}
 
 	public Long getId() {
@@ -234,17 +238,12 @@ public class Ciudadano implements Serializable {
 		this.estado = estado;
 	}
 
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	@Override
+	public String toString() {
+		return "Ciudadano [id=" + id + ", dni=" + dni + ", password=" + password + ", numeroTramite=" + numeroTramite
+				+ ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email + ", estadoCivil=" + estadoCivil
+				+ ", provincia=" + provincia + ", telefono=" + telefono + ", fechaNac=" + fechaNac + ", estado="
+				+ estado + ", curriculum=" + curriculum + "]";
 	}
 
-//	@Override
-//	public String toString() {
-//		return "Ciudadano [id=" + id + ", dni=" + dni + ", password=" + password + ", numeroTramite=" + numeroTramite
-//				+ ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email + ", estadoCivil=" + estadoCivil
-//				+ ", provincia=" + provincia + ", telefono=" + telefono + ", fechaNac=" + fechaNac + ", curriculum="
-//				+ curriculum + ", estado=" + estado + ", ofertas=" + ofertas + ", cursos=" + cursos + "]";
-//	}
-	
 }

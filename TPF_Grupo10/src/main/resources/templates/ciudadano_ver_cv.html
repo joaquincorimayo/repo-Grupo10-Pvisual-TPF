@@ -1,78 +1,102 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
-	<head>
-		<meta charset="utf-8">
-		<title></title>
-	</head>
+<head>
+<meta charset="utf-8">
+<title>Mi Curriculum</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+	crossorigin="anonymous">
+<link type="text/css" href="css/ciudadano_style.css" rel="stylesheet" />
+</head>
 
-	<body>
-		<header th:replace="layouts/ciudadano_header::fheader"></header>
-		<h1>Curriculum</h1>
-				
-		<div>
-			<label>Apellido: </label>
-			<label th:text="${curriculum.ciudadano.apellido}"></label>
+<body>
+	<header th:replace="layouts/ciudadano_header::fheader"></header>
+
+	<section class="intro">
+		<div class="mask d-flex align-items-center h-100" 
+			style="background-color: #D6D6D6;">
+			<div class="container border">
+				<div class="row justify-content-center">
+					<div class="col-12 col-md-8 col-lg-6 col-xl-5">
+						<div class="card" style="border-radius: 1rem;">
+							<div class="card-body p-5 text-center">
+								<div class="my-md-5 pb-5">
+									<h1 class="fw-bold mb-0">Mi curriculum!</h1>
+									<i class="fas fa-user-astronaut fa-3x my-5"></i>
+									<div class="form-outline mb-4">
+										<label class="form-label">Apellido: </label> <label
+											class="form-label" th:text="${curriculum.ciudadano.apellido}"></label>
+									</div>
+									<div class="form-outline mb-4">
+
+										<label class="form-label">Nombre: </label> <label
+											class="form-label" th:text="${curriculum.ciudadano.nombre}"></label>
+									</div>
+									<div class="form-outline mb-4">
+
+										<label class="form-label">DNI: </label> <label
+											class="form-label" th:text="${curriculum.ciudadano.dni}"></label>
+									</div>
+									<div class="form-outline mb-4">
+
+										<label class="form-label">N°Tramite DNI: </label> <label
+											class="form-label"
+											th:text="${curriculum.ciudadano.numeroTramite}"></label>
+									</div>
+									<div class="form-outline mb-4">
+
+										<label class="form-label">Fecha de Nacimiento: </label> <label
+											class="form-label" th:text="${curriculum.ciudadano.fechaNac}"></label>
+									</div>
+									<div class="form-outline mb-4">
+
+										<label class="form-label" for="intContacto">Email: </label> <label
+											class="form-label" th:text="${curriculum.ciudadano.email}"></label>
+									</div>
+									<div class="form-outline mb-4">
+
+										<label class="form-label" for="intContacto">Telefono:
+										</label> <label class="form-label"
+											th:text="${curriculum.ciudadano.telefono}"></label>
+									</div>
+									<div class="form-outline mb-4">
+
+										<label class="form-label" for="intContacto">Estado
+											Civil: </label> <label class="form-label"
+											th:text="${curriculum.ciudadano.estadoCivil}"></label>
+									</div>
+									<div class="form-outline mb-4">
+
+										<label class="form-label" for="intContacto">Provincia:
+										</label> <label class="form-label"
+											th:text="${curriculum.ciudadano.Provincia}"></label>
+									</div>
+									<div class="form-outline mb-4">
+
+										<label class="form-label" for="intDomicilio">Domicilio:
+										</label> <label class="form-label" th:text="${curriculum.domicilio}"></label>
+									</div>
+									<div class="form-outline mb-4">
+
+										<label class="form-label" for="intContacto">Contacto:
+										</label> <label class="form-label" th:text="${curriculum.contacto}"></label>
+									</div>
+									<div class="form-outline mb-4">
+										<label class="form-label" for="inIdioma">Idiomas: </label> <label
+											class="form-label" th:text="${curriculum.idiomas}"></label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-			
-		<div>
-			<label>Nombre: </label>
-			<label th:text="${curriculum.ciudadano.nombre}"></label>
-		</div>
-			
-		<div>
-			<label>DNI: </label>
-			<label th:text="${curriculum.ciudadano.dni}"></label>
-		</div>
-		
-		<div>
-			<label>N°Tramite DNI: </label>
-			<label th:text="${curriculum.ciudadano.numeroTramite}"></label>
-		</div>
-		
-		<div>
-			<label>Fecha de Nacimiento: </label> 
-			<label th:text="${curriculum.ciudadano.fechaNac}"></label>
-		</div>
-			
-		<div>
-			<label for="intContacto">Email: </label> 
-			<label th:text="${curriculum.ciudadano.email}"></label>
-		</div>
-		
-		<div>
-			<label for="intContacto">Telefono: </label> 
-			<label th:text="${curriculum.ciudadano.telefono}"></label>
-		</div>
-			
-		<div>
-			<label for="intContacto">Estado Civil: </label> 
-			<label th:text="${curriculum.ciudadano.estadoCivil}"></label>
-		</div>
-			
-		<div>
-			<label for="intContacto">Provincia: </label>
-			<label th:text="${curriculum.ciudadano.Provincia}"></label> 
-		</div>
-			
-		<div>
-			<label for="intDomicilio">Domicilio: </label> 
-			<label th:text="${curriculum.domicilio}"></label>
-		</div>
-			
-		<div>
-			<label for="intContacto">Contacto: </label> 
-			<label th:text="${curriculum.contacto}"></label>
-		</div>
-				
-		<div>
-		
-		<label for="inIdioma">Idiomas: </label> 
-			<label th:text="${curriculum.idiomas}"></label>
-			
-		</div>
-<!-- 		<button th:href="@{/ciudadano/editar-cv}">Editar</button> -->
-			<a th:href="@{/ciudadano/inicio}">Salir</a>
-				
-		<footer th:replace="layouts/ciudadano_footer::ffooter"></footer>
-	</body>
+	</section>
+
+	<footer th:replace="layouts/ciudadano_footer::ffooter"></footer>
+</body>
 </html>

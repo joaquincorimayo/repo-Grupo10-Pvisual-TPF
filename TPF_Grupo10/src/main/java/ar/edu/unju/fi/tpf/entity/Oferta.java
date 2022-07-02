@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 import org.springframework.stereotype.Component;
 
@@ -32,30 +33,53 @@ public class Oferta implements Serializable {
 	@Column(name = "OFE_ID")
 	private Long id;
 	
+	@NotEmpty(message = "Este campo no puede estar vacio")
 	@Column(name = "OFE_VACANTES")
 	private String cantidadVacantes;
+	
+	@NotEmpty(message = "Este campo no puede estar vacio")
 	@Column(name = "OFE_DISP_HORARIA")
 	private String disponibilidadHoraria;
+	
+	@NotEmpty(message = "Este campo no puede estar vacio")
 	@Column(name = "OFE_PUESTO_REQ")
 	private String puestoRequerido;
+	
+	@NotEmpty(message = "Este campo no puede estar vacio")
 	@Column(name = "OFE_TAREAS")
 	private String principalesTareas;
+	
+	@NotEmpty(message = "Este campo no puede estar vacio")
 	@Column(name = "OFE_RESUMEN")
 	private String resumen;
+	
+	@NotEmpty(message = "Este campo no puede estar vacio")
 	@Column(name = "OFE_CONTACTO")
 	private String datosContacto;
+	
+	@NotEmpty(message = "Este campo no puede estar vacio")
 	@Column(name = "OFE_JORNADA")
 	private String jornada;
+	
+	@NotEmpty(message = "Este campo no puede estar vacio")
 	@Column(name = "OFE_REQ")
 	private String requisitos;
+	
+	@NotEmpty(message = "Este campo no puede estar vacio")
 	@Column(name = "OFE_BENEFICIOS")
 	private String beneficios;
+	
+	@NotEmpty(message = "Este campo no puede estar vacio")
 	@Column(name = "OFE_DISPONIBILIDAD")
 	private String disponibilidad;
+	
+	@NotEmpty(message = "Este campo no puede estar vacio")
 	@Column(name = "OFE_SALARIO")
 	private String salario;
+	
 	@Column(name = "OFE_ESTADO")
 	private boolean estado;
+	
 	@ManyToOne
 	@JoinColumn(name = "EMP_ID")
 	private Empleador empleador;

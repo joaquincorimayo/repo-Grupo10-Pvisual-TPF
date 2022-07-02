@@ -1,43 +1,144 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
-	<head>
-		<meta charset="utf-8">
-		<title></title>
-	</head>
+<head>
+<meta charset="utf-8">
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+	crossorigin="anonymous">
+<link type="text/css" href="css/empleador_style.css" rel="stylesheet" />
+</head>
+<body class="container">
+	<header th:replace="layouts/empleador_header::fheader"></header>
 
-	<body>
-		<header th:replace="layouts/empleador_header::fheader"></header>
-		
-		<h1>Edicion de oferta</h1>
-	
-		<!-- Formulario de edicion -->
-		<form th:action="@{/oferta/modificar}" method="POST" th:object="${oferta}">
-		
-			<!-- Propiedades que no debe ser modificada, solamente se visualiza.-->
+	<h1>Edicion de oferta</h1>
+
+	<!-- Formulario de edicion -->
+	<form th:action="@{/oferta/modificar}" method="POST"
+		th:object="${oferta}" autocomplete="off" class="row g-3">
+
+		<!-- Propiedades que no debe ser modificada, solamente se visualiza.-->
+		<div>
+			<input type="hidden" th:field="*{id}"> <label for="inputid">#</label>
 			<div>
-				<input type="hidden" th:field="*{id}"> 
-				<label for="inputid">#</label>
-				<div>
-					<input type="text" id="inputid" th:value="*{id}" disabled="disabled">
+				<input type="text" id="inputid" th:value="*{id}" disabled="disabled">
+			</div>
+		</div>
+
+		<!-- Propiedades que se podran modificar, incluye validacion. -->
+		<div class="row mb-4">
+			<div class="col">
+				<div class="form-outline">
+					<input th:field=*{puestoRequerido} type="text" id="fpreq"
+						class="form-control" /> <label class="form-label" for="fpreq">Puesto
+						requerido</label>
+					<div class="text-danger"
+						th:if="${#fields.hasErrors('puestoRequerido')}"
+						th:errors="*{puestoRequerido}"></div>
 				</div>
 			</div>
-			
-			<!-- Propiedades que se podran modificar, incluye validacion. -->
-			<div>
-				<label for="icv">cantidadVacantes</label>
-				<div>
-					<input type="text" id="icv" th:field="*{cantidadVacantes}">
-<!-- 					<div th:if="${#fields.hasErrors('cantidadVacantes')}" th:errors="*{cantidadVacantes}"></div> -->
+			<div class="col">
+				<div class="form-outline">
+					<input th:field=*{principalesTareas} type="text" id="ftareas"
+						class="form-control" /> <label class="form-label" for="ftareas">Principales
+						tareas</label>
+					<div class="text-danger"
+						th:if="${#fields.hasErrors('principalesTareas')}"
+						th:errors="*{principalesTareas}"></div>
 				</div>
 			</div>
-			<!-- Fin propiedades que pueden ser modificadas.-->
-			
-			<div>
-				<button type="submit">Confirmar</button>
-				<button th:href="@{/empleador/inicio}">Cancelar</button>
+		</div>
+
+
+		<div class="row mb-4">
+			<div class="col">
+				<div class="form-outline">
+					<input th:field=*{datosContacto} type="text" id="fcont"
+						class="form-control" /> <label class="form-label" for="fcont">Contacto</label>
+					<div class="text-danger"
+						th:if="${#fields.hasErrors('datosContacto')}"
+						th:errors="*{datosContacto}"></div>
+				</div>
 			</div>
-		</form>
-	
-		<footer th:replace="layouts/empleador_footer::ffooter"></footer>
-	</body>
+			<div class="col">
+				<div class="form-outline">
+					<input th:field=*{jornada} type="text" id="fjor"
+						class="form-control" /> <label class="form-label" for="fjor">Jornada</label>
+					<div class="text-danger" th:if="${#fields.hasErrors('jornada')}"
+						th:errors="*{jornada}"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row mb-4">
+			<div class="col">
+				<div class="form-outline">
+					<input th:field=*{cantidadVacantes} type="text" id="fcantidadV"
+						class="form-control" /> <label class="form-label"
+						for="fcantidadV">Candidad de vacantes disponibles</label>
+					<div class="text-danger"
+						th:if="${#fields.hasErrors('cantidadVacantes')}"
+						th:errors="*{cantidadVacantes}"></div>
+				</div>
+			</div>
+			<div class="col">
+				<div class="form-outline">
+					<input th:field=*{salario} type="text" id="fsal"
+						class="form-control" /> <label class="form-label" for="fsal">Salario</label>
+					<div class="text-danger" th:if="${#fields.hasErrors('salario')}"
+						th:errors="*{salario}"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-outline mb-4">
+			<input th:field=*{requisitos} type="text" id="freq"
+				class="form-control" /> <label class="form-label" for="freq">Requisitos</label>
+			<div class="text-danger" th:if="${#fields.hasErrors('requisitos')}"
+				th:errors="*{requisitos}"></div>
+		</div>
+
+		<div class="form-outline mb-4">
+			<input th:field=*{beneficios} type="text" id="fben"
+				class="form-control" /> <label class="form-label" for="fben">Beneficios</label>
+			<div class="text-danger" th:if="${#fields.hasErrors('beneficios')}"
+				th:errors="*{beneficios}"></div>
+		</div>
+
+		<div class="form-outline mb-4">
+			<input th:field=*{disponibilidad} type="text" id="fdisp"
+				class="form-control" /> <label class="form-label" for="fdisp">Disponibilidad</label>
+			<div class="text-danger"
+				th:if="${#fields.hasErrors('disponibilidad')}"
+				th:errors="*{disponibilidad}"></div>
+		</div>
+		<div class="form-outline mb-4">
+			<input th:field=*{disponibilidadHoraria} type="text" id="fdispH"
+				class="form-control" /> <label class="form-label" for="fdispH">Disponibilidad horaria</label>
+			<div class="text-danger"
+				th:if="${#fields.hasErrors('disponibilidadHoraria')}"
+				th:errors="*{disponibilidadHoraria}"></div>
+		</div>
+
+		<div class="form-outline mb-4">
+			<textarea class="form-control" th:field=*{resumen} id="fres" rows="4"></textarea>
+			<label class="form-label" for="fres">Resumen</label>
+			<div class="text-danger" th:if="${#fields.hasErrors('resumen')}"
+				th:errors="*{resumen}"></div>
+		</div>
+
+		<!-- Fin propiedades que pueden ser modificadas.-->
+
+		<div>
+			<button type="submit">Confirmar</button>
+			<a th:href="@{/empleador/inicio}">Cancelar</a>
+		</div>
+	</form>
+
+
+	<footer th:replace="layouts/empleador_footer::ffooter"></footer>
+</body>
 </html>

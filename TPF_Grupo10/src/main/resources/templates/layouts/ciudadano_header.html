@@ -1,19 +1,35 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
-	<head>
-		<meta charset="utf-8">
-		<title></title>
-	</head>
+<head>
+<meta charset="utf-8">
+<title></title>
+</head>
 
-	<body>
-		<header th:fragment="fheader">
-			<a th:href="@{/ciudadano/inicio}">Inicio</a>
-			<a th:href="@{/ciudadano/editar}">Editar Perfil</a>
-			<a th:href="@{/ciudadano/crear-cv}">Crear Cv</a>
-			<a th:href="@{/ciudadano/ver-cv}">Ver Cv</a>
-			<a th:href="@{/ciudadano/cursos}">Cursos Disponibles</a>
-			<a th:href="@{/ciudadano/ofertas}">Ver Ofertas</a>
-			<a th:href="@{/ciudadano/salir}">Salir</a>
-		</header>
-	</body>
+<body>
+	<header th:fragment="fheader">
+		<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="#">Bienvenido <strong th:text="${usuario}"></strong></a>
+				<button class="navbar-toggler" type="button"
+					data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+					aria-controls="navbarCollapse" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarCollapse">
+					<ul class="navbar-nav me-auto mb-2 mb-md-0">
+						<li class="nav-item"><a class="nav-link active" aria-current="page" th:href="@{/ciudadano/inicio}">Inicio</a></li>
+						<li class="nav-item"><a class="nav-link" th:href="@{/ciudadano/crear-cv}">Crear Cv</a></li>
+						<li class="nav-item"><a class="nav-link" th:href="@{/ciudadano/ver-cv}">Ver Cv</a></li>
+						<li class="nav-item"><a class="nav-link" th:href="@{/ciudadano/cursos}">Ver cursos</a></li>
+						<li class="nav-item"><a class="nav-link" th:href="@{/ciudadano/ofertas}">Ver ofertas</a></li>
+					</ul>
+					<form class="d-flex">
+						<a class="btn btn-outline-success" th:href="@{/ciudadano/salir}">Salir</a>
+					</form>
+				</div>
+			</div>
+		</nav>
+	</header>
+</body>
 </html>

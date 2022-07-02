@@ -1,44 +1,50 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
-	<head>
-		<meta charset="utf-8">
-		<title></title>
-	</head>
+<head>
+<meta charset="utf-8">
+<title>Cursos</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+	crossorigin="anonymous">
+<link type="text/css" href="css/ciudadano_style.css" rel="stylesheet" />
+</head>
 
-	<body>
-		<header th:replace="layouts/ciudadano_header::fheader"></header>
-<!-- 	completar con filtrado  -->
-		<table>
-			<tr>
-				<th>#</th>
-				<th>Titulo</th>
-				<th>Categoria</th>
-				<th>Fecha de Inicio</th>
-				<th>Fecha de Fin</th>
-				<th>Modalidad</th>
-				<th>Detalles</th>
-				<th>Docente</th>
-				<th>Opciones</th>
-			</tr>
-				<tr th:each="c: ${cursos}" th:if="${c.contador == false}">
-				<td th:text="${c.id}"></td>
-				<td th:text="${c.titulo}"></td>
-				<td th:text="${c.categoria}"></td>
-				<td th:text="${c.fechaInicio}"></td>
-				<td th:text="${c.fechaFin}"></td>
-				<td th:text="${c.modalidad}"></td>
-				<td th:text="${c.detalles}"></td>
-				<td th:text="${c.nombreDocente}"></td>
-				<td>
-				<a th:href="@{/inscripcion/nuevaInscripcion/}+${c.id}">Inscribirse</a> 
-					</td>
-				</tr>
-	
-		</table>
-			<div>
-				<button th:href="@{/inicio}">Salir</button>
+<body>
+	<header th:replace="layouts/ciudadano_header::fheader"></header>
+	<br />
+	<br />
+	<br />
+	<h3>Lista de cursos disponibles</h3>
+
+	<div class="mx-auto mt-4">
+		<div class="row">
+			<div class="col-md-4">
+				<div class="card" style="width: 18rem;" th:each="c: ${cursos}"
+					th:if="${c.contador == false}">
+					<div class="card-body">
+						<h5 class="card-title" th:text="'#'+${c.id}+' '+ ${c.titulo}"></h5>
+						<p class="card-text"
+							th:text="'Inicio: '+${c.fechaInicio} + ' - Fin: ' + ${c.fechaFin}"></p>
+						<p class="card-text" th:text="${c.categoria}"></p>
+						<p class="card-text" th:text="${c.modalidad}"></p>
+						<p class="card-text" th:text="${c.detalles}"></p>
+						<p class="card-text" th:text="${c.nombreDocente}"></p>
+						<a th:href="@{/inscripcion/nuevaInscripcion/}+${c.id}"
+							class="btn mr-2 bg-success bg-gradient text-white"><i
+							class="fas fa-link"></i>Inscribirse</a>
+					</div>
+				</div>
 			</div>
-			
-		<footer th:replace="layouts/ciudadano_footer::ffooter"></footer>		
-	</body>
+		</div>
+	</div>
+
+	<h3 th:if="${#lists.isEmpty(cursos)}"
+		class="container bg-danger bg-gradient text-center text-white">No
+		hay cursos disponibles!</h3>
+
+	<footer th:replace="layouts/ciudadano_footer::ffooter"></footer>
+</body>
 </html>

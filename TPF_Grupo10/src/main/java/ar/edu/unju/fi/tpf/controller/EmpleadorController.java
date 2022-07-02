@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +23,8 @@ import ar.edu.unju.fi.tpf.service.ICiudadanoService;
 import ar.edu.unju.fi.tpf.service.IEmpleadorService;
 import ar.edu.unju.fi.tpf.service.IOfertaService;
 import ar.edu.unju.fi.tpf.service.IUsuarioService;
+import ar.edu.unju.fi.tpf.util.ListaClaves;
+import ar.edu.unju.fi.tpf.util.ListaProvincias;
 
 /**
  * Permite manejar-responder a peticiones que recibe para el objeto Empleador
@@ -45,9 +49,14 @@ public class EmpleadorController {
 	@Autowired
 	@Qualifier("UsuarioService")
 	private IUsuarioService usuarioService;
-	
+
 	@Autowired
 	private ICiudadanoService ciudadanoService;
+
+	@Autowired
+	private ListaProvincias provincias;
+	@Autowired
+	private ListaClaves palabrasClaves;
 
 	@GetMapping("/inicio")
 	public String getInicioPage(Model model) {
@@ -70,11 +79,13 @@ public class EmpleadorController {
 		model.addAttribute("ofertas", ofertas);
 		return "empleador_lista_ofertas";
 	}
-	
+
 	@GetMapping("perfiles")
 	public String algo(Model model) {
 		List<Ciudadano> perfiles = ciudadanoService.getListaCiudadano();
+		model.addAttribute("provincias", provincias.getProvincias());
 		model.addAttribute("perfiles", perfiles);
+		model.addAttribute("claves", palabrasClaves.getClaves());
 		return "empleador_filtrar_perfiles";
 	}
 
@@ -85,8 +96,23 @@ public class EmpleadorController {
 		return "redirect:/inicio";
 	}
 
+	@GetMapping("/nuevo")
+	public String getNuevoEmpleadorPage(Model model) {
+		Empleador empleador = new Empleador();
+		model.addAttribute("empleador", empleador);
+		model.addAttribute("provincias", provincias.getProvincias());
+		return "empleador_formulario";
+	}
+
 	@PostMapping("/guardar")
-	public String guardarEmpleadorPage(@ModelAttribute("empleador") Empleador empleador) {
+	public String guardarEmpleadorPage(@Validated @ModelAttribute("empleador") Empleador empleador, BindingResult br,
+			Model model) {
+		if (br.hasErrors()) {
+			model.addAttribute("empleador", empleador);
+			model.addAttribute("provincias", provincias.getProvincias());
+			return "empleador_formulario";
+		}
+
 		try {
 			empleadorService.guardarEmpleador(empleador);
 		} catch (Exception e) {

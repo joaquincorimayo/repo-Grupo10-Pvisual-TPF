@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +20,7 @@ import ar.edu.unju.fi.tpf.entity.Usuario;
 import ar.edu.unju.fi.tpf.service.ICiudadanoService;
 import ar.edu.unju.fi.tpf.service.ICurriculumService;
 import ar.edu.unju.fi.tpf.service.IUsuarioService;
+import ar.edu.unju.fi.tpf.util.ListaConocimientosInformaticos;
 
 @Controller
 @RequestMapping("/curriculum")
@@ -32,12 +35,23 @@ public class CurriculumController {
 	@Autowired
 	@Qualifier("UsuarioService")
 	private IUsuarioService usuarioService;
+	@Autowired
+	private ListaConocimientosInformaticos conInf;
 
 	@PostMapping("/guardar")
-	public String guardarNuevoCurriculum(@ModelAttribute("curriculum") Curriculum curriculum) {
-
+	public String guardarNuevoCurriculum(@Validated @ModelAttribute("curriculum") Curriculum curriculum,
+			BindingResult br, Model model) {
 		Usuario usuario = usuarioService.getUsuarioActivo();
 		Ciudadano ciudadano = ciudadanoService.buscarIdCiudadano(usuario.getIdActivo());
+
+		if (br.hasErrors()) {
+			System.out.println("Error en: /curriculum/guardar -> Validaciones" + br.getAllErrors());
+			model.addAttribute("ciudadano", ciudadano);
+			model.addAttribute("conInf", conInf.getConoInf());
+			model.addAttribute("curriculum", curriculum);
+			return "ciudadano_crear_cv";
+
+		}
 
 		try {
 			curriculum.setCiudadano(ciudadano);
@@ -45,7 +59,7 @@ public class CurriculumController {
 		} catch (Exception e) {
 			System.out.println("Error en: /curriculum/guardar");
 		}
-		
+
 		return "redirect:/ciudadano/inicio";
 	}
 
