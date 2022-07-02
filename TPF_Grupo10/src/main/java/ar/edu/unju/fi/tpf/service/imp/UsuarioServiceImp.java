@@ -18,6 +18,7 @@ import ar.edu.unju.fi.tpf.service.IUsuarioService;
 @Service("UsuarioService")
 public class UsuarioServiceImp implements IUsuarioService{
 
+
 	@Autowired
 	private IUsuarioRepository usuarioRepository;
 	

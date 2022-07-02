@@ -27,6 +27,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -65,16 +66,19 @@ public class Ciudadano implements Serializable {
 	@Size(min = 10, max = 12, message = "El numero de tramite tiene que tener 12 digitos")
 	@NotNull(message = "Tenes que ingresar el numero de tramite")
 	@Column(name = "CIU_NROTRAMITE")
+	@Pattern(message = "No ingresar letras", regexp="[0-9]*")
 	private String numeroTramite;
 
 	@NotEmpty(message = "El nombre no puede estar vacio")
 	@Size(min = 3, max = 100, message = "El nombre debe tener entre 3 a 100 caracteres")
 	@Column(name = "CIU_NOMBRE")
+	@Pattern(message = "No ingresar numeros", regexp="[^0-9]*")
 	private String nombre;
 
 	@Size(min = 3, max = 100, message = "El Apellido debe tener entre 3 a 100 caracteres")
 	@NotEmpty(message = "El apellido no puede ser vacío")
 	@Column(name = "CIU_APELLIDO")
+	@Pattern(message = "No ingresar numeros", regexp="[^0-9]*")
 	private String apellido;
 
 	@NotEmpty(message = "El email no puede ser vacío")
@@ -92,11 +96,12 @@ public class Ciudadano implements Serializable {
 
 	@NotEmpty(message = "Tenes que ingresar un numero de telefono")
 	@Column(name = "CIU_TELEFONO")
+	@Pattern(message = "No ingresar letras", regexp="[0-9]*")
 	private String telefono;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "CIU_FECNAC")
-	@Past(message = "La fecha no puede ser mayo a la actual")
+	@Past(message = "La fecha no puede ser mayor a la actual")
 	private LocalDate fechaNac;
 
 	@Column(name = "CIU_ESTADO")

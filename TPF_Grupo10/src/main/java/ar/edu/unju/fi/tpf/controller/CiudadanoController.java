@@ -150,12 +150,12 @@ public class CiudadanoController {
 	public String guardarCiudadanoPage(@Validated @ModelAttribute("ciudadano") Ciudadano ciudadano, BindingResult br,
 			Model model) {
 
-		if (br.hasErrors() || ciudadano.obtenerEdad() < 18 || (ciudadanoService.existeCiudadno(ciudadano.getDni()))) {
+		if (br.hasErrors() || ciudadano.obtenerEdad() < 18 || (ciudadanoService.existeCiudadano(ciudadano.getDni()))) {
 			model.addAttribute("ciudadano", ciudadano);
 			model.addAttribute("estadoCivil", estadoCivil.getEstadoCivil());
 			model.addAttribute("provincias", provincias.getProvincias());
 			model.addAttribute("errorEdad", ciudadano.obtenerEdad());
-			model.addAttribute("existeCiudadano", ciudadanoService.existeCiudadno(ciudadano.getDni()));
+			model.addAttribute("existeCiudadano", ciudadanoService.existeCiudadano(ciudadano.getDni()));
 			return "ciudadano_formulario";
 		}
 

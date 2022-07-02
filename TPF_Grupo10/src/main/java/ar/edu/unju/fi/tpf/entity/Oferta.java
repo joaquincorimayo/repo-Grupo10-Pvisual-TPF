@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
 import org.springframework.stereotype.Component;
 
@@ -35,46 +36,57 @@ public class Oferta implements Serializable {
 	
 	@NotEmpty(message = "Este campo no puede estar vacio")
 	@Column(name = "OFE_VACANTES")
+	@Pattern(message = "No ingresar letras", regexp="[0-9]*")
 	private String cantidadVacantes;
 	
 	@NotEmpty(message = "Este campo no puede estar vacio")
 	@Column(name = "OFE_DISP_HORARIA")
+	@Pattern(message = "No ingresar numeros", regexp="[^0-9]*")
 	private String disponibilidadHoraria;
 	
 	@NotEmpty(message = "Este campo no puede estar vacio")
 	@Column(name = "OFE_PUESTO_REQ")
+	@Pattern(message = "No ingresar numeros", regexp="[^0-9]*")
 	private String puestoRequerido;
 	
 	@NotEmpty(message = "Este campo no puede estar vacio")
 	@Column(name = "OFE_TAREAS")
+	@Pattern(message = "No ingresar numeros", regexp="[^0-9]*")
 	private String principalesTareas;
 	
 	@NotEmpty(message = "Este campo no puede estar vacio")
 	@Column(name = "OFE_RESUMEN")
+	@Pattern(message = "No ingresar numeros", regexp="[^0-9]*")
 	private String resumen;
 	
 	@NotEmpty(message = "Este campo no puede estar vacio")
 	@Column(name = "OFE_CONTACTO")
+	@Pattern(message = "No ingresar numeros", regexp="[^0-9]*")
 	private String datosContacto;
 	
 	@NotEmpty(message = "Este campo no puede estar vacio")
 	@Column(name = "OFE_JORNADA")
+	@Pattern(message = "No ingresar numeros", regexp="[^0-9]*")
 	private String jornada;
 	
 	@NotEmpty(message = "Este campo no puede estar vacio")
 	@Column(name = "OFE_REQ")
+	@Pattern(message = "No ingresar numeros", regexp="[^0-9]*")
 	private String requisitos;
 	
 	@NotEmpty(message = "Este campo no puede estar vacio")
 	@Column(name = "OFE_BENEFICIOS")
+	@Pattern(message = "No ingresar numeros", regexp="[^0-9]*")
 	private String beneficios;
 	
 	@NotEmpty(message = "Este campo no puede estar vacio")
 	@Column(name = "OFE_DISPONIBILIDAD")
+	@Pattern(message = "No ingresar numeros", regexp="[^0-9]*")
 	private String disponibilidad;
 	
 	@NotEmpty(message = "Este campo no puede estar vacio")
 	@Column(name = "OFE_SALARIO")
+	@Pattern(message = "No ingresar letras", regexp="[0-9]*")
 	private String salario;
 	
 	@Column(name = "OFE_ESTADO")

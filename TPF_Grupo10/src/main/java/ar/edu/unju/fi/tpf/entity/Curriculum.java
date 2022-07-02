@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
 import org.springframework.stereotype.Component;
 
@@ -42,22 +43,27 @@ public class Curriculum implements Serializable {
 	
 	@NotEmpty(message = "Este campo no puede estar vacio")
 	@Column(name="CURR_CONTACTO")
+	@Pattern(message = "No ingresar numeros", regexp="[^0-9]*")
 	private String contacto;
 	
 	@NotEmpty(message = "Este campo no puede estar vacio")
 	@Column(name="CURR_EDUCACION")
+	@Pattern(message = "No ingresar numeros", regexp="[^0-9]*")
 	private String educacion;
 	
 	@NotEmpty(message = "Este campo no puede estar vacio")
 	@Column(name="CURR_IDIOMAS")
+	@Pattern(message = "No ingresar numeros", regexp="[^0-9]*")
 	private String idiomas;
 	
 	@NotEmpty(message = "Este campo no puede estar vacio")
 	@Column(name="CURR_CONINF")
+	@Pattern(message = "No ingresar numeros", regexp="[^0-9]*")
 	private String conocimientosInfomaticos;
 	
 	@NotEmpty(message = "Este campo no puede estar vacio")
 	@Column(name="CURR_EXPLAB")
+	@Pattern(message = "No ingresar numeros", regexp="[^0-9]*")
 	private String experienciaLaboral;
 	
 	@NotEmpty(message = "Este campo no puede estar vacio")
