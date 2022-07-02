@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div th:if="${errorCurriculum}==true"
+		class="container text-center alert alert-danger alert-dismissible fade show">
+		<strong>Error!</strong> El ciudadano seleccionado no tiene cv cargado.
+		<a th:href="@{/empleador/ver-ofertas-creadas}">Volver</a>
+	</div>
+
+
+	<section class="intro" th:if="${errorCurriculum}!=true">
+		<div class="mask d-flex align-items-center h-100"
+			style="background-color: #D6D6D6;">
+			<div class="container border">
+				<div class="row justify-content-center">
+					<div class="col-12 col-md-8 col-lg-6 col-xl-5">
+						<div class="card" style="border-radius: 1rem;">
+							<div class="card-body p-5 text-center">
+								<div class="my-md-5 pb-5">
+									<h1 class="fw-bold mb-0">Datos del curriculum</h1>
+									<i class="fas fa-user-astronaut fa-3x my-5"></i>
+									<div class="form-outline mb-4">
+										<label class="form-label">Apellido: </label> <label
+											class="form-label" th:text="${curriculum.ciudadano.apellido}"></label>
+									</div>
+									<div class="form-outline mb-4">
+
+										<label class="form-label">Nombre: </label> <label
+											class="form-label" th:text="${curriculum.ciudadano.nombre}"></label>
+									</div>
+									<div class="form-outline mb-4">
+
+										<label class="form-label">DNI: </label> <label
+											class="form-label" th:text="${curriculum.ciudadano.dni}"></label>
+									</div>
+									<div class="form-outline mb-4">
+
+										<label class="form-label">N°Tramite DNI: </label> <label
+											class="form-label"
+											th:text="${curriculum.ciudadano.numeroTramite}"></label>
+									</div>
+									<div class="form-outline mb-4">
+
+										<label class="form-label">Fecha de Nacimiento: </label> <label
+											class="form-label" th:text="${curriculum.ciudadano.fechaNac}"></label>
+									</div>
+									<div class="form-outline mb-4">
+
+										<label class="form-label" for="intContacto">Email: </label> <label
+											class="form-label" th:text="${curriculum.ciudadano.email}"></label>
+									</div>
+									<div class="form-outline mb-4">
+
+										<label class="form-label" for="intContacto">Telefono:
+										</label> <label class="form-label"
+											th:text="${curriculum.ciudadano.telefono}"></label>
+									</div>
+									<div class="form-outline mb-4">
+
+										<label class="form-label" for="intContacto">Estado
+											Civil: </label> <label class="form-label"
+											th:text="${curriculum.ciudadano.estadoCivil}"></label>
+									</div>
+									<div class="form-outline mb-4">
+
+										<label class="form-label" for="intContacto">Provincia:
+										</label> <label class="form-label"
+											th:text="${curriculum.ciudadano.Provincia}"></label>
+									</div>
+									<div class="form-outline mb-4">
+
+										<label class="form-label" for="intDomicilio">Domicilio:
+										</label> <label class="form-label" th:text="${curriculum.domicilio}"></label>
+									</div>
+									<div class="form-outline mb-4">
+
+										<label class="form-label" for="intContacto">Contacto:
+										</label> <label class="form-label" th:text="${curriculum.contacto}"></label>
+									</div>
+									<div class="form-outline mb-4">
+										<label class="form-label" for="inIdioma">Idiomas: </label> <label
+											class="form-label" th:text="${curriculum.idiomas}"></label>
+									</div>
+									<div class="form-outline mb-4">
+										<a th:href="@{/empleador/ver-ofertas-creadas}">Volver</a>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+</body>
+</html>

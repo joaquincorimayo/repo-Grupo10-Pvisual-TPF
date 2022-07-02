@@ -27,6 +27,13 @@ public interface ICiudadanoService {
 	public Ciudadano buscarCiudadano(String dni);
 
 	public Ciudadano buscarIdCiudadano(Long id);
-	
-	public boolean existeCiudadno(String dni);
+
+	public boolean existeCiudadano(String dni);
+
+	public List<Ciudadano> getListaCiudadanoProvincia(String provincia);
+
+	public List<Ciudadano> getListaCiudadanoClave(String clave);
+
+	public List<Ciudadano> getListaCiudadanoProvinciaClave(String provincia, String clave);
+
 }

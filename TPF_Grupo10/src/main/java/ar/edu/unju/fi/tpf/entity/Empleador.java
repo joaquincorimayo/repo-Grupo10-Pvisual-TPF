@@ -17,6 +17,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -53,10 +54,12 @@ public class Empleador implements Serializable {
 	
 	@NotEmpty(message = "Este campo no puede estar vacio")
 	@Column(name = "EMP_R_SOCIAL")
+	@Pattern(message = "No ingresar numeros", regexp="[^0-9]*")
 	private String razonSocial;
 	
 	@NotEmpty(message = "Este campo no puede estar vacio")
 	@Column(name = "EMP_N_COMERCIAL")
+	@Pattern(message = "No ingresar numeros", regexp="[^0-9]*")
 	private String nombreComercial;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -70,6 +73,7 @@ public class Empleador implements Serializable {
 	
 	@NotEmpty(message = "Este campo no puede estar vacio")
 	@Column(name = "EMP_TEL")
+	@Pattern(message = "No ingresar letras", regexp="[0-9]*")
 	private String telefono;
 	
 	@NotEmpty(message = "Este campo no puede estar vacio")
@@ -82,10 +86,12 @@ public class Empleador implements Serializable {
 	
 	@NotEmpty(message = "Este campo no puede estar vacio")
 	@Column(name = "EMP_PAG_WEB")
+	@Pattern(message = "No ingresar numeros", regexp="[^0-9]*")
 	private String paginaWeb;
 	
 	@NotEmpty(message = "Este campo no puede estar vacio")
 	@Column(name = "EMP_DESCRIPCION")
+	@Pattern(message = "No ingresar numeros", regexp="[^0-9]*")
 	private String descripcion;
 	
 	@Column(name = "EMP_ESTADO")
