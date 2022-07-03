@@ -45,7 +45,7 @@ public class CurriculumController {
 		Ciudadano ciudadano = ciudadanoService.buscarIdCiudadano(usuario.getIdActivo());
 
 		if (br.hasErrors()) {
-			System.out.println("Error en: /curriculum/guardar -> Validaciones" + br.getAllErrors());
+			logger.info("Method: /curriculum/guardar/ | Error: Validacion | Action: Error creacion curriculum");
 			model.addAttribute("ciudadano", ciudadano);
 			model.addAttribute("conInf", conInf.getConoInf());
 			model.addAttribute("curriculum", curriculum);
@@ -54,10 +54,11 @@ public class CurriculumController {
 		}
 
 		try {
+			logger.info("Method: /curriculum/guardar/ Action: Se almacena nuevo curriculum");
 			curriculum.setCiudadano(ciudadano);
 			curriculumService.guardarCurriculum(curriculum);
 		} catch (Exception e) {
-			System.out.println("Error en: /curriculum/guardar");
+			logger.info("Method: /curriculum/guardar/ | Error: No se pudo almacenar al nuevo curriculum");
 		}
 
 		return "redirect:/ciudadano/inicio";

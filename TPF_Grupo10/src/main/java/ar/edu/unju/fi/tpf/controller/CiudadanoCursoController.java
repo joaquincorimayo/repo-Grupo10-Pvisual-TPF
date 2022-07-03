@@ -45,7 +45,7 @@ public class CiudadanoCursoController {
 
 	@GetMapping("/nuevaInscripcion/{id}")
 	public String agregarInscripcion(@PathVariable(value = "id") Long id) {
-
+		logger.info("Method: /ciudadano/nuevaInscripcion/{id}/ Action: El ciudadano se registro de forma correcta a curso:");
 		CiudadanoCurso ciudadanoCurso = ciudadanoCursoService.nuevoCiudadanoCurso();
 
 		Usuario usuario = usuarioService.getUsuarioActivo();
