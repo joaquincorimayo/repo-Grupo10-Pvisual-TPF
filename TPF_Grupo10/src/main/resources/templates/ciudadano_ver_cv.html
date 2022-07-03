@@ -13,9 +13,19 @@
 </head>
 
 <body>
-	<header th:replace="layouts/ciudadano_header::fheader"></header>
-
-	<section class="intro">
+<header th:replace="layouts/ciudadano_header::fheader"></header>
+	<br />
+	<br />
+	<br />
+	
+	<div th:if="${errorCurriculum}==true"
+		class="container text-center alert alert-danger alert-dismissible fade show">
+		<strong>Error!</strong> Todavia no creaste tu curriculum.
+		<a th:href="@{/ciudadano/inicio}">Volver</a>
+	</div>
+	
+	
+	<section class="intro" th:if="${errorCurriculum}!=true">
 		<div class="mask d-flex align-items-center h-100" 
 			style="background-color: #D6D6D6;">
 			<div class="container border">

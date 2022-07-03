@@ -51,6 +51,7 @@ public class CiudadanoOfertaController {
 		CiudadanoOferta ciudadanoOferta = ciudadanoOfertaService.nuevoCiudadanoOferta();
 
 		if (ciudadanoOfertaService.verificarPostulacion(idUsuarioActivo, id)) {
+			logger.info("Method: /ciudadano/nuevaPostulacion/{id}/ Action: El ciudadano se postulo de forma correcta a curso:");
 			Ciudadano ciudadano = ciudadanoService.buscarIdCiudadano(idUsuarioActivo);
 			ciudadanoOferta.setCiudadano(ciudadano);
 			Oferta oferta = ofertaService.buscarOferta(id);
@@ -59,6 +60,7 @@ public class CiudadanoOfertaController {
 			return "redirect:/ciudadano/ofertas";
 
 		} else {
+			logger.info("Method: /ciudadano/nuevaPostulacion/{id}/ Action: El ciudadano ya se postulo");
 			List<Oferta> ofertas = ofertaService.listarOfertas();
 			model.addAttribute("ofertas", ofertas);
 			model.addAttribute("postulado", true);

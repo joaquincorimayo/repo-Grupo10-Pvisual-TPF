@@ -25,17 +25,30 @@
 	<br />
 	<br />
 	<h1>Lista de ofertas disponibles</h1>
+
+
+		<div class="d-grid gap-2 d-md-flex justify-content-md-end container">
+			<h5>Provincia:</h5>
+			<select class="select">
+				<option th:each="o: ${provincias}" th:text="${o}"></option>
+			</select><a href="#" class="btn btn-primary">Filtrar</a>
+		</div>	
+
+
 	<div class="container mx-auto mt-4">
 		<div class="row">
 			<div class="col-md-4">
 				<div class="card" style="width: 18rem;" th:each="o: ${ofertas}"
 					th:if="${o.estado}==true">
 					<div class="card-body">
-						<h5 class="card-title" th:text="'#'+${o.id}+' '+ ${o.empleador.nombreComercial}"></h5>
-						<h6 class="card-subtitle mb-2 text-muted" th:text="${o.puestoRequerido} + ' ' + ${o.datosContacto}"></h6>
-						<p class="card-text" th:text="${o.resumen}"></p>
-						<p class="card-text" th:text="'$'+${o.salario}"></p>
-						<a th:href="@{/postulacion/nuevaPostulacion/}+${o.id}" class="btn mr-2"><i class="fas fa-link"></i>Postularse</a> 
+						<h5 class="card-title" th:text="'#'+${o.id}+' '+ 'Empleador: '+${o.empleador.nombreComercial}"></h5>
+<!-- 						<h6 class="card-subtitle mb-2 text-muted" th:text="'Puesto: '+${o.puestoRequerido} + ' ' + ${o.datosContacto}"></h6> -->
+						<h6 class="card-subtitle mb-2 text-muted" th:text="'Puesto: '+${o.puestoRequerido}"></h6>
+						<h6 class="card-subtitle mb-2 text-muted" th:text="'Contacto: '+${o.datosContacto}"></h6>
+						<p class="card-text" th:text="'Oferta Resumen: '+${o.resumen}"></p>
+						<p class="card-text" th:text="'SALARIO: $'+${o.salario}"></p>
+<!-- 						<a th:href="@{/postulacion/nuevaPostulacion/}+${o.id}" class="btn mr-2"><i class="fas fa-link"></i>Postularse</a> -->
+						<a th:href="@{/postulacion/nuevaPostulacion/}+${o.id}" class="btn btn-info"><i class="fas fa-link"></i>Postularse</a> 
 					</div>
 				</div>
 			</div>
