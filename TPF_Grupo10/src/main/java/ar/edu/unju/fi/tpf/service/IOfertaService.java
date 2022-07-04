@@ -29,4 +29,6 @@ public interface IOfertaService {
 	public Oferta buscarOferta(Long id);
 	
 	public List<Oferta> listarOfertasId(Long id);
+	
+	public List<Oferta> listarOfertas2(String palabraClave);
 }
