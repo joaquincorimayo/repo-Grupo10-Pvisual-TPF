@@ -27,7 +27,11 @@ import ar.edu.unju.fi.tpf.service.IEmpleadorService;
 import ar.edu.unju.fi.tpf.service.IOfertaService;
 import ar.edu.unju.fi.tpf.service.IUsuarioService;
 import ar.edu.unju.fi.tpf.util.ListaClaves;
+import ar.edu.unju.fi.tpf.util.ListaDisponibilidad;
+import ar.edu.unju.fi.tpf.util.ListaJornada;
+import ar.edu.unju.fi.tpf.util.ListaModalidad;
 import ar.edu.unju.fi.tpf.util.ListaProvincias;
+import ar.edu.unju.fi.tpf.util.ListaTareas;
 
 /**
  * Permite manejar-responder a peticiones que recibe para el objeto Empleador
@@ -58,9 +62,18 @@ public class EmpleadorController {
 	@Autowired
 	private ListaProvincias provincias;
 	@Autowired
+	private ICiudadanoOfertaService ciudadanoOfertaService;
+
+	@Autowired
 	private ListaClaves palabrasClaves;
 	@Autowired
-	private ICiudadanoOfertaService ciudadanoOfertaService;
+	private ListaTareas listaTareas;
+	@Autowired
+	private ListaJornada listaJornada;
+	@Autowired
+	private ListaDisponibilidad listaDisponibilidad;
+	@Autowired
+	private ListaModalidad listaModalidad;
 
 	@GetMapping("/inicio")
 	public String getInicioPage(Model model) {
@@ -75,12 +88,18 @@ public class EmpleadorController {
 		logger.info("Method: /empleador/oferta/ Action: Se envia un objeto de tipo oferta");
 		Oferta oferta = new Oferta();
 		model.addAttribute("oferta", oferta);
+		model.addAttribute("claves", palabrasClaves.getClaves());
+		model.addAttribute("tareas", listaTareas.getTareas());
+		model.addAttribute("jornadas", listaJornada.getJornada());
+		model.addAttribute("disponiblidades", listaDisponibilidad.getDisponibilidad());
+		model.addAttribute("modalidades", listaModalidad.getModalidad());
 		return "empleador_crear_oferta";
 	}
 
 	@GetMapping("/ver-ofertas-creadas")
 	public String getListaOfertasPage(Model model) {
-		logger.info("Method: /empleador/ver-ofertas-creadas/ Action: Se visualiza la lista de ofertas del usuario actual");
+		logger.info(
+				"Method: /empleador/ver-ofertas-creadas/ Action: Se visualiza la lista de ofertas del usuario actual");
 		Usuario usuario = usuarioService.getUsuarioActivo();
 		List<Oferta> ofertas = ofertaService.listarOfertasId(usuario.getIdActivo());
 		model.addAttribute("ofertas", ofertas);
@@ -111,9 +130,10 @@ public class EmpleadorController {
 	@PostMapping("/guardar")
 	public String guardarEmpleadorPage(@Validated @ModelAttribute("empleador") Empleador empleador, BindingResult br,
 			Model model) {
-		
+
 		if (br.hasErrors()) {
-			logger.info("Method: /empleador/guardar/ | Error: Validacion | Action: Erro en ingreso de datos para empleador");
+			logger.info(
+					"Method: /empleador/guardar/ | Error: Validacion | Action: Erro en ingreso de datos para empleador");
 			model.addAttribute("empleador", empleador);
 			model.addAttribute("provincias", provincias.getProvincias());
 			return "empleador_formulario";
@@ -134,7 +154,8 @@ public class EmpleadorController {
 		CiudadanoOferta ciudadanoOferta = ciudadanoOfertaService.nuevoCiudadanoOferta();
 		Oferta oferta = ofertaService.buscarOferta(ido);
 		if (ciudadanoOfertaService.verificarPostulacion(idn, ido) && !oferta.getCantidadVacantes().equals("0")) {
-			logger.info("Method: /empleador/contratar-oferta/ | Action: Se contrata al usuario con id: " + idn + " En la oferta: "+ ido);
+			logger.info("Method: /empleador/contratar-oferta/ | Action: Se contrata al usuario con id: " + idn
+					+ " En la oferta: " + ido);
 			Ciudadano ciudadano = ciudadanoService.buscarIdCiudadano(idn);
 			ciudadanoOferta.setCiudadano(ciudadano);
 			int restar = Integer.parseInt(oferta.getCantidadVacantes());
@@ -146,7 +167,8 @@ public class EmpleadorController {
 			return "redirect:/empleador/ver-ofertas-creadas";
 
 		} else {
-			logger.info("Method: /empleador/contratar-oferta/ | Error: se alcanzo el minimo de postulantes o ya se lo contrato");
+			logger.info(
+					"Method: /empleador/contratar-oferta/ | Error: se alcanzo el minimo de postulantes o ya se lo contrato");
 
 			Usuario usuario = usuarioService.getUsuarioActivo();
 			List<Oferta> ofertas = ofertaService.listarOfertasId(usuario.getIdActivo());

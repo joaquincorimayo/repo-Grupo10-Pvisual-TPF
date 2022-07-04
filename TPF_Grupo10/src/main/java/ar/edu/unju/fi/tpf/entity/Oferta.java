@@ -61,7 +61,7 @@ public class Oferta implements Serializable {
 	
 	@NotEmpty(message = "Este campo no puede estar vacio")
 	@Column(name = "OFE_CONTACTO")
-	@Pattern(message = "No ingresar numeros", regexp="[^0-9]*")
+	@Pattern(message = "No ingresar letras", regexp="[0-9]*")
 	private String datosContacto;
 	
 	@NotEmpty(message = "Este campo no puede estar vacio")

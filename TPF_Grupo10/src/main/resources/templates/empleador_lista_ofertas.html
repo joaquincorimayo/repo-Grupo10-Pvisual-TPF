@@ -42,10 +42,11 @@ thead th {
 <body>
 	<header th:replace="layouts/empleador_header::fheader"></header>
 	<h6 th:if="${postulado}==true" class="container bg-danger bg-gradient text-center text-white">El que seleccionaste, ya lo contrataste.</h6>
-	<h6 th:if="${vacio}==true" class="container bg-danger bg-gradient text-center text-white">La oferta no tiene mas vacantes</h6>
-	
-
-
+<!-- 	<div th:if="${errorCurriculum}==true" -->
+<!-- 		class="container text-center alert alert-danger alert-dismissible fade show"> -->
+<!-- 		<strong>Error!</strong> El ciudadano seleccionado no tiene cv cargado. -->
+<!-- 		<a th:href="@{/empleador/ver-ofertas-creadas}">Volver</a> -->
+<!-- 	</div> -->
 	<section class="intro">
 		<div class="bg-image h-100" style="background-color: #f5f7fa;">
 			<div class="mask d-flex align-items-center h-30">
@@ -70,6 +71,7 @@ thead th {
 													<th scope="col">Requisitos</th>
 													<th scope="col">Beneficios</th>
 													<th scope="col">Disponibilidad horaria</th>
+													<th scope="col">Modalidad</th>
 													<th scope="col">Salario</th>
 													<th scope="col">Opciones</th>
 												</tr>
@@ -85,6 +87,7 @@ thead th {
 													<td th:text="${o.jornada}"></td>
 													<td th:text="${o.requisitos}"></td>
 													<td th:text="${o.beneficios}"></td>
+													<td th:text="${o.disponibilidadHoraria}"></td>
 													<td th:text="${o.disponibilidad}"></td>
 													<td th:text="${o.salario}"></td>
 													<td><a th:href="@{/oferta/editar/}+${o.id}">Editar</a>
@@ -128,7 +131,7 @@ thead th {
 																			</ul>
 																			<div class="card-body">
 																				<a th:href="@{/empleador/contratar/{usu}/oferta/{ofe}(usu=${per.id},ofe=${o.id})}" class="card-link">Contratar</a>
-																				<a th:href="@{/empleador/vercv/}+${per.id}" class="card-link">Ver cv</a>
+																				<a th:href="@{/empleador/vercv/{usu}(usu=${per.id})}" class="card-link">Ver cv</a>
 																			</div>
 																	</div>
 																</div>

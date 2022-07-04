@@ -20,6 +20,11 @@ import ar.edu.unju.fi.tpf.entity.Usuario;
 import ar.edu.unju.fi.tpf.service.IEmpleadorService;
 import ar.edu.unju.fi.tpf.service.IOfertaService;
 import ar.edu.unju.fi.tpf.service.IUsuarioService;
+import ar.edu.unju.fi.tpf.util.ListaClaves;
+import ar.edu.unju.fi.tpf.util.ListaDisponibilidad;
+import ar.edu.unju.fi.tpf.util.ListaJornada;
+import ar.edu.unju.fi.tpf.util.ListaModalidad;
+import ar.edu.unju.fi.tpf.util.ListaTareas;
 
 /**
  * Clase controladora de Ofertas
@@ -44,6 +49,16 @@ public class OfertaController {
 	@Autowired
 	@Qualifier("EmpleadorService")
 	private IEmpleadorService empleadorService;
+	@Autowired
+	private ListaClaves palabrasClaves;
+	@Autowired
+	private ListaTareas listaTareas;
+	@Autowired
+	private ListaJornada listaJornada;
+	@Autowired
+	private ListaDisponibilidad listaDisponibilidad;
+	@Autowired
+	private ListaModalidad listaModalidad;
 
 	@PostMapping("/guardar")
 	public String guardarOfertaNueva(@Validated @ModelAttribute("oferta") Oferta oferta, BindingResult br,
@@ -51,6 +66,11 @@ public class OfertaController {
 
 		if (br.hasErrors()) {
 			model.addAttribute("oferta", oferta);
+			model.addAttribute("claves", palabrasClaves.getClaves());
+			model.addAttribute("tareas", listaTareas.getTareas());
+			model.addAttribute("jornadas", listaJornada.getJornada());
+			model.addAttribute("disponiblidades", listaDisponibilidad.getDisponibilidad());
+			model.addAttribute("modalidades", listaModalidad.getModalidad());
 			return "empleador_crear_oferta";
 		}
 

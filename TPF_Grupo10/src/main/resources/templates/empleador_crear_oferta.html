@@ -21,9 +21,10 @@
 		<div class="row mb-4">
 			<div class="col">
 				<div class="form-outline">
-					<input th:field=*{puestoRequerido} type="text" id="fpreq"
-						class="form-control" /> <label class="form-label" for="fpreq">Puesto
-						requerido</label>
+					<select class="form-control" th:field="*{puestoRequerido}" id="pure">
+						<option th:each="clave : ${claves}" th:value="${clave}" th:text="${clave}" class="form-control"></option>
+					</select>
+					<label class="form-label" for="pure">Puesto requerido</label>
 					<div class="text-danger"
 						th:if="${#fields.hasErrors('puestoRequerido')}"
 						th:errors="*{puestoRequerido}"></div>
@@ -31,9 +32,10 @@
 			</div>
 			<div class="col">
 				<div class="form-outline">
-					<input th:field=*{principalesTareas} type="text" id="ftareas"
-						class="form-control" /> <label class="form-label" for="ftareas">Principales
-						tareas</label>
+					<select class="form-control" th:field="*{principalesTareas}" id="pita">
+						<option th:each="tarea : ${tareas}" th:value="${tarea}" th:text="${tarea}" class="form-control"></option>
+					</select>
+					<label class="form-label" for="pita">Principales tareas</label>
 					<div class="text-danger"
 						th:if="${#fields.hasErrors('principalesTareas')}"
 						th:errors="*{principalesTareas}"></div>
@@ -54,8 +56,10 @@
 			</div>
 			<div class="col">
 				<div class="form-outline">
-					<input th:field=*{jornada} type="text" id="fjor"
-						class="form-control" /> <label class="form-label" for="fjor">Jornada</label>
+					<select class="form-control" th:field="*{jornada}" id="jorn">
+						<option th:each="jornada : ${jornadas}" th:value="${jornada}" th:text="${jornada}" class="form-control"></option>
+					</select>
+					<label class="form-label" for="jorn">Jornada</label>
 					<div class="text-danger" th:if="${#fields.hasErrors('jornada')}"
 						th:errors="*{jornada}"></div>
 				</div>
@@ -98,16 +102,20 @@
 		</div>
 
 		<div class="form-outline mb-4">
-			<input th:field=*{disponibilidadHoraria} type="text" id="fdispH"
-				class="form-control" /> <label class="form-label" for="fdispH">Disponibilidad</label>
+			<select class="form-control" th:field="*{disponibilidadHoraria}" id="diho">
+				<option th:each="disponiblidad: ${disponiblidades}" th:value="${disponiblidad}" th:text="${disponiblidad}" class="form-control"></option>
+			</select>
+			<label class="form-label" for="diho">Disponibilidad Horaria</label>
 			<div class="text-danger"
 				th:if="${#fields.hasErrors('disponibilidadHoraria')}"
 				th:errors="*{disponibilidadHoraria}"></div>
 		</div>
 		
 		<div class="form-outline mb-4">
-			<input th:field=*{disponibilidad} type="text" id="fdisp"
-				class="form-control" /> <label class="form-label" for="fdisp">Disponibilidad</label>
+			<select class="form-control" th:field="*{disponibilidad}" id="modalid">
+				<option th:each="modalidad: ${modalidades}" th:value="${modalidad}" th:text="${modalidad}" class="form-control"></option>
+			</select>
+			<label class="form-label" for="modalid">Modalidad</label>
 			<div class="text-danger"
 				th:if="${#fields.hasErrors('disponibilidad')}"
 				th:errors="*{disponibilidad}"></div>
