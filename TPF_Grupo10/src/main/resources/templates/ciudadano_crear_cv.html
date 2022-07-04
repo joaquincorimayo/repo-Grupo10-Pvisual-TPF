@@ -134,14 +134,27 @@
 											</div>
 										</div>
 
+<!-- 										<div class="form-outline mb-4"> -->
+<!-- 											<input th:field=*{idiomas} type="text" id="inIdioma" -->
+<!-- 												class="form-control" /> <label class="form-label" -->
+<!-- 												for="inIdioma">Idiomas</label> -->
+<!-- 											<div class="text-danger" -->
+<!-- 												th:if="${#fields.hasErrors('idiomas')}" -->
+<!-- 												th:errors="*{idiomas}"></div> -->
+<!-- 										</div> -->
+										
 										<div class="form-outline mb-4">
-											<input th:field=*{idiomas} type="text" id="inIdioma"
-												class="form-control" /> <label class="form-label"
-												for="inIdioma">Idiomas</label>
+											<select class="form-control"
+												th:field="*{idiomas}" id="inIdiomas">
+												<option th:each="i : ${idiomas}" th:value="${i}"
+													th:text="${i}" class="form-control"></option>
+											</select> <label class="form-label" for="inIdiomas">Idioma </label>
 											<div class="text-danger"
 												th:if="${#fields.hasErrors('idiomas')}"
 												th:errors="*{idiomas}"></div>
 										</div>
+										
+										
 
 										<div class="form-outline mb-4">
 											<select class="form-control"
@@ -149,7 +162,7 @@
 												<option th:each="ci : ${conInf}" th:value="${ci}"
 													th:text="${ci}" class="form-control"></option>
 											</select> <label class="form-label" for="inConInf">Conocimientos
-												Infomaticos: </label>
+												Infomaticos </label>
 											<div class="text-danger"
 												th:if="${#fields.hasErrors('conocimientosInfomaticos')}"
 												th:errors="*{conocimientosInfomaticos}"></div>
