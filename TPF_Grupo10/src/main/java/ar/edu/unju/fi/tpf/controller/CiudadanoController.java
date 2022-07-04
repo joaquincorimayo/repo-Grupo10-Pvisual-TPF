@@ -27,8 +27,9 @@ import ar.edu.unju.fi.tpf.service.IUsuarioService;
 import ar.edu.unju.fi.tpf.service.ICiudadanoService;
 import ar.edu.unju.fi.tpf.service.ICurriculumService;
 import ar.edu.unju.fi.tpf.service.ICursoService;
-import ar.edu.unju.fi.tpf.util.ListaConocimientosInformaticos;
+import ar.edu.unju.fi.tpf.util.ListaClaves;
 import ar.edu.unju.fi.tpf.util.ListaEstadoCivil;
+import ar.edu.unju.fi.tpf.util.ListaIdiomas;
 import ar.edu.unju.fi.tpf.util.ListaProvincias;
 
 /**
@@ -52,7 +53,7 @@ public class CiudadanoController {
 	@Autowired
 	private ICurriculumService curriculumService;
 	@Autowired
-	private ListaConocimientosInformaticos conInf;
+	private ListaClaves listaClaves;
 	@Autowired
 	private ICursoService cursoService;
 	@Autowired
@@ -62,6 +63,8 @@ public class CiudadanoController {
 	private ListaEstadoCivil estadoCivil;
 	@Autowired
 	private ListaProvincias provincias;
+	@Autowired
+	private ListaIdiomas listaIdiomas;
 
 	@GetMapping("/inicio")
 	public String getInicioPage(Model model) {
@@ -88,7 +91,8 @@ public class CiudadanoController {
 			logger.info("Method: /ciudadano/crear-cv/ Action: Se crea curriculum del usuario ciudadano activo:");
 			model.addAttribute("ciudadano", ciudadano);
 			Curriculum curriculum = new Curriculum();
-			model.addAttribute("conInf", conInf.getConoInf());
+			model.addAttribute("conInf", listaClaves.getClaves());
+			model.addAttribute("idiomas", listaIdiomas.getIdiomas());
 			model.addAttribute("curriculum", curriculum);
 			return "ciudadano_crear_cv";
 		}

@@ -20,7 +20,8 @@ import ar.edu.unju.fi.tpf.entity.Usuario;
 import ar.edu.unju.fi.tpf.service.ICiudadanoService;
 import ar.edu.unju.fi.tpf.service.ICurriculumService;
 import ar.edu.unju.fi.tpf.service.IUsuarioService;
-import ar.edu.unju.fi.tpf.util.ListaConocimientosInformaticos;
+import ar.edu.unju.fi.tpf.util.ListaClaves;
+import ar.edu.unju.fi.tpf.util.ListaIdiomas;
 
 @Controller
 @RequestMapping("/curriculum")
@@ -36,7 +37,9 @@ public class CurriculumController {
 	@Qualifier("UsuarioService")
 	private IUsuarioService usuarioService;
 	@Autowired
-	private ListaConocimientosInformaticos conInf;
+	private ListaClaves listaClaves;
+	@Autowired
+	private ListaIdiomas listaIdiomas;
 
 	@PostMapping("/guardar")
 	public String guardarNuevoCurriculum(@Validated @ModelAttribute("curriculum") Curriculum curriculum,
@@ -47,7 +50,8 @@ public class CurriculumController {
 		if (br.hasErrors()) {
 			logger.info("Method: /curriculum/guardar/ | Error: Validacion | Action: Error creacion curriculum");
 			model.addAttribute("ciudadano", ciudadano);
-			model.addAttribute("conInf", conInf.getConoInf());
+			model.addAttribute("conInf", listaClaves.getClaves());
+			model.addAttribute("idiomas", listaIdiomas.getIdiomas());
 			model.addAttribute("curriculum", curriculum);
 			return "ciudadano_crear_cv";
 
