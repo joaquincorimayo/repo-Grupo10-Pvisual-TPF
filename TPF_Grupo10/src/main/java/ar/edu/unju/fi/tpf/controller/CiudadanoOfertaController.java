@@ -48,23 +48,33 @@ public class CiudadanoOfertaController {
 	public String agregarPostulacion(@PathVariable(value = "id") Long id, Model model) {
 		Usuario usuario = usuarioService.getUsuarioActivo();
 		Long idUsuarioActivo = usuario.getIdActivo();
-		CiudadanoOferta ciudadanoOferta = ciudadanoOfertaService.nuevoCiudadanoOferta();
-
-		if (ciudadanoOfertaService.verificarPostulacion(idUsuarioActivo, id)) {
-			logger.info("Method: /ciudadano/nuevaPostulacion/{id}/ Action: El ciudadano se postulo de forma correcta a curso:");
-			Ciudadano ciudadano = ciudadanoService.buscarIdCiudadano(idUsuarioActivo);
-			ciudadanoOferta.setCiudadano(ciudadano);
-			Oferta oferta = ofertaService.buscarOferta(id);
-			ciudadanoOferta.setOferta(oferta);
-			ciudadanoOfertaService.guardarCiudadanoOferta(ciudadanoOferta);
-			return "redirect:/ciudadano/ofertas";
-
+		
+		Ciudadano ciudadano = ciudadanoService.buscarIdCiudadano(usuario.getIdActivo());
+		if (ciudadano.getCurriculum() == null) {
+			model.addAttribute("errorCurriculum", true);
 		} else {
-			logger.info("Method: /ciudadano/nuevaPostulacion/{id}/ Action: El ciudadano ya se postulo");
-			List<Oferta> ofertas = ofertaService.listarOfertas();
-			model.addAttribute("ofertas", ofertas);
-			model.addAttribute("postulado", true);
-			return "ciudadano_lista_ofertas";
+		
+			CiudadanoOferta ciudadanoOferta = ciudadanoOfertaService.nuevoCiudadanoOferta();
+	
+			if (ciudadanoOfertaService.verificarPostulacion(idUsuarioActivo, id)) {
+				logger.info("Method: /ciudadano/nuevaPostulacion/{id}/ Action: El ciudadano se postulo de forma correcta a curso:");
+				Ciudadano ciudadano2 = ciudadanoService.buscarIdCiudadano(idUsuarioActivo);
+				ciudadanoOferta.setCiudadano(ciudadano2);
+				Oferta oferta = ofertaService.buscarOferta(id);
+				ciudadanoOferta.setOferta(oferta);
+				ciudadanoOfertaService.guardarCiudadanoOferta(ciudadanoOferta);
+				return "redirect:/ciudadano/ofertas";
+	
+			} else {
+				logger.info("Method: /ciudadano/nuevaPostulacion/{id}/ Action: El ciudadano ya se postulo");
+				List<Oferta> ofertas = ofertaService.listarOfertas();
+				model.addAttribute("ofertas", ofertas);
+				model.addAttribute("postulado", true);
+				return "ciudadano_lista_ofertas";
+			}
+
 		}
+		return "ciudadano_lista_ofertas";
+	
 	}
 }

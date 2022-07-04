@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -140,11 +141,14 @@ public class CiudadanoController {
 	}
 
 	@GetMapping("/ofertas")
-	public String getListaOfertasPage(Model model) {
+	public String getListaOfertasPage(Model model, @Param("palabraClave") String palabraClave) {
 		logger.info("Method: /ciudadano/ofertas/ Action: Se visualiza la lista de ofertas disponibles");
-		List<Oferta> ofertas = ofertaService.listarOfertas();
+//		String palabraClave="Jujuy";
+		List<Oferta> ofertas = ofertaService.listarOfertas2(palabraClave);
+		
 		model.addAttribute("ofertas", ofertas);
-		model.addAttribute("provincias", provincias.getProvincias());
+		model.addAttribute("palabraClave", palabraClave);
+//		model.addAttribute("provincias", provincias.getProvincias());
 		return "ciudadano_lista_ofertas";
 	}
 

@@ -26,16 +26,38 @@
 	<br />
 	<h1>Lista de ofertas disponibles</h1>
 
+	<div th:if="${errorCurriculum}==true"
+		class="container text-center alert alert-danger alert-dismissible fade show">
+		<strong>Error!</strong> Todavia no creaste tu curriculum. No puedes realizar una postulacion
+		<a th:href="@{/ciudadano/ofertas}">Volver</a>
+	</div>
 
-		<div class="d-grid gap-2 d-md-flex justify-content-md-end container">
-			<h5>Provincia:</h5>
-			<select class="select">
-				<option th:each="o: ${provincias}" th:text="${o}"></option>
-			</select><a href="#" class="btn btn-primary">Filtrar</a>
-		</div>	
+<!-- 		<div class="d-grid gap-2 d-md-flex justify-content-md-end container" th:if="${errorCurriculum}!=true"> -->
+<!-- 			<h5>Provincia:</h5> -->
+<!-- 			<select class="select"> -->
+<!-- 				<option th:each="o: ${provincias}" th:text="${o}"></option> -->
+<!-- 			</select><a href="#" class="btn btn-primary">Filtrar</a> -->
+<!-- 		</div>	 -->
 
+	
+	<nav class="navbar navbar-light bg-light" th:if="${errorCurriculum}!=true">
+	  <div class="container-fluid" th:action="@{/ciudadano/ofertas}">
+	    <form class="d-flex">
+	      <input class="form-control me-2" type="text" name="palabraClave" id="palabraClave" th:value="${palabraClave}" placeholder="Ingrese Provincia" aria-label="Search">
+	      <button class="btn btn-outline-success" type="submit">Filtrar</button>
+	    </form>
+	  </div>
+	</nav>
+	
+	<nav class="navbar navbar-light bg-light" th:if="${errorCurriculum}!=true">
+	  <div class="container-fluid" th:action="@{/ciudadano/ofertas}">
+	    <form class="d-flex">
+	      <button class="btn btn-outline-success" type="submit">Todas</button>
+	    </form>
+	  </div>
+	</nav>
 
-	<div class="container mx-auto mt-4">
+	<div class="container mx-auto mt-4" th:if="${errorCurriculum}!=true">
 		<div class="row">
 			<div class="col-md-4">
 				<div class="card" style="width: 18rem;" th:each="o: ${ofertas}"
@@ -55,10 +77,12 @@
 		</div>
 	</div>
 	
-	<h3 th:if="${#lists.isEmpty(ofertas)}"
-		class="container bg-danger bg-gradient text-center text-white">No
-		hay ofertas cargadas!</h3>
-		
+	<div  th:if="${errorCurriculum}!=true">
+		<h3 th:if="${#lists.isEmpty(ofertas)}"
+			class="container bg-danger bg-gradient text-center text-white">No
+			hay ofertas cargadas!</h3>
+	</div>	
+	
 	<h4 th:if="${postulado}==true" class="container bg-danger bg-gradient text-center text-white">Ya te postulaste</h4>
 	<footer th:replace="layouts/ciudadano_footer::ffooter"></footer>
 </body>

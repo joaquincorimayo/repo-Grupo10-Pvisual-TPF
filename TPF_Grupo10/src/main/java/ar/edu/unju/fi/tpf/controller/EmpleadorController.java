@@ -131,11 +131,12 @@ public class EmpleadorController {
 	public String guardarEmpleadorPage(@Validated @ModelAttribute("empleador") Empleador empleador, BindingResult br,
 			Model model) {
 
-		if (br.hasErrors()) {
+		if (br.hasErrors() || empleadorService.existeEmpleador(empleador.getCuit())) {
 			logger.info(
 					"Method: /empleador/guardar/ | Error: Validacion | Action: Erro en ingreso de datos para empleador");
 			model.addAttribute("empleador", empleador);
 			model.addAttribute("provincias", provincias.getProvincias());
+			model.addAttribute("existeEmpleador", empleadorService.existeEmpleador(empleador.getCuit()));
 			return "empleador_formulario";
 		}
 

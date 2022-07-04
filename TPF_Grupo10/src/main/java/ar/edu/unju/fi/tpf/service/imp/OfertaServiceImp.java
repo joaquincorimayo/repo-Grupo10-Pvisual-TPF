@@ -96,4 +96,11 @@ public class OfertaServiceImp implements IOfertaService {
 		return aux_ofertas;
 	}
 
+	@Override
+	public List<Oferta> listarOfertas2(String palabraClave) {
+		if (palabraClave != null){
+			return ofertaRepository.findAll(palabraClave);
+		}
+		return ofertaRepository.findAll();
+	}
 }
