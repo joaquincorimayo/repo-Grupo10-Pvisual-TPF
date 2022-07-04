@@ -100,25 +100,24 @@ thead th {
 															</div>
 															<div class="offcanvas-body">
 																<div>
-																	Provincia:
-																	<select class="select">
-																		<option value="todas">Todas</option>
-																		<option th:each="prov: ${provincias}" th:text="${prov}"></option>
-																	</select>
+																	<h6>Filtrar por</h6>
 																	<hr />
-																	Palabras:
-																	<select class="select">
-																		<option value="todas">Todas</option>
-																		<option th:each="clav: ${claves}" th:text="${clav}"></option>
-																	</select>
+																	<h5>Provincias</h5>
+																	<div th:each="prov: ${provincias}">
+																	    <a th:text="${prov}" th:href="@{/empleador/provincia/{p}(p=${prov})}"></a>
+																	</div>
 																	<hr />
-<!-- 																	Unicamente filtra manualmente. -->
-<!-- 																	<a th:href="@{/empleador/provincia/{p}/clave/{c}(p=Jujuy, c=Todas)}">Filtrar</a> -->
-																	<a href="#">Filtrar</a>
+																	<h5>Palabras clave</h5>
+																	<hr />
+																	<div th:each=" clav: ${claves}">
+																	   		<a th:text="${clav}" th:href="@{/empleador/clave/{c}(c=${clav})}"></a>
+																	</div>
 																</div>
 																<hr />
-																
 																<div>
+																	<h6 th:if="${errorProvincia}==true" class="container bg-danger bg-gradient text-center text-white">No hay candidatos con esta provincia.</h6>
+																	<h6 th:if="${errorClave}==true" class="container bg-danger bg-gradient text-center text-white">No hay candidatos con esta palabra clave.</h6>
+																	
 																	<div class="card" style="width: 18rem;" th:each="per: ${perfiles}">
 																		<div class="card-body">
 																				<h5 class="card-title" th:text="'#'+${per.id}+ ' ' + ${per.nombre}"></h5>

@@ -199,18 +199,46 @@ public class EmpleadorController {
 		return "empleador_ver_cvs";
 	}
 
-	@GetMapping("/provincia/{provincia}/clave/{clave}")
-	public String filtrarUsuarios(@PathVariable(value = "provincia") String provincia,
-			@PathVariable(value = "clave") String clave, Model model) {
-		logger.info("Method: /empleador/provincia/{provincia}/clave/{clave} Action: filtro de candidatos");
+	@GetMapping("/provincia/{p}")
+	public String filtrarUsuariosProvincia(@PathVariable(value = "p") String provincia, Model model) {
+		logger.info("Method: /empleador/provincia/{provincia}/clave/{clave} Action: filtro de candidatos por provinca");
 		Usuario usuario = usuarioService.getUsuarioActivo();
 		List<Oferta> ofertas = ofertaService.listarOfertasId(usuario.getIdActivo());
 		model.addAttribute("ofertas", ofertas);
 
 		List<Ciudadano> perfiles = ciudadanoService.getListaCiudadanoProvincia(provincia);
+		if (perfiles.size() == 0) {
+			model.addAttribute("errorProvincia", true);
+		} else {
+			model.addAttribute("errorProvincia", false);
+		}
 		model.addAttribute("perfiles", perfiles);
 		model.addAttribute("provincias", provincias.getProvincias());
 		model.addAttribute("claves", palabrasClaves.getClaves());
+
 		return "empleador_lista_ofertas";
 	}
+
+	@GetMapping("/clave/{c}")
+	public String filtrarUsuarioClave(@PathVariable(value = "c") String clave, Model model) {
+		logger.info(
+				"Method: /empleador/provincia/{provincia}/clave/{clave} Action: filtro de candidatos por palabra clave");
+		Usuario usuario = usuarioService.getUsuarioActivo();
+		List<Oferta> ofertas = ofertaService.listarOfertasId(usuario.getIdActivo());
+		model.addAttribute("ofertas", ofertas);
+
+		List<Ciudadano> perfiles = ciudadanoService.getListaCiudadanoClave(clave);
+		if (perfiles.size() == 0) {
+			model.addAttribute("errorClave", true);
+		} else {
+			model.addAttribute("errorClave", false);
+		}
+
+		model.addAttribute("perfiles", perfiles);
+		model.addAttribute("provincias", provincias.getProvincias());
+		model.addAttribute("claves", palabrasClaves.getClaves());
+
+		return "empleador_lista_ofertas";
+	}
+
 }

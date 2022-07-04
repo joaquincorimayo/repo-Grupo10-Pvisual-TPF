@@ -120,7 +120,7 @@ public class CiudadanoServiceImp implements ICiudadanoService {
 	public List<Ciudadano> getListaCiudadanoClave(String clave) {
 		List<Ciudadano> lista = new ArrayList<Ciudadano>();
 		for (int i = 0; i < ciudadanoRepository.findAll().size(); i++) {
-			if (ciudadanoRepository.findAll().get(i).getCurriculum().getExperienciaLaboral().equals(clave)) {
+			if (ciudadanoRepository.findAll().get(i).getCurriculum().getConocimientosInfomaticos().equals(clave)) {
 				lista.add(ciudadanoRepository.findAll().get(i));
 			}
 		}
